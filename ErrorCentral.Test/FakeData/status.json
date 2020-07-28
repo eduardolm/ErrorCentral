@@ -1,0 +1,14 @@
+﻿[
+  {
+    "id": 1,
+    "name": "Arquivado"
+  },
+  {
+    "id": 2,
+    "name": "Pendente"
+  },
+  {
+    "id": 3,
+    "name": "Ignorado"
+  }
+]

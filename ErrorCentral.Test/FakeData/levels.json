@@ -1,0 +1,14 @@
+﻿[
+  {
+    "id": 1,
+    "name": "Debug"
+  },
+  {
+    "id": 2,
+    "name": "Warning"
+  },
+  {
+    "id": 3,
+    "name": "Error"
+  }
+]

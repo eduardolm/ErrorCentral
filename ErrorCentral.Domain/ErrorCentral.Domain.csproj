@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netcoreapp3.1</TargetFramework>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.6" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.6" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Remove="Entities\EnvironmentEntity.cs" />
+      <Compile Remove="Entities\LayerEntity.cs" />
+      <Compile Remove="Entities\LevelEntity.cs" />
+      <Compile Remove="Entities\LogEntity.cs" />
+      <Compile Remove="Entities\StatusEntity.cs" />
+      <Compile Remove="Entities\UserEntity.cs" />
+      <Compile Remove="Enums\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Remove="Enums\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="Enums\**" />
+    </ItemGroup>
+
+</Project>
