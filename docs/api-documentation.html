@@ -1,0 +1,495 @@
+<!DOCTYPE HTML><html><head><title>Error Central API API documentation</title><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="generator" content="https://github.com/raml2html/raml2html 7.6.0"><link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"><script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script><script type="text/javascript" src="https://netdna.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script><script type="text/javascript">
+      $(document).ready(function() {
+  $('.page-header pre code, .top-resource-description pre code, .modal-body pre code').each(function(i, block) {
+    hljs.highlightBlock(block);
+  });
+
+  $('[data-toggle]').click(function() {
+    var selector = $(this).data('target') + ' pre code';
+    $(selector).each(function(i, block) {
+      hljs.highlightBlock(block);
+    });
+  });
+
+  // open modal on hashes like #_action_get
+  $(window).bind('hashchange', function(e) {
+    var anchor_id = document.location.hash.substr(1); //strip #
+    var element = $('#' + anchor_id);
+
+    // do we have such element + is it a modal?  --> show it
+    if (element.length && element.hasClass('modal')) {
+      element.modal('show');
+    }
+  });
+
+  // execute hashchange on first page load
+  $(window).trigger('hashchange');
+
+  // remove url fragment on modal hide
+  $('.modal').on('hidden.bs.modal', function() {
+    try {
+      if (history && history.replaceState) {
+          history.replaceState({}, '', '#');
+      }
+    } catch(e) {}
+  });
+});
+    </script><style>
+      .hljs {
+  background: transparent;
+}
+.parent {
+  color: #999;
+}
+.list-group-item > .badge {
+  float: none;
+  margin-right: 6px;
+}
+.panel-title > .methods {
+  float: right;
+}
+.badge {
+  border-radius: 0;
+  text-transform: uppercase;
+  width: 70px;
+  font-weight: normal;
+  color: #f3f3f6;
+  line-height: normal;
+}
+.badge_get {
+  background-color: #63a8e2;
+}
+.badge_post {
+  background-color: #6cbd7d;
+}
+.badge_put {
+  background-color: #22bac4;
+}
+.badge_delete {
+  background-color: #d26460;
+}
+.badge_patch {
+  background-color: #ccc444;
+}
+.list-group,
+.panel-group {
+  margin-bottom: 0;
+}
+.panel-group .panel+.panel-white {
+  margin-top: 0;
+}
+.panel-group .panel-white {
+  border-bottom: 1px solid #F5F5F5;
+  border-radius: 0;
+}
+.panel-white:last-child {
+  border-bottom-color: white;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+.panel-white .panel-heading {
+  background: white;
+}
+.tab-pane ul {
+  padding-left: 2em;
+}
+.tab-pane h1 {
+  font-size: 1.3em;
+}
+.tab-pane h2 {
+  font-size: 1.2em;
+  padding-bottom: 4px;
+  border-bottom: 1px solid #ddd;
+}
+.tab-pane h3 {
+  font-size: 1.1em;
+}
+.tab-content {
+  border-left: 1px solid #ddd;
+  border-right: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  padding: 10px;
+}
+#sidebar {
+  margin-top: 30px;
+  padding-right: 5px;
+  overflow: auto;
+  height: 90%;
+}
+.top-resource-description {
+  border-bottom: 1px solid #ddd;
+  background: #fcfcfc;
+  padding: 15px 15px 0 15px;
+  margin: -15px -15px 10px -15px;
+}
+.resource-description {
+  border-bottom: 1px solid #fcfcfc;
+  background: #fcfcfc;
+  padding: 15px 15px 0 15px;
+  margin: -15px -15px 10px -15px;
+}
+.resource-description p:last-child {
+  margin: 0;
+}
+.list-group .badge {
+  float: left;
+}
+.method_description {
+  margin-left: 85px;
+}
+.method_description p:last-child {
+  margin: 0;
+}
+.list-group-item {
+  cursor: pointer;
+}
+.list-group-item:hover {
+  background-color: #f5f5f5;
+}
+pre code {
+  overflow: auto;
+  word-wrap: normal;
+  white-space: pre;
+}
+.items {
+  background: #f5f5f5;
+  color: #333;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 9.5px;
+  margin: 0 0 10px;
+  font-size: 13px;
+  line-height: 1.42857143;
+}
+.examples {
+  margin-left: 0.5em;
+}
+.resource-modal li > ul {
+  margin-bottom: 1em;
+}
+.required {
+  color: #f00;
+}
+    </style></head><body data-spy="scroll" data-target="#sidebar"><div class="container"><div class="row"><div class="col-md-9" role="main"><div class="page-header"><h1>Error Central API API documentation <small>version 1.0.22</small></h1><p>https://errorcentralv102.azurewebsites.net/</p><p>API to manage error logs</p></div><div class="panel panel-default"><div class="panel-heading"><h3 id="user_cadastro" class="panel-title">/user/cadastro</h3></div><div class="panel-body"><div class="panel-group"><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_user_cadastro"><span class="parent"></span>/user/cadastro</a> <span class="methods"><a href="#user_cadastro_post"><span class="badge badge_post">post</span></a></span></h4></div><div id="panel_user_cadastro" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#user_cadastro_post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"><p>Creates a new user</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="user_cadastro_post"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent"></span>/user/cadastro</h4></div><div class="modal-body"><div class="alert alert-info"><p>Creates a new user</p></div><ul class="nav nav-tabs"><li class="active"><a href="#user_cadastro_post_request" data-toggle="tab">Request</a></li><li><a href="#user_cadastro_post_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="user_cadastro_post_request"><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><strong>Properties</strong><ul><li><strong>FullName</strong>: <em><span class="required">required</span>(string)</em><p>Full name</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>Test User</code></pre></div></li><li><strong>Email</strong>: <em><span class="required">required</span>(string)</em><p>E-mail address</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>mail@test.com</code></pre></div></li><li><strong>Password</strong>: <em><span class="required">required</span>(string)</em><p>Password</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>TestPass1234</code></pre></div></li><li><strong>CreateAt</strong>: <em><span class="required">required</span>(datetime)</em><p>Registration date</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>2020-01-15T12:23:14</code></pre></div></li></ul><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "Id": 1,
+  "Name": "Test User",
+  "Email": "test@mail.com",
+  "Password": "testPass1234",
+  "CreatedAt": "2020-01-25T10:45:32"
+}</code></pre></div></div><div class="tab-pane" id="user_cadastro_post_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: json</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "FullName": "Test User",
+  "Email": "test@mail.com",
+  "CreatedAt": "2020-10-25T15:35:41"
+}</code></pre></div><h2>HTTP status code <a href="http://httpstatus.es/400" target="_blank">400</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: json</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "Message": "Dados inválidos. Verifique os dados digitados. Caso estejam corretos, seu nome e/ou e-mail já estão cadastrados em nosso sistema. Neste caso, entre em contato com o administrador"
+}</code></pre></div><h2>HTTP status code <a href="http://httpstatus.es/500" target="_blank">500</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: json</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "Message": "Internal Server Error"
+}</code></pre></div></div></div></div></div></div></div></div></div></div></div><div class="panel panel-default"><div class="panel-heading"><h3 id="connect_token" class="panel-title">/connect/token</h3></div><div class="panel-body"><div class="panel-group"><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_connect_token"><span class="parent"></span>/connect/token</a> <span class="methods"><a href="#connect_token_post"><span class="badge badge_post">post</span></a></span></h4></div><div id="panel_connect_token" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#connect_token_post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"><p>Create an access token</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="connect_token_post"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent"></span>/connect/token</h4></div><div class="modal-body"><div class="alert alert-info"><p>Create an access token</p></div><ul class="nav nav-tabs"><li class="active"><a href="#connect_token_post_request" data-toggle="tab">Request</a></li><li><a href="#connect_token_post_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="connect_token_post_request"><h3>Body</h3><p><strong>Media type</strong>: application/x-www-form-urlencoded</p><p><strong>Type</strong>: object</p><strong>Properties</strong><ul><li><strong>username</strong>: <em><span class="required">required</span>(string)</em><p>E-mail address</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>mail@test.com</code></pre></div></li><li><strong>password</strong>: <em><span class="required">required</span>(string)</em><p>Password</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>password</code></pre></div></li><li><strong>client_id</strong>: <em><span class="required">required</span>(string)</em><p>client_id</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>client_id</code></pre></div></li><li><strong>client_secret</strong>: <em><span class="required">required</span>(string)</em><p>client_secret</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>client_secret</code></pre></div></li><li><strong>grant_type</strong>: <em><span class="required">required</span>(string)</em><p>grant_type</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>grant_type</code></pre></div></li></ul><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "username": "test@mail.com",
+  "password": "testPass",
+  "client_id": "client_id",
+  "client_secret": "client_secret",
+  "grant_type": "grant_type"
+}</code></pre></div></div><div class="tab-pane" id="connect_token_post_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: json</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6Im1hcmNlbG8iLCJleHAiOjE1NTg3NjI5NTgsImVtYWlsIjoibWFyY2Vsby5taWxlcmlzQGdtYWlsLmNvbSJ9.XzzOy9yovI2mCLUuIWhAIxkI0XgldBeWgzmqPU3e4RQ"
+}</code></pre></div><h2>HTTP status code <a href="http://httpstatus.es/400" target="_blank">400</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: json</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "Message": "Unable to login with provided username / password"
+}</code></pre></div></div></div></div></div></div></div></div></div></div></div><div class="panel panel-default"><div class="panel-heading"><h3 id="user_create" class="panel-title">/user/create</h3></div><div class="panel-body"><div class="panel-group"><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_user_create"><span class="parent"></span>/user/create</a> <span class="methods"><a href="#user_create_post"><span class="badge badge_post">post <span class="glyphicon glyphicon-lock" title="Authentication required"></span></span></a></span></h4></div><div id="panel_user_create" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#user_create_post'" class="list-group-item"><span class="badge badge_post">post <span class="glyphicon glyphicon-lock" title="Authentication required"></span></span><div class="method_description"><p>Creates a new user</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="user_create_post"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post <span class="glyphicon glyphicon-lock" title="Authentication required"></span></span> <span class="parent"></span>/user/create</h4></div><div class="modal-body"><div class="alert alert-info"><p>Creates a new user</p></div><div class="alert alert-warning"><span class="glyphicon glyphicon-lock" title="Authentication required"></span> Secured by <b>JWT</b><p>Authenticate to execute methods within the API</p></div><ul class="nav nav-tabs"><li class="active"><a href="#user_create_post_request" data-toggle="tab">Request</a></li><li><a href="#user_create_post_response" data-toggle="tab">Response</a></li><li><a href="#user_create_post_securedby" data-toggle="tab">Security</a></li></ul><div class="tab-content"><div class="tab-pane active" id="user_create_post_request"><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><strong>Properties</strong><ul><li><strong>FullName</strong>: <em><span class="required">required</span>(string)</em><p>Full name</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>Test User</code></pre></div></li><li><strong>Email</strong>: <em><span class="required">required</span>(string)</em><p>E-mail address</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>mail@test.com</code></pre></div></li><li><strong>Password</strong>: <em><span class="required">required</span>(string)</em><p>Password</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>TestPass1234</code></pre></div></li><li><strong>CreateAt</strong>: <em><span class="required">required</span>(datetime)</em><p>Registration date</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>2020-01-15T12:23:14</code></pre></div></li></ul><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "Id": 1,
+  "Name": "Test User",
+  "Email": "test@mail.com",
+  "Password": "testPass1234",
+  "CreatedAt": "2020-01-25T10:45:32"
+}</code></pre></div></div><div class="tab-pane" id="user_create_post_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: json</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "FullName": "Test User",
+  "Email": "test@mail.com",
+  "CreatedAt": "2020-10-25T15:35:41"
+}</code></pre></div><h2>HTTP status code <a href="http://httpstatus.es/400" target="_blank">400</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: json</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "Message": "",
+  "ados inválidos. Verifique os dados digitados. Caso estejam corretos": null,
+  "seu nome e/ou e-mail já estão cadastrados em nosso sistema. Neste caso": null,
+  "entre em contato com o administrador\"": null,
+  "01": "body",
+  "pplication/json": "type",
+  "son": null,
+  "xample": {
+    "Message": "Internal Server Error"
+  },
+  "04": "body",
+  "00": "body",
+  "user": "get",
+  "escription": "Lists all users from database",
+  "ecuredBy": "JWT",
+  "esponses": 200,
+  "ody": "application/json",
+  "ype": "json",
+  "user/": null,
+  "id": null
+}</code></pre></div></div><div class="tab-pane" id="user_create_post_securedby"><h1>Secured by JWT</h1><h3>Headers</h3><ul><li><strong>Authorization</strong>: <em><span class="required">required</span>(string)</em><p>X-AuthToken</p></li></ul><h2>HTTP status code <a href="http://httpstatus.es/401" target="_blank">401</a></h2><p>Authentication problem (JWT not set or expired)</p></div></div></div></div></div></div></div></div></div></div><div class="panel panel-default"><div class="panel-heading"><h3 id="user" class="panel-title">/user</h3></div><div class="panel-body"><div class="panel-group"><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_user"><span class="parent"></span>/user</a> <span class="methods"><a href="#user_put"><span class="badge badge_put">put <span class="glyphicon glyphicon-lock" title="Authentication required"></span></span></a></span></h4></div><div id="panel_user" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#user_put'" class="list-group-item"><span class="badge badge_put">put <span class="glyphicon glyphicon-lock" title="Authentication required"></span></span><div class="method_description"><p>Updates user in database</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="user_put"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_put">put <span class="glyphicon glyphicon-lock" title="Authentication required"></span></span> <span class="parent"></span>/user</h4></div><div class="modal-body"><div class="alert alert-info"><p>Updates user in database</p></div><div class="alert alert-warning"><span class="glyphicon glyphicon-lock" title="Authentication required"></span> Secured by <b>JWT</b><p>Authenticate to execute methods within the API</p></div><ul class="nav nav-tabs"><li class="active"><a href="#user_put_request" data-toggle="tab">Request</a></li><li><a href="#user_put_response" data-toggle="tab">Response</a></li><li><a href="#user_put_securedby" data-toggle="tab">Security</a></li></ul><div class="tab-content"><div class="tab-pane active" id="user_put_request"><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><strong>Properties</strong><ul><li><strong>FullName</strong>: <em><span class="required">required</span>(string)</em><p>Full name</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>Test User</code></pre></div></li><li><strong>Email</strong>: <em><span class="required">required</span>(string)</em><p>E-mail address</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>mail@test.com</code></pre></div></li><li><strong>Password</strong>: <em><span class="required">required</span>(string)</em><p>Password</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>TestPass1234</code></pre></div></li><li><strong>CreateAt</strong>: <em><span class="required">required</span>(datetime)</em><p>Registration date</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>2020-01-15T12:23:14</code></pre></div></li></ul><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "Id": 1,
+  "Name": "Test User",
+  "Email": "test@mail.com",
+  "Password": "testPass1234",
+  "CreatedAt": "2020-01-25T10:45:32"
+}</code></pre></div></div><div class="tab-pane" id="user_put_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: json</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "Id": 10,
+  "FullName": "Test User",
+  "Email": "test@mail.com",
+  "CreatedAt": "2020-09-14T15:35:00"
+}</code></pre></div><h2>HTTP status code <a href="http://httpstatus.es/400" target="_blank">400</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: json</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "Message": "Dados inválidos. Favor verificar os dados digitados."
+}</code></pre></div><h2>HTTP status code <a href="http://httpstatus.es/401" target="_blank">401</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: json</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "Message": "Unauthorized"
+}</code></pre></div><h2>HTTP status code <a href="http://httpstatus.es/404" target="_blank">404</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: json</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "Message": "Page not found on the server"
+}</code></pre></div><h2>HTTP status code <a href="http://httpstatus.es/500" target="_blank">500</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: json</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "Message": "Internal Server Error"
+}</code></pre></div></div><div class="tab-pane" id="user_put_securedby"><h1>Secured by JWT</h1><h3>Headers</h3><ul><li><strong>Authorization</strong>: <em><span class="required">required</span>(string)</em><p>X-AuthToken</p></li></ul><h2>HTTP status code <a href="http://httpstatus.es/401" target="_blank">401</a></h2><p>Authentication problem (JWT not set or expired)</p></div></div></div></div></div></div></div></div></div></div><div class="panel panel-default"><div class="panel-heading"><h3 id="user__id_" class="panel-title">/user/{id}</h3></div><div class="panel-body"><div class="panel-group"><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_user__id_"><span class="parent"></span>/user/{id}</a> <span class="methods"><a href="#user__id__delete"><span class="badge badge_delete">delete <span class="glyphicon glyphicon-lock" title="Authentication required"></span></span></a></span></h4></div><div id="panel_user__id_" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#user__id__delete'" class="list-group-item"><span class="badge badge_delete">delete <span class="glyphicon glyphicon-lock" title="Authentication required"></span></span><div class="method_description"><p>Deletes user from database</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="user__id__delete"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_delete">delete <span class="glyphicon glyphicon-lock" title="Authentication required"></span></span> <span class="parent"></span>/user/{id}</h4></div><div class="modal-body"><div class="alert alert-info"><p>Deletes user from database</p></div><div class="alert alert-warning"><span class="glyphicon glyphicon-lock" title="Authentication required"></span> Secured by <b></b></div><ul class="nav nav-tabs"><li class="active"><a href="#user__id__delete_request" data-toggle="tab">Request</a></li><li><a href="#user__id__delete_response" data-toggle="tab">Response</a></li><li><a href="#user__id__delete_securedby" data-toggle="tab">Security</a></li></ul><div class="tab-content"><div class="tab-pane active" id="user__id__delete_request"><h3>URI Parameters</h3><ul><li><strong>id</strong>: <em><span class="required">required</span>(string)</em></li></ul></div><div class="tab-pane" id="user__id__delete_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: json</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "Message": "Item removido com sucesso."
+}</code></pre></div><h2>HTTP status code <a href="http://httpstatus.es/400" target="_blank">400</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: json</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "Message": "Bad Request."
+}</code></pre></div><h2>HTTP status code <a href="http://httpstatus.es/401" target="_blank">401</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: json</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "Message": "Unauthorized"
+}</code></pre></div><h2>HTTP status code <a href="http://httpstatus.es/404" target="_blank">404</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: json</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "Message": "Page not found on the server"
+}</code></pre></div><h2>HTTP status code <a href="http://httpstatus.es/500" target="_blank">500</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: json</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "Message": "Internal Server Error"
+}</code></pre></div></div><div class="tab-pane" id="user__id__delete_securedby"><h1>Secured by</h1></div></div></div></div></div></div></div></div></div></div><div class="panel panel-default"><div class="panel-heading"><h3 id="log_create" class="panel-title">/log/create</h3></div><div class="panel-body"><div class="panel-group"><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_log_create"><span class="parent"></span>/log/create</a> <span class="methods"><a href="#log_create_post"><span class="badge badge_post">post <span class="glyphicon glyphicon-lock" title="Authentication required"></span></span></a></span></h4></div><div id="panel_log_create" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#log_create_post'" class="list-group-item"><span class="badge badge_post">post <span class="glyphicon glyphicon-lock" title="Authentication required"></span></span><div class="method_description"><p>Creates new log in the database</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="log_create_post"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post <span class="glyphicon glyphicon-lock" title="Authentication required"></span></span> <span class="parent"></span>/log/create</h4></div><div class="modal-body"><div class="alert alert-info"><p>Creates new log in the database</p></div><div class="alert alert-warning"><span class="glyphicon glyphicon-lock" title="Authentication required"></span> Secured by <b>JWT</b><p>Authenticate to execute methods within the API</p></div><ul class="nav nav-tabs"><li class="active"><a href="#log_create_post_request" data-toggle="tab">Request</a></li><li><a href="#log_create_post_response" data-toggle="tab">Response</a></li><li><a href="#log_create_post_securedby" data-toggle="tab">Security</a></li></ul><div class="tab-content"><div class="tab-pane active" id="log_create_post_request"><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><strong>Properties</strong><ul><li><strong>Id</strong>: <em><span class="required">required</span>(integer)</em><p>Log id</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>10</code></pre></div></li><li><strong>Name</strong>: <em><span class="required">required</span>(string)</em><p>Log name</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>Error trying to create new user</code></pre></div></li><li><strong>Description</strong>: <em><span class="required">required</span>(string)</em><p><strong>Example</strong>:</p><div class="examples"><pre><code>Erro ao cadastrar um novo usuário</code></pre></div></li><li><strong>CreatedAt</strong>: <em><span class="required">required</span>(datetime)</em><p><strong>Example</strong>:</p><div class="examples"><pre><code>2020-01-12T12:32:00</code></pre></div></li><li><strong>UserId</strong>: <em><span class="required">required</span>(integer)</em><p><strong>Example</strong>:</p><div class="examples"><pre><code>1</code></pre></div></li><li><strong>EnvironmentId</strong>: <em><span class="required">required</span>(integer)</em><p><strong>Example</strong>:</p><div class="examples"><pre><code>1</code></pre></div></li><li><strong>LayerId</strong>: <em><span class="required">required</span>(integer)</em><p><strong>Example</strong>:</p><div class="examples"><pre><code>1</code></pre></div></li><li><strong>LevelId</strong>: <em><span class="required">required</span>(integer)</em><p><strong>Example</strong>:</p><div class="examples"><pre><code>1</code></pre></div></li><li><strong>StatusId</strong>: <em><span class="required">required</span>(integer)</em><p><strong>Example</strong>:</p><div class="examples"><pre><code>1</code></pre></div></li></ul><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "Id": 1,
+  "Name": "Error creating user",
+  "Description": "Erro ao cadastrar usuário.",
+  "CreatedAt": "2020-01-25T10:45:32",
+  "UserId": 1,
+  "EnvironmentId": 1,
+  "LayerId": 1,
+  "LevelId": 1,
+  "StatusId": 1
+}</code></pre></div></div><div class="tab-pane" id="log_create_post_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: json</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "Id": 1,
+  "Name": "acceleration.Service.AddCandidate: &lt;forbidden&gt;",
+  "Description": "Erro ao tentar cadastrar um candidato. Usuário não autorizado a acessar este endpoint.",
+  "CreatedAt": "2020-07-15T10:25:32",
+  "Environment": "Dev",
+  "Layer": "Backend",
+  "Level": "Debug",
+  "Status": "Arquivado"
+}</code></pre></div><h2>HTTP status code <a href="http://httpstatus.es/400" target="_blank">400</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: json</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "Message": "Verifique os dados digitados."
+}</code></pre></div><h2>HTTP status code <a href="http://httpstatus.es/401" target="_blank">401</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: json</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "Message": "Unauthorized"
+}</code></pre></div><h2>HTTP status code <a href="http://httpstatus.es/404" target="_blank">404</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: json</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "Message": "Page not found on the server"
+}</code></pre></div><h2>HTTP status code <a href="http://httpstatus.es/500" target="_blank">500</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: json</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "Message": "Internal Server Error"
+}</code></pre></div></div><div class="tab-pane" id="log_create_post_securedby"><h1>Secured by JWT</h1><h3>Headers</h3><ul><li><strong>Authorization</strong>: <em><span class="required">required</span>(string)</em><p>X-AuthToken</p></li></ul><h2>HTTP status code <a href="http://httpstatus.es/401" target="_blank">401</a></h2><p>Authentication problem (JWT not set or expired)</p></div></div></div></div></div></div></div></div></div></div><div class="panel panel-default"><div class="panel-heading"><h3 id="log" class="panel-title">/log</h3></div><div class="panel-body"><div class="panel-group"><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_log"><span class="parent"></span>/log</a> <span class="methods"><a href="#log_put"><span class="badge badge_put">put <span class="glyphicon glyphicon-lock" title="Authentication required"></span></span></a></span></h4></div><div id="panel_log" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#log_put'" class="list-group-item"><span class="badge badge_put">put <span class="glyphicon glyphicon-lock" title="Authentication required"></span></span><div class="method_description"><p>Updates log in the database</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="log_put"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_put">put <span class="glyphicon glyphicon-lock" title="Authentication required"></span></span> <span class="parent"></span>/log</h4></div><div class="modal-body"><div class="alert alert-info"><p>Updates log in the database</p></div><div class="alert alert-warning"><span class="glyphicon glyphicon-lock" title="Authentication required"></span> Secured by <b>JWT</b><p>Authenticate to execute methods within the API</p></div><ul class="nav nav-tabs"><li class="active"><a href="#log_put_request" data-toggle="tab">Request</a></li><li><a href="#log_put_response" data-toggle="tab">Response</a></li><li><a href="#log_put_securedby" data-toggle="tab">Security</a></li></ul><div class="tab-content"><div class="tab-pane active" id="log_put_request"><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><strong>Properties</strong><ul><li><strong>Id</strong>: <em><span class="required">required</span>(integer)</em><p>Log id</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>10</code></pre></div></li><li><strong>Name</strong>: <em><span class="required">required</span>(string)</em><p>Log name</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>Error trying to create new user</code></pre></div></li><li><strong>Description</strong>: <em><span class="required">required</span>(string)</em><p><strong>Example</strong>:</p><div class="examples"><pre><code>Erro ao cadastrar um novo usuário</code></pre></div></li><li><strong>CreatedAt</strong>: <em><span class="required">required</span>(datetime)</em><p><strong>Example</strong>:</p><div class="examples"><pre><code>2020-01-12T12:32:00</code></pre></div></li><li><strong>UserId</strong>: <em><span class="required">required</span>(integer)</em><p><strong>Example</strong>:</p><div class="examples"><pre><code>1</code></pre></div></li><li><strong>EnvironmentId</strong>: <em><span class="required">required</span>(integer)</em><p><strong>Example</strong>:</p><div class="examples"><pre><code>1</code></pre></div></li><li><strong>LayerId</strong>: <em><span class="required">required</span>(integer)</em><p><strong>Example</strong>:</p><div class="examples"><pre><code>1</code></pre></div></li><li><strong>LevelId</strong>: <em><span class="required">required</span>(integer)</em><p><strong>Example</strong>:</p><div class="examples"><pre><code>1</code></pre></div></li><li><strong>StatusId</strong>: <em><span class="required">required</span>(integer)</em><p><strong>Example</strong>:</p><div class="examples"><pre><code>1</code></pre></div></li></ul><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "Id": 1,
+  "Name": "Error creating user",
+  "Description": "Erro ao cadastrar usuário.",
+  "CreatedAt": "2020-01-25T10:45:32",
+  "UserId": 1,
+  "EnvironmentId": 1,
+  "LayerId": 1,
+  "LevelId": 1,
+  "StatusId": 1
+}</code></pre></div></div><div class="tab-pane" id="log_put_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: json</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "Id": 1,
+  "Name": "acceleration.Service.AddCandidate: &lt;forbidden&gt;",
+  "Description": "Erro ao tentar cadastrar um candidato. Usuário não autorizado a acessar este endpoint.",
+  "CreatedAt": "2020-07-15T10:25:32",
+  "Environment": "Dev",
+  "Layer": "Backend",
+  "Level": "Debug",
+  "Status": "Arquivado"
+}</code></pre></div><h2>HTTP status code <a href="http://httpstatus.es/400" target="_blank">400</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: json</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "Message": "Verifique os dados digitados."
+}</code></pre></div><h2>HTTP status code <a href="http://httpstatus.es/401" target="_blank">401</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: json</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "Message": "Unauthorized"
+}</code></pre></div><h2>HTTP status code <a href="http://httpstatus.es/404" target="_blank">404</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: json</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "Message": "Page not found on the server"
+}</code></pre></div><h2>HTTP status code <a href="http://httpstatus.es/500" target="_blank">500</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: json</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "Message": "Internal Server Error"
+}</code></pre></div></div><div class="tab-pane" id="log_put_securedby"><h1>Secured by JWT</h1><h3>Headers</h3><ul><li><strong>Authorization</strong>: <em><span class="required">required</span>(string)</em><p>X-AuthToken</p></li></ul><h2>HTTP status code <a href="http://httpstatus.es/401" target="_blank">401</a></h2><p>Authentication problem (JWT not set or expired)</p></div></div></div></div></div></div></div></div></div></div><div class="panel panel-default"><div class="panel-heading"><h3 id="log" class="panel-title">/log</h3></div><div class="panel-body"><div class="panel-group"><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_log"><span class="parent"></span>/log</a> <span class="methods"><a href="#log_get"><span class="badge badge_get">get <span class="glyphicon glyphicon-lock" title="Authentication required"></span></span></a></span></h4></div><div id="panel_log" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#log_get'" class="list-group-item"><span class="badge badge_get">get <span class="glyphicon glyphicon-lock" title="Authentication required"></span></span><div class="method_description"><p>Lists all logs from database</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="log_get"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get <span class="glyphicon glyphicon-lock" title="Authentication required"></span></span> <span class="parent"></span>/log</h4></div><div class="modal-body"><div class="alert alert-info"><p>Lists all logs from database</p></div><div class="alert alert-warning"><span class="glyphicon glyphicon-lock" title="Authentication required"></span> Secured by <b>JWT</b><p>Authenticate to execute methods within the API</p></div><ul class="nav nav-tabs"><li class="active"><a href="#log_get_response" data-toggle="tab">Response</a></li><li><a href="#log_get_securedby" data-toggle="tab">Security</a></li></ul><div class="tab-content"><div class="tab-pane active" id="log_get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: json</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>[
+  {
+    "Id": 1,
+    "Name": "acceleration.Service.AddCandidate: &lt;forbidden&gt;",
+    "Description": "Erro ao tentar cadastrar um candidato. Usuário não autorizado a acessar este endpoint.",
+    "CreatedAt": "2020-07-15T10:25:32",
+    "Environment": "Dev",
+    "Layer": "Backend",
+    "Level": "Debug",
+    "Status": "Arquivado"
+  },
+  {
+    "Id": 2,
+    "Name": "acceleration.Service.AddCandidate: &lt;forbidden&gt;",
+    "Description": "Erro ao tentar cadastrar um candidato. Usuário não autorizado a acessar este endpoint.",
+    "CreatedAt": "2020-07-15T10:25:32",
+    "Environment": "Dev",
+    "Layer": "Backend",
+    "Level": "Debug",
+    "Status": "Arquivado"
+  }
+]</code></pre></div><h2>HTTP status code <a href="http://httpstatus.es/204" target="_blank">204</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: json</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "Message": "No Content"
+}</code></pre></div><h2>HTTP status code <a href="http://httpstatus.es/400" target="_blank">400</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: json</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "Message": "Bad Request."
+}</code></pre></div><h2>HTTP status code <a href="http://httpstatus.es/401" target="_blank">401</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: json</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "Message": "Unauthorized"
+}</code></pre></div><h2>HTTP status code <a href="http://httpstatus.es/404" target="_blank">404</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: json</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "Message": "Page not found on the server"
+}</code></pre></div><h2>HTTP status code <a href="http://httpstatus.es/500" target="_blank">500</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: json</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "Message": "Internal Server Error"
+}</code></pre></div></div><div class="tab-pane" id="log_get_securedby"><h1>Secured by JWT</h1><h3>Headers</h3><ul><li><strong>Authorization</strong>: <em><span class="required">required</span>(string)</em><p>X-AuthToken</p></li></ul><h2>HTTP status code <a href="http://httpstatus.es/401" target="_blank">401</a></h2><p>Authentication problem (JWT not set or expired)</p></div></div></div></div></div></div></div></div></div></div><div class="panel panel-default"><div class="panel-heading"><h3 id="log__id_" class="panel-title">/log/{id}</h3></div><div class="panel-body"><div class="panel-group"><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_log__id_"><span class="parent"></span>/log/{id}</a> <span class="methods"><a href="#log__id__delete"><span class="badge badge_delete">delete <span class="glyphicon glyphicon-lock" title="Authentication required"></span></span></a></span></h4></div><div id="panel_log__id_" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#log__id__delete'" class="list-group-item"><span class="badge badge_delete">delete <span class="glyphicon glyphicon-lock" title="Authentication required"></span></span><div class="method_description"><p>Deletes log from database</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="log__id__delete"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_delete">delete <span class="glyphicon glyphicon-lock" title="Authentication required"></span></span> <span class="parent"></span>/log/{id}</h4></div><div class="modal-body"><div class="alert alert-info"><p>Deletes log from database</p></div><div class="alert alert-warning"><span class="glyphicon glyphicon-lock" title="Authentication required"></span> Secured by <b>JWT</b><p>Authenticate to execute methods within the API</p></div><ul class="nav nav-tabs"><li class="active"><a href="#log__id__delete_request" data-toggle="tab">Request</a></li><li><a href="#log__id__delete_response" data-toggle="tab">Response</a></li><li><a href="#log__id__delete_securedby" data-toggle="tab">Security</a></li></ul><div class="tab-content"><div class="tab-pane active" id="log__id__delete_request"><h3>URI Parameters</h3><ul><li><strong>id</strong>: <em><span class="required">required</span>(string)</em></li></ul></div><div class="tab-pane" id="log__id__delete_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: json</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "Message": "Item removido com sucesso."
+}</code></pre></div><h2>HTTP status code <a href="http://httpstatus.es/400" target="_blank">400</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: json</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "Message": "Bad Request"
+}</code></pre></div><h2>HTTP status code <a href="http://httpstatus.es/401" target="_blank">401</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: json</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "Message": "Unauthorized"
+}</code></pre></div><h2>HTTP status code <a href="http://httpstatus.es/404" target="_blank">404</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: json</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "Message": "Page not found on the server"
+}</code></pre></div><h2>HTTP status code <a href="http://httpstatus.es/500" target="_blank">500</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: json</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "Message": "Internal Server Error"
+}</code></pre></div></div><div class="tab-pane" id="log__id__delete_securedby"><h1>Secured by JWT</h1><h3>Headers</h3><ul><li><strong>Authorization</strong>: <em><span class="required">required</span>(string)</em><p>X-AuthToken</p></li></ul><h2>HTTP status code <a href="http://httpstatus.es/401" target="_blank">401</a></h2><p>Authentication problem (JWT not set or expired)</p></div></div></div></div></div></div></div></div></div></div><div class="panel panel-default"><div class="panel-heading"><h3 id="log__id_" class="panel-title">/log/{id}</h3></div><div class="panel-body"><div class="panel-group"><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_log__id_"><span class="parent"></span>/log/{id}</a> <span class="methods"><a href="#log__id__get"><span class="badge badge_get">get <span class="glyphicon glyphicon-lock" title="Authentication required"></span></span></a></span></h4></div><div id="panel_log__id_" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#log__id__get'" class="list-group-item"><span class="badge badge_get">get <span class="glyphicon glyphicon-lock" title="Authentication required"></span></span><div class="method_description"><p>Returns log by id</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="log__id__get"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get <span class="glyphicon glyphicon-lock" title="Authentication required"></span></span> <span class="parent"></span>/log/{id}</h4></div><div class="modal-body"><div class="alert alert-info"><p>Returns log by id</p></div><div class="alert alert-warning"><span class="glyphicon glyphicon-lock" title="Authentication required"></span> Secured by <b>JWT</b><p>Authenticate to execute methods within the API</p></div><ul class="nav nav-tabs"><li class="active"><a href="#log__id__get_request" data-toggle="tab">Request</a></li><li><a href="#log__id__get_response" data-toggle="tab">Response</a></li><li><a href="#log__id__get_securedby" data-toggle="tab">Security</a></li></ul><div class="tab-content"><div class="tab-pane active" id="log__id__get_request"><h3>URI Parameters</h3><ul><li><strong>id</strong>: <em><span class="required">required</span>(string)</em></li></ul></div><div class="tab-pane" id="log__id__get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: json</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "Id": 1,
+  "Name": "acceleration.Service.AddCandidate: &lt;forbidden&gt;",
+  "Description": "Erro ao tentar cadastrar um candidato. Usuário não autorizado a acessar este endpoint.",
+  "CreatedAt": "2020-07-15T10:25:32",
+  "Environment": "Dev",
+  "Layer": "Backend",
+  "Level": "Debug",
+  "Status": "Arquivado"
+}</code></pre></div><h2>HTTP status code <a href="http://httpstatus.es/204" target="_blank">204</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: json</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "Message": "No Content"
+}</code></pre></div><h2>HTTP status code <a href="http://httpstatus.es/400" target="_blank">400</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: json</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "Message": "Bad Request."
+}</code></pre></div><h2>HTTP status code <a href="http://httpstatus.es/401" target="_blank">401</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: json</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "Message": "Unauthorized"
+}</code></pre></div><h2>HTTP status code <a href="http://httpstatus.es/404" target="_blank">404</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: json</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "Message": "Page not found on the server"
+}</code></pre></div><h2>HTTP status code <a href="http://httpstatus.es/500" target="_blank">500</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: json</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "Message": "Internal Server Error"
+}</code></pre></div></div><div class="tab-pane" id="log__id__get_securedby"><h1>Secured by JWT</h1><h3>Headers</h3><ul><li><strong>Authorization</strong>: <em><span class="required">required</span>(string)</em><p>X-AuthToken</p></li></ul><h2>HTTP status code <a href="http://httpstatus.es/401" target="_blank">401</a></h2><p>Authentication problem (JWT not set or expired)</p></div></div></div></div></div></div></div></div></div></div><div class="panel panel-default"><div class="panel-heading"><h3 id="log_environment__id_" class="panel-title">/log/environment/{id}</h3></div><div class="panel-body"><div class="panel-group"><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_log_environment__id_"><span class="parent"></span>/log/environment/{id}</a> <span class="methods"><a href="#log_environment__id__get"><span class="badge badge_get">get <span class="glyphicon glyphicon-lock" title="Authentication required"></span></span></a></span></h4></div><div id="panel_log_environment__id_" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#log_environment__id__get'" class="list-group-item"><span class="badge badge_get">get <span class="glyphicon glyphicon-lock" title="Authentication required"></span></span><div class="method_description"><p>Returns log by environment id</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="log_environment__id__get"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get <span class="glyphicon glyphicon-lock" title="Authentication required"></span></span> <span class="parent"></span>/log/environment/{id}</h4></div><div class="modal-body"><div class="alert alert-info"><p>Returns log by environment id</p></div><div class="alert alert-warning"><span class="glyphicon glyphicon-lock" title="Authentication required"></span> Secured by <b>JWT</b><p>Authenticate to execute methods within the API</p></div><ul class="nav nav-tabs"><li class="active"><a href="#log_environment__id__get_request" data-toggle="tab">Request</a></li><li><a href="#log_environment__id__get_response" data-toggle="tab">Response</a></li><li><a href="#log_environment__id__get_securedby" data-toggle="tab">Security</a></li></ul><div class="tab-content"><div class="tab-pane active" id="log_environment__id__get_request"><h3>URI Parameters</h3><ul><li><strong>id</strong>: <em><span class="required">required</span>(string)</em></li></ul></div><div class="tab-pane" id="log_environment__id__get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: json</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>[
+  {
+    "Id": 1,
+    "Name": "acceleration.Service.AddCandidate: &lt;forbidden&gt;",
+    "Description": "Erro ao tentar cadastrar um candidato. Usuário não autorizado a acessar este endpoint.",
+    "CreatedAt": "2020-07-15T10:25:32",
+    "Environment": "Dev",
+    "Layer": "Backend",
+    "Level": "Debug",
+    "Status": "Arquivado"
+  },
+  {
+    "Id": 2,
+    "Name": "acceleration.Service.AddCandidate: &lt;forbidden&gt;",
+    "Description": "Erro ao tentar cadastrar um candidato. Usuário não autorizado a acessar este endpoint.",
+    "CreatedAt": "2020-07-15T10:25:32",
+    "Environment": "Dev",
+    "Layer": "Backend",
+    "Level": "Debug",
+    "Status": "Arquivado"
+  }
+]</code></pre></div><h2>HTTP status code <a href="http://httpstatus.es/204" target="_blank">204</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: json</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "Message": "No Content"
+}</code></pre></div><h2>HTTP status code <a href="http://httpstatus.es/400" target="_blank">400</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: json</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "Message": "Bad Request."
+}</code></pre></div><h2>HTTP status code <a href="http://httpstatus.es/401" target="_blank">401</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: json</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "Message": "Unauthorized"
+}</code></pre></div><h2>HTTP status code <a href="http://httpstatus.es/404" target="_blank">404</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: json</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "Message": "Page not found on the server"
+}</code></pre></div><h2>HTTP status code <a href="http://httpstatus.es/500" target="_blank">500</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: json</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "Message": "Internal Server Error"
+}</code></pre></div></div><div class="tab-pane" id="log_environment__id__get_securedby"><h1>Secured by JWT</h1><h3>Headers</h3><ul><li><strong>Authorization</strong>: <em><span class="required">required</span>(string)</em><p>X-AuthToken</p></li></ul><h2>HTTP status code <a href="http://httpstatus.es/401" target="_blank">401</a></h2><p>Authentication problem (JWT not set or expired)</p></div></div></div></div></div></div></div></div></div></div><div class="panel panel-default"><div class="panel-heading"><h3 id="log_environment__environmentid__level__levelid_" class="panel-title">/log/environment/{environmentId}/level/{levelId}</h3></div><div class="panel-body"><div class="panel-group"><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_log_environment__environmentid__level__levelid_"><span class="parent"></span>/log/environment/{environmentId}/level/{levelId}</a> <span class="methods"><a href="#log_environment__environmentid__level__levelid__get"><span class="badge badge_get">get <span class="glyphicon glyphicon-lock" title="Authentication required"></span></span></a></span></h4></div><div id="panel_log_environment__environmentid__level__levelid_" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#log_environment__environmentid__level__levelid__get'" class="list-group-item"><span class="badge badge_get">get <span class="glyphicon glyphicon-lock" title="Authentication required"></span></span><div class="method_description"><p>Returns log by environment and level ids</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="log_environment__environmentid__level__levelid__get"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get <span class="glyphicon glyphicon-lock" title="Authentication required"></span></span> <span class="parent"></span>/log/environment/{environmentId}/level/{levelId}</h4></div><div class="modal-body"><div class="alert alert-info"><p>Returns log by environment and level ids</p></div><div class="alert alert-warning"><span class="glyphicon glyphicon-lock" title="Authentication required"></span> Secured by <b>JWT</b><p>Authenticate to execute methods within the API</p></div><ul class="nav nav-tabs"><li class="active"><a href="#log_environment__environmentid__level__levelid__get_request" data-toggle="tab">Request</a></li><li><a href="#log_environment__environmentid__level__levelid__get_response" data-toggle="tab">Response</a></li><li><a href="#log_environment__environmentid__level__levelid__get_securedby" data-toggle="tab">Security</a></li></ul><div class="tab-content"><div class="tab-pane active" id="log_environment__environmentid__level__levelid__get_request"><h3>URI Parameters</h3><ul><li><strong>environmentId</strong>: <em><span class="required">required</span>(string)</em></li><li><strong>levelId</strong>: <em><span class="required">required</span>(string)</em></li></ul></div><div class="tab-pane" id="log_environment__environmentid__level__levelid__get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: json</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>[
+  {
+    "Id": 1,
+    "Name": "acceleration.Service.AddCandidate: &lt;forbidden&gt;",
+    "Description": "Erro ao tentar cadastrar um candidato. Usuário não autorizado a acessar este endpoint.",
+    "CreatedAt": "2020-07-15T10:25:32",
+    "Environment": "Dev",
+    "Layer": "Backend",
+    "Level": "Debug",
+    "Status": "Arquivado"
+  },
+  {
+    "Id": 2,
+    "Name": "acceleration.Service.AddCandidate: &lt;forbidden&gt;",
+    "Description": "Erro ao tentar cadastrar um candidato. Usuário não autorizado a acessar este endpoint.",
+    "CreatedAt": "2020-07-15T10:25:32",
+    "Environment": "Dev",
+    "Layer": "Backend",
+    "Level": "Debug",
+    "Status": "Arquivado"
+  }
+]</code></pre></div><h2>HTTP status code <a href="http://httpstatus.es/204" target="_blank">204</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: json</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "Message": "No Content"
+}</code></pre></div><h2>HTTP status code <a href="http://httpstatus.es/400" target="_blank">400</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: json</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "Message": "Bad Request."
+}</code></pre></div><h2>HTTP status code <a href="http://httpstatus.es/401" target="_blank">401</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: json</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "Message": "Unauthorized"
+}</code></pre></div><h2>HTTP status code <a href="http://httpstatus.es/404" target="_blank">404</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: json</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "Message": "Page not found on the server"
+}</code></pre></div><h2>HTTP status code <a href="http://httpstatus.es/500" target="_blank">500</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: json</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "Message": "Internal Server Error"
+}</code></pre></div></div><div class="tab-pane" id="log_environment__environmentid__level__levelid__get_securedby"><h1>Secured by JWT</h1><h3>Headers</h3><ul><li><strong>Authorization</strong>: <em><span class="required">required</span>(string)</em><p>X-AuthToken</p></li></ul><h2>HTTP status code <a href="http://httpstatus.es/401" target="_blank">401</a></h2><p>Authentication problem (JWT not set or expired)</p></div></div></div></div></div></div></div></div></div></div><div class="panel panel-default"><div class="panel-heading"><h3 id="log_environment__environmentid__layer_layerid_" class="panel-title">/log/environment/{environmentId}/layer{layerId}</h3></div><div class="panel-body"><div class="panel-group"><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_log_environment__environmentid__layer_layerid_"><span class="parent"></span>/log/environment/{environmentId}/layer{layerId}</a> <span class="methods"><a href="#log_environment__environmentid__layer_layerid__get"><span class="badge badge_get">get <span class="glyphicon glyphicon-lock" title="Authentication required"></span></span></a></span></h4></div><div id="panel_log_environment__environmentid__layer_layerid_" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#log_environment__environmentid__layer_layerid__get'" class="list-group-item"><span class="badge badge_get">get <span class="glyphicon glyphicon-lock" title="Authentication required"></span></span><div class="method_description"><p>Returns log by environment and level ids</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="log_environment__environmentid__layer_layerid__get"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get <span class="glyphicon glyphicon-lock" title="Authentication required"></span></span> <span class="parent"></span>/log/environment/{environmentId}/layer{layerId}</h4></div><div class="modal-body"><div class="alert alert-info"><p>Returns log by environment and level ids</p></div><div class="alert alert-warning"><span class="glyphicon glyphicon-lock" title="Authentication required"></span> Secured by <b>JWT</b><p>Authenticate to execute methods within the API</p></div><ul class="nav nav-tabs"><li class="active"><a href="#log_environment__environmentid__layer_layerid__get_request" data-toggle="tab">Request</a></li><li><a href="#log_environment__environmentid__layer_layerid__get_response" data-toggle="tab">Response</a></li><li><a href="#log_environment__environmentid__layer_layerid__get_securedby" data-toggle="tab">Security</a></li></ul><div class="tab-content"><div class="tab-pane active" id="log_environment__environmentid__layer_layerid__get_request"><h3>URI Parameters</h3><ul><li><strong>environmentId</strong>: <em><span class="required">required</span>(string)</em></li><li><strong>layerId</strong>: <em><span class="required">required</span>(string)</em></li></ul></div><div class="tab-pane" id="log_environment__environmentid__layer_layerid__get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: json</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>[
+  {
+    "Id": 1,
+    "Name": "acceleration.Service.AddCandidate: &lt;forbidden&gt;",
+    "Description": "Erro ao tentar cadastrar um candidato. Usuário não autorizado a acessar este endpoint.",
+    "CreatedAt": "2020-07-15T10:25:32",
+    "Environment": "Dev",
+    "Layer": "Backend",
+    "Level": "Debug",
+    "Status": "Arquivado"
+  },
+  {
+    "Id": 2,
+    "Name": "acceleration.Service.AddCandidate: &lt;forbidden&gt;",
+    "Description": "Erro ao tentar cadastrar um candidato. Usuário não autorizado a acessar este endpoint.",
+    "CreatedAt": "2020-07-15T10:25:32",
+    "Environment": "Dev",
+    "Layer": "Backend",
+    "Level": "Debug",
+    "Status": "Arquivado"
+  }
+]</code></pre></div><h2>HTTP status code <a href="http://httpstatus.es/204" target="_blank">204</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: json</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "Message": "No Content"
+}</code></pre></div><h2>HTTP status code <a href="http://httpstatus.es/400" target="_blank">400</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: json</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "Message": "Bad Request."
+}</code></pre></div><h2>HTTP status code <a href="http://httpstatus.es/401" target="_blank">401</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: json</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "Message": "Unauthorized"
+}</code></pre></div><h2>HTTP status code <a href="http://httpstatus.es/404" target="_blank">404</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: json</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "Message": "Page not found on the server"
+}</code></pre></div><h2>HTTP status code <a href="http://httpstatus.es/500" target="_blank">500</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: json</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "Message": "Internal Server Error"
+}</code></pre></div></div><div class="tab-pane" id="log_environment__environmentid__layer_layerid__get_securedby"><h1>Secured by JWT</h1><h3>Headers</h3><ul><li><strong>Authorization</strong>: <em><span class="required">required</span>(string)</em><p>X-AuthToken</p></li></ul><h2>HTTP status code <a href="http://httpstatus.es/401" target="_blank">401</a></h2><p>Authentication problem (JWT not set or expired)</p></div></div></div></div></div></div></div></div></div></div><div class="panel panel-default"><div class="panel-heading"><h3 id="log_environment_environmentid__environmentid__description__description_" class="panel-title">/log/environment?environmentId={environmentId}&description={description}</h3></div><div class="panel-body"><div class="panel-group"><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_log_environment_environmentid__environmentid__description__description_"><span class="parent"></span>/log/environment?environmentId={environmentId}&description={description}</a> <span class="methods"><a href="#log_environment_environmentid__environmentid__description__description__get"><span class="badge badge_get">get <span class="glyphicon glyphicon-lock" title="Authentication required"></span></span></a></span></h4></div><div id="panel_log_environment_environmentid__environmentid__description__description_" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#log_environment_environmentid__environmentid__description__description__get'" class="list-group-item"><span class="badge badge_get">get <span class="glyphicon glyphicon-lock" title="Authentication required"></span></span><div class="method_description"><p>Returns logs by environment and description</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="log_environment_environmentid__environmentid__description__description__get"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get <span class="glyphicon glyphicon-lock" title="Authentication required"></span></span> <span class="parent"></span>/log/environment?environmentId={environmentId}&description={description}</h4></div><div class="modal-body"><div class="alert alert-info"><p>Returns logs by environment and description</p></div><div class="alert alert-warning"><span class="glyphicon glyphicon-lock" title="Authentication required"></span> Secured by <b>JWT</b><p>Authenticate to execute methods within the API</p></div><ul class="nav nav-tabs"><li class="active"><a href="#log_environment_environmentid__environmentid__description__description__get_request" data-toggle="tab">Request</a></li><li><a href="#log_environment_environmentid__environmentid__description__description__get_response" data-toggle="tab">Response</a></li><li><a href="#log_environment_environmentid__environmentid__description__description__get_securedby" data-toggle="tab">Security</a></li></ul><div class="tab-content"><div class="tab-pane active" id="log_environment_environmentid__environmentid__description__description__get_request"><h3>URI Parameters</h3><ul><li><strong>environmentId</strong>: <em><span class="required">required</span>(string)</em></li><li><strong>description</strong>: <em><span class="required">required</span>(string)</em></li></ul></div><div class="tab-pane" id="log_environment_environmentid__environmentid__description__description__get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: json</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>[
+  {
+    "Id": 1,
+    "Name": "acceleration.Service.AddCandidate: &lt;forbidden&gt;",
+    "Description": "Erro ao tentar cadastrar um candidato. Usuário não autorizado a acessar este endpoint.",
+    "CreatedAt": "2020-07-15T10:25:32",
+    "Environment": "Dev",
+    "Layer": "Backend",
+    "Level": "Debug",
+    "Status": "Arquivado"
+  },
+  {
+    "Id": 2,
+    "Name": "acceleration.Service.AddCandidate: &lt;forbidden&gt;",
+    "Description": "Erro ao tentar cadastrar um candidato. Usuário não autorizado a acessar este endpoint.",
+    "CreatedAt": "2020-07-15T10:25:32",
+    "Environment": "Dev",
+    "Layer": "Backend",
+    "Level": "Debug",
+    "Status": "Arquivado"
+  }
+]</code></pre></div><h2>HTTP status code <a href="http://httpstatus.es/204" target="_blank">204</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: json</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "Message": "No Content"
+}</code></pre></div><h2>HTTP status code <a href="http://httpstatus.es/400" target="_blank">400</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: json</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "Message": "Bad Request."
+}</code></pre></div><h2>HTTP status code <a href="http://httpstatus.es/401" target="_blank">401</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: json</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "Message": "Unauthorized"
+}</code></pre></div><h2>HTTP status code <a href="http://httpstatus.es/404" target="_blank">404</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: json</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "Message": "Page not found on the server"
+}</code></pre></div><h2>HTTP status code <a href="http://httpstatus.es/500" target="_blank">500</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: json</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "Message": "Internal Server Error"
+}</code></pre></div></div><div class="tab-pane" id="log_environment_environmentid__environmentid__description__description__get_securedby"><h1>Secured by JWT</h1><h3>Headers</h3><ul><li><strong>Authorization</strong>: <em><span class="required">required</span>(string)</em><p>X-AuthToken</p></li></ul><h2>HTTP status code <a href="http://httpstatus.es/401" target="_blank">401</a></h2><p>Authentication problem (JWT not set or expired)</p></div></div></div></div></div></div></div></div></div></div></div><div class="col-md-3"><div id="sidebar" class="hidden-print affix" role="complementary"><ul class="nav nav-pills nav-stacked"><li><a href="#user_cadastro">/user/cadastro</a></li><li><a href="#connect_token">/connect/token</a></li><li><a href="#user_create">/user/create</a></li><li><a href="#user">/user</a></li><li><a href="#user__id_">/user/{id}</a></li><li><a href="#log_create">/log/create</a></li><li><a href="#log">/log</a></li><li><a href="#log">/log</a></li><li><a href="#log__id_">/log/{id}</a></li><li><a href="#log__id_">/log/{id}</a></li><li><a href="#log_environment__id_">/log/environment/{id}</a></li><li><a href="#log_environment__environmentid__level__levelid_">/log/environment/{environmentId}/level/{levelId}</a></li><li><a href="#log_environment__environmentid__layer_layerid_">/log/environment/{environmentId}/layer{layerId}</a></li><li><a href="#log_environment_environmentid__environmentid__description__description_">/log/environment?environmentId={environmentId}&description={description}</a></li></ul></div></div></div></div></body></html>

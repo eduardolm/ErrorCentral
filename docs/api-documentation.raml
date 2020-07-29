@@ -1,0 +1,861 @@
+#%RAML 1.0
+title: Error Central API
+baseUri: https://errorcentralv102.azurewebsites.net/
+protocols: [HTTP, HTTPS]
+mediaType: application/json, x-www-form-urlencoded
+description: API to manage error logs
+version: 1.0.22
+securitySchemes:
+  JWT:
+    description: Authenticate to execute methods within the API
+    type: x-{other}
+    describedBy:
+        headers:
+            Authorization:
+                description: X-AuthToken
+                type: string
+                required: true
+        responses:
+            401:
+                description: Authentication problem (JWT not set or expired)
+    settings:
+        roles: []
+types:
+    Token:
+        type: object
+        discriminator: token
+        properties:
+            token: string
+    User:
+        type: object
+        discriminator: Id
+        properties:
+            Id: integer
+            FullName: string
+            Email: string
+            Password: string
+            CreatedAt: datetime
+        example:
+            Id: 1
+            FullName: "Test User"
+            Email: "testmail@mail.com"
+            Password: "testPass1234"
+            CreatedAt: "2020-07-27T10:54:12"
+    Log:
+        type: object
+        discriminator: Id
+        properties:
+            Id: integer
+            Name: string
+            Description: string
+            CreatedAt: datetime
+            UserId: integer
+            EnvironmentId: integer
+            LayerId: integer
+            LevelId: integer
+            StatusId: integer
+        example:
+            Id: 1
+            Name: "acceleration.Service.AddCandidate: <forbidden>"
+            Description: "Erro ao tentar cadastrar um cadidato. Usuário não está autorizado a acessar este endpoint"
+            CreatedAt: "2019-05-24T10:15:00"
+            UserId: 1
+            EnvironmentId: 1
+            LayerId: 1
+            LevelId: 1
+            StatusId: 1
+    Environment:
+        type: object
+        discriminator: Id
+        properties:
+            Id: integer
+            Name: string
+        example:
+            Id: 1
+            Name: "Dev"
+    Layer:
+        type: object
+        discriminator: Id
+        properties:
+            Id: integer
+            Name: string
+        example:
+            Id: 1
+            Name: "Backend"
+    Level:
+        type: object
+        discriminator: Id
+        properties:
+            Id: integer
+            Name: string
+        example:
+            Id: 1
+            Name: "Debug"
+    Status:
+        type: object
+        discriminator: Id
+        properties:
+            Id: integer
+            Name: string
+        example:
+            Id: 1
+            Name: "Arquivado"
+/user/cadastro:
+    post:
+        description: Creates a new user
+        body:
+            application/json:
+                properties:
+                    FullName:
+                        displayName: Nome
+                        type: string
+                        description: Full name
+                        example: "Test User"
+                        required: true
+                    Email:
+                        displayName: E-mail
+                        type: string
+                        description: E-mail address
+                        example: "mail@test.com"
+                        required: true
+                    Password:
+                        displayName: Senha
+                        type: string
+                        description: Password
+                        example: "TestPass1234"
+                        required: true
+                    CreateAt:
+                        displayName: Data de cadastro
+                        type: datetime
+                        description: Registration date
+                        example: "2020-01-15T12:23:14"
+                        required: true
+                example:
+                    Id: 1
+                    Name: "Test User"
+                    Email: "test@mail.com"
+                    Password: "testPass1234"
+                    CreatedAt: "2020-01-25T10:45:32"
+        responses:
+            200:
+                body:
+                    application/json:
+                        type: json
+                        example: {"FullName": "Test User", "Email": "test@mail.com", "CreatedAt": "2020-10-25T15:35:41"}
+            400:
+                body:
+                    application/json:
+                        type: json
+                        example: {"Message": "Dados inválidos. Verifique os dados digitados. Caso estejam corretos, seu nome e/ou e-mail já estão cadastrados em nosso sistema. Neste caso, entre em contato com o administrador"}
+            500:
+                body:
+                    application/json:
+                        type: json
+                        example: {"Message": "Internal Server Error"}
+/connect/token:
+    post:
+        description: Create an access token
+        body:
+            application/x-www-form-urlencoded:
+                properties:
+                    username:
+                        displayName: Username
+                        type: string
+                        description: E-mail address
+                        example: "mail@test.com"
+                        required: true
+                    password:
+                        displayName: Password
+                        type: string
+                        description: Password
+                        example: "password"
+                        required: true
+                    client_id:
+                        displayName: client_id
+                        type: string
+                        description: client_id
+                        example: "client_id"
+                        rquired: true
+                    client_secret:
+                        displayName: client_secret
+                        type: string
+                        description: client_secret
+                        example: "client_secret"
+                        required: true
+                    grant_type:
+                        displayName: grant_type
+                        type: string
+                        description: grant_type
+                        example: "grant_type"
+                        required: true
+                example:
+                    username: "test@mail.com"
+                    password: "testPass"
+                    client_id: "client_id"
+                    client_secret: "client_secret"
+                    grant_type: "grant_type"
+        responses:
+            200:
+                body:
+                    application/json:
+                        type: json
+                        example: {"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6Im1hcmNlbG8iLCJleHAiOjE1NTg3NjI5NTgsImVtYWlsIjoibWFyY2Vsby5taWxlcmlzQGdtYWlsLmNvbSJ9.XzzOy9yovI2mCLUuIWhAIxkI0XgldBeWgzmqPU3e4RQ"}
+            400:
+                body:
+                    application/json:
+                        type: json
+                        example: {"Message": "Unable to login with provided username / password"}
+/user/create:
+    post:
+        description: Creates a new user
+        securedBy: JWT
+        body:
+            application/json:
+                properties:
+                    FullName:
+                        displayName: Nome
+                        type: string
+                        description: Full name
+                        example: "Test User"
+                        required: true
+                    Email:
+                        displayName: E-mail
+                        type: string
+                        description: E-mail address
+                        example: "mail@test.com"
+                        required: true
+                    Password:
+                        displayName: Senha
+                        type: string
+                        description: Password
+                        example: "TestPass1234"
+                        required: true
+                    CreateAt:
+                        displayName: Data de cadastro
+                        type: datetime
+                        description: Registration date
+                        example: "2020-01-15T12:23:14"
+                        required: true
+                example:
+                    Id: 1
+                    Name: "Test User"
+                    Email: "test@mail.com"
+                    Password: "testPass1234"
+                    CreatedAt: "2020-01-25T10:45:32"
+        responses:
+            200:
+                body:
+                    application/json:
+                        type: json
+                        example: {"FullName": "Test User", "Email": "test@mail.com", "CreatedAt": "2020-10-25T15:35:41"}
+            400:
+                body:
+                    application/json:
+                        type: json
+                        example: {"Message": ""Dados inválidos. Verifique os dados digitados. Caso estejam corretos, seu nome e/ou e-mail já estão cadastrados em nosso sistema. Neste caso, entre em contato com o administrador"
+            401:
+                body:
+                    application/json:
+                        type: json
+                        example: {"Message": "Unauthorized"}
+            404:
+                body:
+                    application/json:
+                        type: json
+                        example: {"Message": "Page not found on the server"}
+            500:
+                body:
+                    application/json:
+                        type: json
+                        example: {"Message": "Internal Server Error"}
+/user:
+    get:
+        description: Lists all users from database
+        securedBy: JWT
+        responses:
+            200:
+                body:
+                    application/json:
+                        type: json
+                        example: [{"Id": 10, "FullName": "Test User", "Email": "test@mail.com", "CreatedAt": "2020-09-14T15:35:00"}, {"Id": 11, "FullName": "Test User2", "Email": "test2@mail.com", "CreatedAt": "2019-01-14T15:35:00"}]
+            400:
+                body:
+                    application/json:
+                        type: json
+                        example: {"Message": "Bad request"}
+            401:
+                body:
+                    application/json:
+                        type: json
+                        example: {"Message": "Unauthorized"}
+            404:
+                body:
+                    application/json:
+                        type: json
+                        example: {"Message": "Page not found on the server"}
+            500:
+                body:
+                    application/json:
+                        type: json
+                        example: {"Message": "Internal Server Error"}
+/user/{id}:
+    get:
+        description: Returns user by id
+        securedBy: JWT
+        body:
+            application/json:
+                properties:
+                    Id:
+                        displayName: Id
+                        type: integer
+                        description: User id
+                        example: 10
+                        required: true
+        responses:
+            200:
+                body:
+                    application/json:
+                        type: json
+                        example: {"Id": 10, "FullName": "Test User", "Email": "test@mail.com", "CreatedAt": "2020-09-14T15:35:00"}
+            400:
+                body:
+                    application/json:
+                        type: json
+                        example: {"Message": "Bad request"}
+            401:
+                body:
+                    application/json:
+                        type: json
+                        example: {"Message": "Unauthorized"}
+            404:
+                body:
+                    application/json:
+                        type: json
+                        example: {"Message": "Page not found on the server"}
+            500:
+                body:
+                    application/json:
+                        type: json
+                        example: {"Message": "Internal Server Error"}
+/user:
+    put:
+        description: Updates user in database
+        securedBy: JWT
+        body:
+            application/json:
+                properties:
+                    FullName:
+                        displayName: Nome
+                        type: string
+                        description: Full name
+                        example: "Test User"
+                        required: true
+                    Email:
+                        displayName: E-mail
+                        type: string
+                        description: E-mail address
+                        example: "mail@test.com"
+                        required: true
+                    Password:
+                        displayName: Senha
+                        type: string
+                        description: Password
+                        example: "TestPass1234"
+                        required: true
+                    CreateAt:
+                        displayName: Data de cadastro
+                        type: datetime
+                        description: Registration date
+                        example: "2020-01-15T12:23:14"
+                        required: true
+                example:
+                    Id: 1
+                    Name: "Test User"
+                    Email: "test@mail.com"
+                    Password: "testPass1234"
+                    CreatedAt: "2020-01-25T10:45:32"
+        responses:
+            200:
+                body:
+                    application/json:
+                        type: json
+                        example: {"Id": 10, "FullName": "Test User", "Email": "test@mail.com", "CreatedAt": "2020-09-14T15:35:00"}
+            400:
+                body:
+                    application/json:
+                        type: json
+                        example: {"Message": "Dados inválidos. Favor verificar os dados digitados."}
+            401:
+                body:
+                    application/json:
+                        type: json
+                        example: {"Message": "Unauthorized"}
+            404:
+                body:
+                    application/json:
+                        type: json
+                        example: {"Message": "Page not found on the server"}
+            500:
+                body:
+                    application/json:
+                        type: json
+                        example: {"Message": "Internal Server Error"}
+/user/{id}:
+    delete:
+        description: Deletes user from database
+        securedBy: JWT
+            body:
+                application/json:
+                    properties:
+                        Id:
+                            displayName: Id
+                            type: integer
+                            description: User id
+                            example: 10
+                            required: true
+        responses:
+            200:
+                body:
+                    application/json:
+                        type: json
+                        example: {"Message": "Item removido com sucesso."}
+            400:
+                body:
+                    application/json:
+                        type: json
+                        example: {"Message": "Bad Request."}
+            401:
+                body:
+                    application/json:
+                        type: json
+                        example: {"Message": "Unauthorized"}
+            404:
+                body:
+                    application/json:
+                        type: json
+                        example: {"Message": "Page not found on the server"}
+            500:
+                body:
+                    application/json:
+                        type: json
+                        example: {"Message": "Internal Server Error"}
+/log/create:
+    post:
+        description: Creates new log in the database
+        securedBy: JWT
+        body:
+            application/json:
+                properties:
+                    Id:
+                        displayName: Id
+                        type: integer
+                        description: Log id
+                        example: 10
+                        required: true
+                    Name:
+                        displayName: Name
+                        type: string
+                        description: Log name
+                        example: "Error trying to create new user"
+                        required: true
+                    Description:
+                        displayName: Description
+                        type: string
+                        example: "Erro ao cadastrar um novo usuário"
+                        required: true
+                    CreatedAt:
+                        displayName: CreatedAt
+                        type: datetime
+                        example: "2020-01-12T12:32:00"
+                        reuired: true
+                    UserId:
+                        displayName: UserId
+                        type: integer
+                        example: 1
+                        required: true
+                    EnvironmentId:
+                        displayName: EnvironmentId
+                        type: integer
+                        example: 1
+                        required: true
+                    LayerId:
+                        displayName: LayerId
+                        type: integer
+                        example: 1
+                        required: true
+                    LevelId:
+                        displayName: LevelId
+                        type: integer
+                        example: 1
+                        required: true
+                    StatusId:
+                        displayName: StatusId
+                        type: integer
+                        example: 1
+                        required: true
+                example:
+                    Id: 1
+                    Name: "Error creating user"
+                    Description: "Erro ao cadastrar usuário."
+                    CreatedAt: "2020-01-25T10:45:32"
+                    UserId: 1
+                    EnvironmentId: 1
+                    LayerId: 1
+                    LevelId: 1
+                    StatusId: 1
+        responses:
+            200:
+                body:
+                    application/json:
+                        type: json
+                        example: {"Id": 1, "Name": "acceleration.Service.AddCandidate: <forbidden>", "Description": "Erro ao tentar cadastrar um candidato. Usuário não autorizado a acessar este endpoint.", "CreatedAt": "2020-07-15T10:25:32", "Environment": "Dev", "Layer": "Backend", "Level": "Debug", "Status": "Arquivado"}
+            400:
+                body:
+                    application/json:
+                        type: json
+                        example: {"Message": "Verifique os dados digitados."}
+            401:
+                body:
+                    application/json:
+                        type: json
+                        example: {"Message": "Unauthorized"}
+            404:
+                body:
+                    application/json:
+                        type: json
+                        example: {"Message": "Page not found on the server"}
+            500:
+                body:
+                    application/json:
+                        type: json
+                        example: {"Message": "Internal Server Error"}
+/log:
+    put:
+        description: Updates log in the database
+        securedBy: JWT
+        body:
+            application/json:
+                properties:
+                    Id:
+                        displayName: Id
+                        type: integer
+                        description: Log id
+                        example: 10
+                        required: true
+                    Name:
+                        displayName: Name
+                        type: string
+                        description: Log name
+                        example: "Error trying to create new user"
+                        required: true
+                    Description:
+                        displayName: Description
+                        type: string
+                        example: "Erro ao cadastrar um novo usuário"
+                        required: true
+                    CreatedAt:
+                        displayName: CreatedAt
+                        type: datetime
+                        example: "2020-01-12T12:32:00"
+                        reuired: true
+                    UserId:
+                        displayName: UserId
+                        type: integer
+                        example: 1
+                        required: true
+                    EnvironmentId:
+                        displayName: EnvironmentId
+                        type: integer
+                        example: 1
+                        required: true
+                    LayerId:
+                        displayName: LayerId
+                        type: integer
+                        example: 1
+                        required: true
+                    LevelId:
+                        displayName: LevelId
+                        type: integer
+                        example: 1
+                        required: true
+                    StatusId:
+                        displayName: StatusId
+                        type: integer
+                        example: 1
+                        required: true
+                example:
+                    Id: 1
+                    Name: "Error creating user"
+                    Description: "Erro ao cadastrar usuário."
+                    CreatedAt: "2020-01-25T10:45:32"
+                    UserId: 1
+                    EnvironmentId: 1
+                    LayerId: 1
+                    LevelId: 1
+                    StatusId: 1
+        responses:
+            200:
+                body:
+                    application/json:
+                        type: json
+                        example: {"Id": 1, "Name": "acceleration.Service.AddCandidate: <forbidden>", "Description": "Erro ao tentar cadastrar um candidato. Usuário não autorizado a acessar este endpoint.", "CreatedAt": "2020-07-15T10:25:32", "Environment": "Dev", "Layer": "Backend", "Level": "Debug", "Status": "Arquivado"}
+            400:
+                body:
+                    application/json:
+                        type: json
+                        example: {"Message": "Verifique os dados digitados."}
+            401:
+                body:
+                    application/json:
+                        type: json
+                        example: {"Message": "Unauthorized"}
+            404:
+                body:
+                    application/json:
+                        type: json
+                        example: {"Message": "Page not found on the server"}
+            500:
+                body:
+                    application/json:
+                        type: json
+                        example: {"Message": "Internal Server Error"}
+/log/{id}:
+    delete:
+        description: Deletes log from database
+        securedBy: JWT
+        responses:
+            200:
+                body:
+                    application/json:
+                        type: json
+                        example: {"Message": "Item removido com sucesso."}
+            400:
+                body:
+                    application/json:
+                        type: json
+                        example: {"Message": "Bad Request"}
+            401:
+                body:
+                    application/json:
+                        type: json
+                        example: {"Message": "Unauthorized"}
+            404:
+                body:
+                    application/json:
+                        type: json
+                        example: {"Message": "Page not found on the server"}
+            500:
+                body:
+                    application/json:
+                        type: json
+                        example: {"Message": "Internal Server Error"}
+/log:
+    get:
+        description: Lists all logs from database
+        securedBy: JWT
+        responses:
+            200:
+                body:
+                    application/json:
+                        type: json
+                        example: [{"Id": 1, "Name": "acceleration.Service.AddCandidate: <forbidden>", "Description": "Erro ao tentar cadastrar um candidato. Usuário não autorizado a acessar este endpoint.", "CreatedAt": "2020-07-15T10:25:32", "Environment": "Dev", "Layer": "Backend", "Level": "Debug", "Status": "Arquivado"}, {"Id": 2, "Name": "acceleration.Service.AddCandidate: <forbidden>", "Description": "Erro ao tentar cadastrar um candidato. Usuário não autorizado a acessar este endpoint.", "CreatedAt": "2020-07-15T10:25:32", "Environment": "Dev", "Layer": "Backend", "Level": "Debug", "Status": "Arquivado"}]
+            204:
+                body:
+                    application/json:
+                        type: json
+                        example: {"Message": "No Content"}
+            400:
+                body:
+                    application/json:
+                        type: json
+                        example: {"Message": "Bad Request."}
+            401:
+                body:
+                    application/json:
+                        type: json
+                        example: {"Message": "Unauthorized"}
+            404:
+                body:
+                    application/json:
+                        type: json
+                        example: {"Message": "Page not found on the server"}
+            500:
+                body:
+                    application/json:
+                        type: json
+                        example: {"Message": "Internal Server Error"}
+/log/{id}:
+    get:
+        description: Returns log by id
+        securedBy: JWT
+        responses:
+            200:
+                body:
+                    application/json:
+                        type: json
+                        example: {"Id": 1, "Name": "acceleration.Service.AddCandidate: <forbidden>", "Description": "Erro ao tentar cadastrar um candidato. Usuário não autorizado a acessar este endpoint.", "CreatedAt": "2020-07-15T10:25:32", "Environment": "Dev", "Layer": "Backend", "Level": "Debug", "Status": "Arquivado"}
+            204:
+                body:
+                    application/json:
+                        type: json
+                        example: {"Message": "No Content"}
+            400:
+                body:
+                    application/json:
+                        type: json
+                        example: {"Message": "Bad Request."}
+            401:
+                body:
+                    application/json:
+                        type: json
+                        example: {"Message": "Unauthorized"}
+            404:
+                body:
+                    application/json:
+                        type: json
+                        example: {"Message": "Page not found on the server"}
+            500:
+                body:
+                    application/json:
+                        type: json
+                        example: {"Message": "Internal Server Error"}
+/log/environment/{id}:
+    get:
+        description: Returns log by environment id
+        securedBy: JWT
+        responses:
+            200:
+                body:
+                    application/json:
+                        type: json
+                        example: [{"Id": 1, "Name": "acceleration.Service.AddCandidate: <forbidden>", "Description": "Erro ao tentar cadastrar um candidato. Usuário não autorizado a acessar este endpoint.", "CreatedAt": "2020-07-15T10:25:32", "Environment": "Dev", "Layer": "Backend", "Level": "Debug", "Status": "Arquivado"}, {"Id": 2, "Name": "acceleration.Service.AddCandidate: <forbidden>", "Description": "Erro ao tentar cadastrar um candidato. Usuário não autorizado a acessar este endpoint.", "CreatedAt": "2020-07-15T10:25:32", "Environment": "Dev", "Layer": "Backend", "Level": "Debug", "Status": "Arquivado"}]
+            204:
+                body:
+                    application/json:
+                        type: json
+                        example: {"Message": "No Content"}
+            400:
+                body:
+                    application/json:
+                        type: json
+                        example: {"Message": "Bad Request."}
+            401:
+                body:
+                    application/json:
+                        type: json
+                        example: {"Message": "Unauthorized"}
+            404:
+                body:
+                    application/json:
+                        type: json
+                        example: {"Message": "Page not found on the server"}
+            500:
+                body:
+                    application/json:
+                        type: json
+                        example: {"Message": "Internal Server Error"}
+/log/environment/{environmentId}/level/{levelId}:
+    get:
+        description: Returns log by environment and level ids
+        securedBy: JWT
+        responses:
+            200:
+                body:
+                    application/json:
+                        type: json
+                        example: [{"Id": 1, "Name": "acceleration.Service.AddCandidate: <forbidden>", "Description": "Erro ao tentar cadastrar um candidato. Usuário não autorizado a acessar este endpoint.", "CreatedAt": "2020-07-15T10:25:32", "Environment": "Dev", "Layer": "Backend", "Level": "Debug", "Status": "Arquivado"}, {"Id": 2, "Name": "acceleration.Service.AddCandidate: <forbidden>", "Description": "Erro ao tentar cadastrar um candidato. Usuário não autorizado a acessar este endpoint.", "CreatedAt": "2020-07-15T10:25:32", "Environment": "Dev", "Layer": "Backend", "Level": "Debug", "Status": "Arquivado"}]
+            204:
+                body:
+                    application/json:
+                        type: json
+                        example: {"Message": "No Content"}
+            400:
+                body:
+                    application/json:
+                        type: json
+                        example: {"Message": "Bad Request."}
+            401:
+                body:
+                    application/json:
+                        type: json
+                        example: {"Message": "Unauthorized"}
+            404:
+                body:
+                    application/json:
+                        type: json
+                        example: {"Message": "Page not found on the server"}
+            500:
+                body:
+                    application/json:
+                        type: json
+                        example: {"Message": "Internal Server Error"}
+/log/environment/{environmentId}/layer{layerId}:
+    get:
+        description: Returns log by environment and level ids
+        securedBy: JWT
+        responses:
+            200:
+                body:
+                    application/json:
+                        type: json
+                        example: [{"Id": 1, "Name": "acceleration.Service.AddCandidate: <forbidden>", "Description": "Erro ao tentar cadastrar um candidato. Usuário não autorizado a acessar este endpoint.", "CreatedAt": "2020-07-15T10:25:32", "Environment": "Dev", "Layer": "Backend", "Level": "Debug", "Status": "Arquivado"}, {"Id": 2, "Name": "acceleration.Service.AddCandidate: <forbidden>", "Description": "Erro ao tentar cadastrar um candidato. Usuário não autorizado a acessar este endpoint.", "CreatedAt": "2020-07-15T10:25:32", "Environment": "Dev", "Layer": "Backend", "Level": "Debug", "Status": "Arquivado"}]
+            204:
+                body:
+                    application/json:
+                        type: json
+                        example: {"Message": "No Content"}
+            400:
+                body:
+                    application/json:
+                        type: json
+                        example: {"Message": "Bad Request."}
+            401:
+                body:
+                    application/json:
+                        type: json
+                        example: {"Message": "Unauthorized"}
+            404:
+                body:
+                    application/json:
+                        type: json
+                        example: {"Message": "Page not found on the server"}
+            500:
+                body:
+                    application/json:
+                        type: json
+                        example: {"Message": "Internal Server Error"}
+/log/environment?environmentId={environmentId}&description={description}:
+    get:
+        description: Returns logs by environment and description
+        securedBy: JWT
+        responses:
+            200:
+                body:
+                    application/json:
+                        type: json
+                        example: [{"Id": 1, "Name": "acceleration.Service.AddCandidate: <forbidden>", "Description": "Erro ao tentar cadastrar um candidato. Usuário não autorizado a acessar este endpoint.", "CreatedAt": "2020-07-15T10:25:32", "Environment": "Dev", "Layer": "Backend", "Level": "Debug", "Status": "Arquivado"}, {"Id": 2, "Name": "acceleration.Service.AddCandidate: <forbidden>", "Description": "Erro ao tentar cadastrar um candidato. Usuário não autorizado a acessar este endpoint.", "CreatedAt": "2020-07-15T10:25:32", "Environment": "Dev", "Layer": "Backend", "Level": "Debug", "Status": "Arquivado"}]
+            204:
+                body:
+                    application/json:
+                        type: json
+                        example: {"Message": "No Content"}
+            400:
+                body:
+                    application/json:
+                        type: json
+                        example: {"Message": "Bad Request."}
+            401:
+                body:
+                    application/json:
+                        type: json
+                        example: {"Message": "Unauthorized"}
+            404:
+                body:
+                    application/json:
+                        type: json
+                        example: {"Message": "Page not found on the server"}
+            500:
+                body:
+                    application/json:
+                        type: json
+                        example: {"Message": "Internal Server Error"}
