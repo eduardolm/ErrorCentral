@@ -13,21 +13,17 @@ namespace ErrorCentral.Domain.Models
         
         [Column("full_name")]
         [MaxLength(100)]
-        [Required]
         public string FullName { get; set; }
         
         [Column("email")]
         [MaxLength(100)]
-        [Required]
         public string Email { get; set; }
         
         [Column("password")]
         [MaxLength(100)]
-        [Required]
         public string Password { get; set; }
         
         [Column("created_at")]
-        [Required]
         public DateTime CreatedAt { get; set; }
     }
 }

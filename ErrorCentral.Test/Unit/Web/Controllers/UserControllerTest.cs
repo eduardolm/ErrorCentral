@@ -43,7 +43,7 @@ namespace ErrorCentral.Test.Unit.Web.Controllers
                     cfg.AddProfile<AutoMapperProfile>();; 
                 });
                 var mapper = mockMapper.CreateMapper();
-                var controller = new UserController(service, mapper);
+                // var controller = new UserController(service, mapper);
                 var user = service.GetById(userId);
                 authServer.CreateClient();
                 var token = auth.GetToken(user.Email, user.Password);
@@ -78,7 +78,7 @@ namespace ErrorCentral.Test.Unit.Web.Controllers
                     cfg.AddProfile<AutoMapperProfile>();; 
                 });
                 var mapper = mockMapper.CreateMapper();
-                var controller = new UserController(service, mapper);
+                // var controller = new UserController(service, mapper);
                 var user = service.GetById(1);
                 authServer.CreateClient();
                 var token = auth.GetToken(user.Email, user.Password);

@@ -10,7 +10,6 @@ using ErrorCentral.Domain.Models;
 using ErrorCentral.Infra.Context;
 using ErrorCentral.Infra.Repositories;
 using ErrorCentral.Test.Unit.Infra.Context;
-using ErrorCentral.Tests.Unit.Infra;
 using ErrorCentral.Web;
 using ErrorCentral.Web.Controllers;
 using IdentityModel.Client;
@@ -21,7 +20,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Xunit;
 using ErrorCentral.Tests.Unit.Domain.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+
 
 namespace ErrorCentral.Test.Unit.Application.Services
 {
@@ -30,6 +31,14 @@ namespace ErrorCentral.Test.Unit.Application.Services
         protected TestServer server;
         protected TestServer authServer;
 
+        public static IConfiguration InitConfiguration()
+        {
+            var config = new ConfigurationBuilder()
+                .AddJsonFile("appsettings.test.json")
+                .Build();
+            return config;
+        }
+        
         public UserAuthenticationTest()
         {
             var authBuilder = new WebHostBuilder().
@@ -44,6 +53,8 @@ namespace ErrorCentral.Test.Unit.Application.Services
                     services.Configure<JwtBearerOptions>( "Bearer", jwtOpts => {
                         jwtOpts.BackchannelHttpHandler = authServer.CreateHandler();
                     });
+                    services.AddDbContext<MainContext>(opt => opt
+                        .UseSqlServer(InitConfiguration().GetConnectionString("DefaultConnection")));
                 }).
                 UseStartup<Startup>();
 
@@ -56,7 +67,7 @@ namespace ErrorCentral.Test.Unit.Application.Services
             var parameters = new Dictionary<string, string>();
             parameters["client_id"] = "codenation.api_client";
             parameters["client_secret"] = "codenation.api_secret";
-            parameters["grant_type"] = "client_credentials";
+            parameters["grant_type"] = "password";
             parameters["username"] = username;
             parameters["password"] = password;
             return parameters;
@@ -148,8 +159,9 @@ namespace ErrorCentral.Test.Unit.Application.Services
                 {
                     cfg.AddProfile<AutoMapperProfile>();; 
                 });
+                var config = InitConfiguration();
                 var mapper = mockMapper.CreateMapper();
-                var controller = new UserController(service, mapper);
+                var controller = new UserController(service, mapper, config);
 
                 var user = new User();
                 user.FullName = "Test User";

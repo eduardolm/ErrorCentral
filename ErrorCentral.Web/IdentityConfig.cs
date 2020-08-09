@@ -44,7 +44,7 @@ namespace ErrorCentral.Web
                 new Client
                 {
                     ClientId = "codenation.api_client",
-                    AllowedGrantTypes = GrantTypes.ClientCredentials,
+                    AllowedGrantTypes = GrantTypes.ResourceOwnerPassword,
                     ClientSecrets = {
                         new Secret("codenation.api_secret".Sha256())
                     },
