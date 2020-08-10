@@ -1,0 +1,68 @@
+#login-page {
+    width: 100vw;
+    height: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo-container {
+    width: 100%;
+    padding-top: 10px;
+    justify-content: center;
+    display: flex;
+    position: relative;
+    top: -100px;
+}
+
+.buttons-container {
+    display: flex;
+    justify-content: center;
+    margin: 3.2rem 0;
+    position: relative;
+    top: -100px;
+}
+
+.buttons-container a {
+    width: 18rem;
+    height: 6.4rem;
+    border-radius: 0.8rem;
+    font: 700 2.0rem Archivo;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    text-decoration: none;
+    color: var(--color-button-text);
+
+    transition: background-color 0.2s;
+}
+
+.buttons-container a:first-child {
+    margin-right: 1.6rem;
+}
+
+.buttons-container a img {
+    width: 4rem;
+}
+
+.buttons-container a.login {
+    background: var(--color-primary-lighter);
+}
+
+.buttons-container a.register {
+    background: var(--color-secundary-lighter);
+}
+
+.buttons-container a.login:hover {
+    background: var(--color-primary-light);
+}
+
+.buttons-container a.register:hover {
+    background: var(--color-secundary-light);
+}
+
+.buttons-container a img {
+    margin-right: 2.4rem;
+}
