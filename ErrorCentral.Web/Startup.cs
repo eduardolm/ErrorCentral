@@ -96,7 +96,13 @@ namespace ErrorCentral.Web
                     };
                 });
 
-            services.AddCors();
+            services.AddCors(opt => opt
+                .AddPolicy("MyPolicy", builder =>
+                {
+                    builder.AllowAnyOrigin()
+                        .AllowAnyMethod()
+                        .AllowAnyHeader();
+                }));
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -127,6 +133,7 @@ namespace ErrorCentral.Web
                     DefaultFileNames = new List<string> {"index.html"}
                 });
 
+            app.UseCors("MyPolicy");
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();

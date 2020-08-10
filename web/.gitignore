@@ -1,16 +1,3 @@
-ErrorCentral.Application/bin
-ErrorCentral.Application/obj
-ErrorCentral.Domain/bin
-ErrorCentral.Domain/obj
-ErrorCentral.Infra/bin
-ErrorCentral.Infra/obj
-ErrorCentral.Test/bin
-ErrorCentral.Test/obj
-ErrorCentral.Web/bin
-ErrorCentral.Web/obj
-.idea
-*.jwk
-
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies

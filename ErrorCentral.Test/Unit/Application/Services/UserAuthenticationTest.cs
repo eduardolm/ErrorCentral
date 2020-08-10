@@ -55,8 +55,7 @@ namespace ErrorCentral.Test.Unit.Application.Services
                     });
                     services.AddDbContext<MainContext>(opt => opt
                         .UseSqlServer(InitConfiguration().GetConnectionString("DefaultConnection")));
-                }).
-                UseStartup<Startup>();
+                }).UseStartup<Startup>();
 
             server = new TestServer(builder);            
             server.BaseAddress = new Uri("https://localhost:5001");
