@@ -3,16 +3,16 @@
 namespace ErrorCentral.Domain.DTOs
 
 {
-    public class LogDTO
+    public class LogDto
     {
         public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public DateTime CreatedAt { get; set; }
-        public UserDTO User { get; set; }
-        public EnvironmentDTO Environment { get; set; }
-        public LayerDTO Layer { get; set; }
-        public LevelDTO Level { get; set; }
-        public StatusDTO Status { get; set; }
+        public UserDto User { get; set; }
+        public EnvironmentDto Environment { get; set; }
+        public LayerDto Layer { get; set; }
+        public LevelDto Level { get; set; }
+        public StatusDto Status { get; set; }
     }
 }

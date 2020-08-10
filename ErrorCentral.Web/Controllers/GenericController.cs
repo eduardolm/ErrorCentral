@@ -2,7 +2,7 @@
 using Castle.Core.Internal;
 using ErrorCentral.Application.Interfaces;
 using ErrorCentral.Domain.Interfaces;
-using ErrorCentral.Web.Controllers.Interfaces;
+using ErrorCentral.Web.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ErrorCentral.Web.Controllers

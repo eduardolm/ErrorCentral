@@ -1,4 +1,4 @@
-﻿namespace ErrorCentral.Tests.Unit.Domain.Models
+﻿namespace ErrorCentral.Test.Unit.Domain.Models
 {
     public class Token
     {

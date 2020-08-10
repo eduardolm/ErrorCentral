@@ -8,13 +8,13 @@ namespace ErrorCentral.Web
     {
         public AutoMapperProfile()
         {
-            CreateMap<User, UserDTO>().ReverseMap();
-            CreateMap<Status, StatusDTO>().ReverseMap();
-            CreateMap<Log, LogDTO>().ReverseMap();
-            CreateMap<Layer, LayerDTO>().ReverseMap();
-            CreateMap<Level, LevelDTO>().ReverseMap();
-            CreateMap<Status, StatusDTO>().ReverseMap();
-            CreateMap<Environment, EnvironmentDTO>().ReverseMap();
+            CreateMap<User, UserDto>().ReverseMap();
+            CreateMap<Status, StatusDto>().ReverseMap();
+            CreateMap<Log, LogDto>().ReverseMap();
+            CreateMap<Layer, LayerDto>().ReverseMap();
+            CreateMap<Level, LevelDto>().ReverseMap();
+            CreateMap<Status, StatusDto>().ReverseMap();
+            CreateMap<Environment, EnvironmentDto>().ReverseMap();
         }
     }
 }

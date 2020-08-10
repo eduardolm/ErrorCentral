@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using ErrorCentral.Domain.Models;
 
-namespace ErrorCentral.Tests.Unit.Domain
+namespace ErrorCentral.Test.Unit.Domain
 {
     public class LevelIdComparer : IEqualityComparer<Level>
     {

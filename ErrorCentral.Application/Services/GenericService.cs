@@ -1,13 +1,9 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using Castle.Core.Internal;
 using ErrorCentral.Application.Interfaces;
-using ErrorCentral.Application.Validators;
 using ErrorCentral.Domain.Interfaces;
 using ErrorCentral.Infra.Interfaces;
 using FluentValidation;
-using FluentValidation.Results;
-using Microsoft.AspNetCore.Mvc;
 
 namespace ErrorCentral.Application.Services
 {

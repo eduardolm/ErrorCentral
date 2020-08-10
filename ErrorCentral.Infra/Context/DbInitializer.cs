@@ -60,13 +60,17 @@ namespace ErrorCentral.Infra.Context
                     context.Database.OpenConnection();
                     foreach (var item in GetData<T>())
                     {
-                        var itemName = $"[{item.GetType().FullName.Split('.')[3]}]";
-                        var turnOn = $"SET IDENTITY_INSERT {itemName} ON";
-                        var turnOff = $"SET IDENTITY_INSERT {itemName} OFF";
-                        context.Database.ExecuteSqlRaw(turnOn);
-                        context.Set<T>().Add(item);
-                        context.SaveChanges();
-                        context.Database.ExecuteSqlRaw(turnOff);
+                        var fullName = item.GetType().FullName;
+                        if (fullName != null)
+                        {
+                            var itemName = $"[{fullName.Split('.')[3]}]";
+                            var turnOn = $"SET IDENTITY_INSERT {itemName} ON";
+                            var turnOff = $"SET IDENTITY_INSERT {itemName} OFF";
+                            context.Database.ExecuteSqlRaw(turnOn);
+                            context.Set<T>().Add(item);
+                            context.SaveChanges();
+                            context.Database.ExecuteSqlRaw(turnOff);
+                        }
                     }
                     context.Database.CloseConnection();
                 }

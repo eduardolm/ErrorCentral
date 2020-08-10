@@ -1,13 +1,13 @@
 ﻿using System.Collections.Generic;
 using ErrorCentral.Domain.Models;
 
-namespace ErrorCentral.Tests.Unit.Domain
+namespace ErrorCentral.Test.Unit.Domain
 {
     public class LayerIdComparer : IEqualityComparer<Layer>
     {
         public bool Equals(Layer x, Layer y)
         {
-            return x.Id == y.Id;
+            return x != null && x.Id == y.Id;
         }
 
         public int GetHashCode(Layer obj)

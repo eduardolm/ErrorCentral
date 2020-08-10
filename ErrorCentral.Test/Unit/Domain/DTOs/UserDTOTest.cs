@@ -1,5 +1,4 @@
-﻿using System;
-using AutoMapper;
+﻿using AutoMapper;
 using ErrorCentral.Application.Services;
 using ErrorCentral.Application.Validators;
 using ErrorCentral.Domain.DTOs;
@@ -7,17 +6,12 @@ using ErrorCentral.Domain.Models;
 using ErrorCentral.Infra.Context;
 using ErrorCentral.Infra.Repositories;
 using ErrorCentral.Test.Unit.Infra.Context;
-using ErrorCentral.Tests.Unit.Infra;
 using ErrorCentral.Web;
-using Moq;
-using Moq.Language.Flow;
-using NSubstitute;
-using NSubstitute.Core;
 using Xunit;
 
-namespace ErrorCentral.Tests.Unit.Domain.DTOs
+namespace ErrorCentral.Test.Unit.Domain.DTOs
 {
-    public class UserDTOTest
+    public class UserDtoTest
     {
         [Theory]
         [InlineData(1)]
@@ -39,14 +33,14 @@ namespace ErrorCentral.Tests.Unit.Domain.DTOs
                 var service = new UserService(repository, validator);
                 var mockMapper = new MapperConfiguration(cfg =>
                 {
-                    cfg.AddProfile<AutoMapperProfile>();; 
+                    cfg.AddProfile<AutoMapperProfile>(); 
                 });
                 var mapper = mockMapper.CreateMapper();
                 
                 var testUser = service.GetById(id);
-                var userDto = mapper.Map<User, UserDTO>(testUser);
+                var userDto = mapper.Map<User, UserDto>(testUser);
 
-                Assert.IsType<UserDTO>(userDto);
+                Assert.IsType<UserDto>(userDto);
                 Assert.Equal(testUser.FullName, userDto.FullName);
                 Assert.Equal(testUser.Email, userDto.Email);
                 Assert.Equal(testUser.Id, userDto.Id);

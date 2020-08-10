@@ -6,7 +6,7 @@ using Castle.Core.Internal;
 using ErrorCentral.Application.Interfaces;
 using ErrorCentral.Domain.DTOs;
 using ErrorCentral.Domain.Models;
-using ErrorCentral.Web.Controllers.Interfaces;
+using ErrorCentral.Web.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -29,21 +29,21 @@ namespace ErrorCentral.Web.Controllers
         {
             var result = _service.GetByEnvironmentId(id);
             if (!result.Any()) return NoContent();
-            return Ok(_mapper.Map<IEnumerable<Log>, IEnumerable<LogDTO>>(result));
+            return Ok(_mapper.Map<IEnumerable<Log>, IEnumerable<LogDto>>(result));
         }
 
         // GET: log/<id>
         [HttpGet("{id:int}")]
         public IActionResult GetById(int id)
         {
-            return Ok(_mapper.Map<Log, LogDTO>(_service.GetFullLog(id)));
+            return Ok(_mapper.Map<Log, LogDto>(_service.GetFullLog(id)));
         }
         
         // GET: log
         [HttpGet]
         public IActionResult GetAll()
         {
-            return Ok(_mapper.Map<IEnumerable<Log>, IEnumerable<LogDTO>>(_service.GetAllFull()));
+            return Ok(_mapper.Map<IEnumerable<Log>, IEnumerable<LogDto>>(_service.GetAllFull()));
         }
 
         // POST: log
@@ -52,14 +52,14 @@ namespace ErrorCentral.Web.Controllers
         {
             if (!ModelState.IsValid) return BadRequest("Verifique os dados digitados.");
             log.CreatedAt = DateTime.Now;
-            return Ok(_mapper.Map<Log, LogDTO>(_service.Create(log)));
+            return Ok(_mapper.Map<Log, LogDto>(_service.Create(log)));
         }
         
         // GET: log/environment/<environmentId>/level/<levelId>
         [HttpGet("environment/{environmentId:int}/level/{levelId:int}")]
         public IActionResult GetByEnvironmentIdAndLevel(int environmentId, int levelId)
         {
-            var result = _mapper.Map<IEnumerable<Log>, IEnumerable<LogDTO>>(
+            var result = _mapper.Map<IEnumerable<Log>, IEnumerable<LogDto>>(
                 _service.GetByEnvironmentIdAndLevel(environmentId, levelId));
             if (result.Any()) return Ok(result);
             return NoContent();
@@ -69,7 +69,7 @@ namespace ErrorCentral.Web.Controllers
         [HttpGet("environment/{environmentId:int}/layer/{layerId:int}")]
         public IActionResult GetByEnvironmentAndLayer(int environmentId, int layerId)
         {
-            var result = _mapper.Map<IEnumerable<Log>, IEnumerable<LogDTO>>(
+            var result = _mapper.Map<IEnumerable<Log>, IEnumerable<LogDto>>(
                 _service.GetByEnvironmentAndLayer(environmentId, layerId));
             if (result.Any()) return Ok(result);
             return NoContent();
@@ -82,7 +82,7 @@ namespace ErrorCentral.Web.Controllers
             if (!description.IsNullOrEmpty())
             {
                 var result =
-                    _mapper.Map<IEnumerable<Log>, IEnumerable<LogDTO>>(
+                    _mapper.Map<IEnumerable<Log>, IEnumerable<LogDto>>(
                         _service.GetByEnvironmentAndDescription(environmentId, description.ToLower()));
                 if (result.Any()) return Ok(result);
                 return NoContent();

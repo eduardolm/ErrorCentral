@@ -4,7 +4,6 @@ using ErrorCentral.Domain.Models;
 using ErrorCentral.Infra.Context;
 using ErrorCentral.Infra.Repositories;
 using ErrorCentral.Test.Unit.Infra.Context;
-using ErrorCentral.Tests.Unit.Infra;
 using Xunit;
 
 namespace ErrorCentral.Test.Unit.Application.Services

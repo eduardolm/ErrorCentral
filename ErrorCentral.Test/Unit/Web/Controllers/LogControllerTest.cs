@@ -8,7 +8,6 @@ using ErrorCentral.Infra.Context;
 using ErrorCentral.Infra.Repositories;
 using ErrorCentral.Test.Unit.Application.Services;
 using ErrorCentral.Test.Unit.Infra.Context;
-using ErrorCentral.Tests.Unit.Infra;
 using ErrorCentral.Web;
 using ErrorCentral.Web.Controllers;
 using IdentityModel.Client;
@@ -44,7 +43,7 @@ namespace ErrorCentral.Test.Unit.Web.Controllers
                 var userService = new UserService(userRepository, userValidator);
                 var mockMapper = new MapperConfiguration(cfg =>
                 {
-                    cfg.AddProfile<AutoMapperProfile>();; 
+                    cfg.AddProfile<AutoMapperProfile>(); 
                 });
                 var mapper = mockMapper.CreateMapper();
                 var controller = new LogController(service, mapper);
@@ -94,7 +93,7 @@ namespace ErrorCentral.Test.Unit.Web.Controllers
                 var userService = new UserService(userRepository, userValidator);
                 var mockMapper = new MapperConfiguration(cfg =>
                 {
-                    cfg.AddProfile<AutoMapperProfile>();; 
+                    cfg.AddProfile<AutoMapperProfile>(); 
                 });
                 var mapper = mockMapper.CreateMapper();
                 var controller = new LogController(service, mapper);
@@ -141,7 +140,7 @@ namespace ErrorCentral.Test.Unit.Web.Controllers
                 var userService = new UserService(userRepository, userValidator);
                 var mockMapper = new MapperConfiguration(cfg =>
                 {
-                    cfg.AddProfile<AutoMapperProfile>();; 
+                    cfg.AddProfile<AutoMapperProfile>(); 
                 });
                 var mapper = mockMapper.CreateMapper();
                 var controller = new LogController(service, mapper);
@@ -196,7 +195,7 @@ namespace ErrorCentral.Test.Unit.Web.Controllers
                 var userService = new UserService(userRepository, userValidator);
                 var mockMapper = new MapperConfiguration(cfg =>
                 {
-                    cfg.AddProfile<AutoMapperProfile>();; 
+                    cfg.AddProfile<AutoMapperProfile>(); 
                 });
                 var mapper = mockMapper.CreateMapper();
                 var controller = new LogController(service, mapper);
@@ -250,7 +249,7 @@ namespace ErrorCentral.Test.Unit.Web.Controllers
                 var userService = new UserService(userRepository, userValidator);
                 var mockMapper = new MapperConfiguration(cfg =>
                 {
-                    cfg.AddProfile<AutoMapperProfile>();; 
+                    cfg.AddProfile<AutoMapperProfile>(); 
                 });
                 var mapper = mockMapper.CreateMapper();
                 var controller = new LogController(service, mapper);
@@ -300,7 +299,7 @@ namespace ErrorCentral.Test.Unit.Web.Controllers
                 var userService = new UserService(userRepository, userValidator);
                 var mockMapper = new MapperConfiguration(cfg =>
                 {
-                    cfg.AddProfile<AutoMapperProfile>();; 
+                    cfg.AddProfile<AutoMapperProfile>(); 
                 });
                 var mapper = mockMapper.CreateMapper();
                 var controller = new LogController(service, mapper);

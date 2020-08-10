@@ -1,12 +1,12 @@
 ﻿using System.Linq;
 using ErrorCentral.Infra.Context;
 using ErrorCentral.Infra.Repositories;
+using ErrorCentral.Test.Unit.Domain;
 using ErrorCentral.Test.Unit.Infra.Context;
-using ErrorCentral.Tests.Unit.Domain;
 using Xunit;
 using Environment = ErrorCentral.Domain.Models.Environment;
 
-namespace ErrorCentral.Tests.Unit.Infra
+namespace ErrorCentral.Test.Unit.Infra.Repositories
 {
     public class EnvironmentRepositoryTest
     {

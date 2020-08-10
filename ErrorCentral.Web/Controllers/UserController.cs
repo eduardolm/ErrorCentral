@@ -4,7 +4,7 @@ using AutoMapper;
 using ErrorCentral.Application.Interfaces;
 using ErrorCentral.Domain.DTOs;
 using ErrorCentral.Domain.Models;
-using ErrorCentral.Web.Controllers.Interfaces;
+using ErrorCentral.Web.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -34,7 +34,7 @@ namespace ErrorCentral.Web.Controllers
             user.CreatedAt = DateTime.Now;
             
             var result = _service.Create(user);
-            if (result != null) return Ok(_mapper.Map<User, UserDTO>(result));
+            if (result != null) return Ok(_mapper.Map<User, UserDto>(result));
             return BadRequest("Dados inválidos. Verifique os dados digitados. Caso estejam corretos, seu nome " +
                               "e/ou e-mail já estão cadastrados em nosso sistema. Neste caso, entre em contato com o " +
                               "administrador");
@@ -52,14 +52,14 @@ namespace ErrorCentral.Web.Controllers
         [HttpGet("{id:int}")]
         public IActionResult GetById(int id)
         {
-            return Ok(_mapper.Map<User, UserDTO>(_service.GetById(id)));
+            return Ok(_mapper.Map<User, UserDto>(_service.GetById(id)));
         }
 
         // GET: user
         [HttpGet]
         public IActionResult GetAll()
         {
-            return Ok(_mapper.Map<IEnumerable<User>, IEnumerable<UserDTO>>(_service.GetAll()));
+            return Ok(_mapper.Map<IEnumerable<User>, IEnumerable<UserDto>>(_service.GetAll()));
         }
         
         // POST: user
@@ -70,7 +70,7 @@ namespace ErrorCentral.Web.Controllers
             user.CreatedAt = DateTime.Now;
 
             var result = _service.Create(user);
-            if (result != null) return Ok(_mapper.Map<User, UserDTO>(result));
+            if (result != null) return Ok(_mapper.Map<User, UserDto>(result));
             return BadRequest();
         }
     }

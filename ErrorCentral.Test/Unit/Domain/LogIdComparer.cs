@@ -1,13 +1,13 @@
 ﻿using System.Collections.Generic;
 using ErrorCentral.Domain.Models;
 
-namespace ErrorCentral.Tests.Unit.Domain
+namespace ErrorCentral.Test.Unit.Domain
 {
     public class LogIdComparer : IEqualityComparer<Log>
     {
         public bool Equals(Log x, Log y)
         {
-            return x.Id == y.Id;
+            return x != null && x.Id == y.Id;
         }
 
         public int GetHashCode(Log obj)

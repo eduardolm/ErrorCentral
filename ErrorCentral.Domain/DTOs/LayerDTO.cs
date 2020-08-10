@@ -1,6 +1,6 @@
 ﻿namespace ErrorCentral.Domain.DTOs
 {
-    public class LayerDTO
+    public class LayerDto
     {
         public string Name { get; set; }
     }

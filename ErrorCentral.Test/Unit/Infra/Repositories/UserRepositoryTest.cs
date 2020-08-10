@@ -1,13 +1,12 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using ErrorCentral.Domain.Models;
 using ErrorCentral.Infra.Context;
 using ErrorCentral.Infra.Repositories;
+using ErrorCentral.Test.Unit.Domain;
 using ErrorCentral.Test.Unit.Infra.Context;
-using ErrorCentral.Tests.Unit.Domain;
 using Xunit;
 
-namespace ErrorCentral.Tests.Unit.Infra
+namespace ErrorCentral.Test.Unit.Infra.Repositories
 {
     public class UserRepositoryTest
     {

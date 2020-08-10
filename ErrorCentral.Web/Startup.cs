@@ -8,7 +8,6 @@ using ErrorCentral.Infra.Context;
 using ErrorCentral.Infra.Interfaces;
 using ErrorCentral.Infra.Repositories;
 using ErrorCentral.Web.Controllers;
-using ErrorCentral.Web.Controllers.Interfaces;
 using IdentityServer4.Services;
 using IdentityServer4.Validation;
 using Microsoft.AspNetCore.Builder;
@@ -26,6 +25,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Http;
 using Microsoft.IdentityModel.Logging;
 using ErrorCentral.Web;
+using ErrorCentral.Web.Interfaces;
 
 namespace ErrorCentral.Web
 {

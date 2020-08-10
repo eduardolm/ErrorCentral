@@ -5,9 +5,8 @@ using ErrorCentral.Application.Validators;
 using ErrorCentral.Domain.Models;
 using ErrorCentral.Infra.Context;
 using ErrorCentral.Infra.Repositories;
+using ErrorCentral.Test.Unit.Domain;
 using ErrorCentral.Test.Unit.Infra.Context;
-using ErrorCentral.Tests.Unit.Domain;
-using ErrorCentral.Tests.Unit.Infra;
 using FluentValidation;
 using Moq;
 using Xunit;
@@ -165,7 +164,7 @@ namespace ErrorCentral.Test.Unit.Application.Services
                 newUser.FullName = "Test Name";
                 newUser.Email = "test@mail.com";
                 newUser.Password = "testPass";
-                var result = service.Create(newUser);
+                service.Create(newUser);
                 var existingUser = (from u in service.GetAll()
                     where u.Id == id
                     select u).FirstOrDefault();

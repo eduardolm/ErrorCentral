@@ -1,8 +1,7 @@
 ﻿using ErrorCentral.Domain.Interfaces;
-using ErrorCentral.Domain.Models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace ErrorCentral.Web.Controllers.Interfaces
+namespace ErrorCentral.Web.Interfaces
 {
     public interface IGenericController<T> where T : class, IBaseEntity
     {

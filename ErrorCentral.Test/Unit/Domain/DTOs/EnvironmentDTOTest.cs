@@ -6,13 +6,12 @@ using ErrorCentral.Domain.Models;
 using ErrorCentral.Infra.Context;
 using ErrorCentral.Infra.Repositories;
 using ErrorCentral.Test.Unit.Infra.Context;
-using ErrorCentral.Tests.Unit.Infra;
 using ErrorCentral.Web;
 using Xunit;
 
-namespace ErrorCentral.Tests.Unit.Domain.DTOs
+namespace ErrorCentral.Test.Unit.Domain.DTOs
 {
-    public class EnvironmentDTOTest
+    public class EnvironmentDtoTest
     {
         [Theory]
         [InlineData(1)]
@@ -30,15 +29,15 @@ namespace ErrorCentral.Tests.Unit.Domain.DTOs
                 var service = new EnvironmentService(repository, validator);
                 var mockMapper = new MapperConfiguration(cfg =>
                 {
-                    cfg.AddProfile<AutoMapperProfile>();; 
+                    cfg.AddProfile<AutoMapperProfile>(); 
                 });
                 var mapper = mockMapper.CreateMapper();
                 
                 var testEnv = service.GetById(id);
-                var envDTO = mapper.Map<Environment, EnvironmentDTO>(testEnv);
+                var envDto = mapper.Map<Environment, EnvironmentDto>(testEnv);
 
-                Assert.IsType<EnvironmentDTO>(envDTO);
-                Assert.Equal(testEnv.Name, envDTO.Name);
+                Assert.IsType<EnvironmentDto>(envDto);
+                Assert.Equal(testEnv.Name, envDto.Name);
             }
         }
     }

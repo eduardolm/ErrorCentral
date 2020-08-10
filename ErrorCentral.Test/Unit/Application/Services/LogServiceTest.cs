@@ -1,15 +1,11 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using ErrorCentral.Application.Services;
 using ErrorCentral.Application.Validators;
-using ErrorCentral.Domain.DTOs;
 using ErrorCentral.Domain.Models;
 using ErrorCentral.Infra.Context;
 using ErrorCentral.Infra.Repositories;
+using ErrorCentral.Test.Unit.Domain;
 using ErrorCentral.Test.Unit.Infra.Context;
-using ErrorCentral.Tests.Unit.Domain;
-using ErrorCentral.Tests.Unit.Infra;
-using FluentAssertions;
 using FluentValidation;
 using Moq;
 using Xunit;
