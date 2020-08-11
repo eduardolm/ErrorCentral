@@ -19,7 +19,7 @@ function Login() {
         api.post('/user/login', {
             email,
             password
-        })
+        });
     }
 
     return (

@@ -6,6 +6,7 @@
 #login-page .page-header .header-content {
     margin-bottom: 6.4rem;
 }
+
 #login-page main {
     background: var(--color-box-base);
     width: 100%;
@@ -100,7 +101,7 @@
     }
 
     #login-page .page-header .header-content {
-        margin-bottom: 0;
+        margin-bottom: 6rem;
     }
 
     #login-page main fieldset {
@@ -112,6 +113,7 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
+        margin-bottom: -65px;
     }
 
     #login-page main footer p {
@@ -124,10 +126,10 @@
     }
 
     #login-page main {
-        padding: 4.4rem 0;
+        padding: 6.4rem 0;
         max-width: 740px;
         margin: 0 auto;
         position: relative;
-        top: 140px;
+        top: 100px;
     }
 }

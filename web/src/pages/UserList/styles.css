@@ -1,0 +1,164 @@
+#user-page {
+    width: 100vw;
+    height: 100vh;
+}
+
+#user-page .page-header .header-content {
+    margin-bottom: 6.4rem;
+}
+
+#user-page main {
+    background: var(--color-box-base);
+    width: 100%;
+    max-width: 74rem;
+    border-radius: 0.8rem;
+    margin: -3.2rem auto 3.2rem;
+    padding-top: 3rem;
+    overflow: hidden;
+    position: relative;
+    bottom: -54px;
+
+}
+
+#user-page main .input-block {
+    margin-top: 2.4rem;
+    margin-bottom: 1.4rem;
+}
+
+#user-page main .list-id {
+    display: flex;
+    grid-template-columns: 1fr 2fr;
+    column-gap: 8px;
+    align-items: center;
+    justify-content: center;
+}
+
+#user-page main .list-id .list-by-id {
+    display: flex;
+    padding: 1rem;
+    margin-top: 4.2rem;
+}
+
+#user-page .header-content {
+    width: 90%;
+    margin: 0 auto;
+    position: relative;
+}
+
+#user-page main fieldset {
+    border: 0;
+    padding: 0 2.4rem;
+}
+
+#user-page main fieldset + fieldset {
+    margin-top: 4.4rem;
+}
+
+#user-page main fieldset legend {
+    font: 700 2.4rem Archivo;
+    color: var(--color-text-title);
+    margin-bottom: 2.4rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding-bottom: 1.6rem;
+    border-bottom: 2px solid var(--color-line-in-white);
+}
+
+#user-page main fieldset legend button:hover {
+    color: var(--color-primary-dark);
+}
+
+#user-page main .user-create {
+    margin-top: 3.6rem;
+    border-top: 2px solid var(--color-line-in-white);
+    padding-top: 2.4rem;
+    padding-bottom: 1rem;
+}
+
+#user-page main .user-create .input-block {
+    margin-top: 1.4rem;
+}
+
+#user-page main .user-create .user-create-action {
+    display: flex;
+    grid-template-columns: 2fr 1fr;
+    column-gap: 8px;
+    align-items: center;
+    justify-content: center;
+    margin-top: -1.4rem;
+}
+
+#user-page main .user-create .user-create-action .create {
+    display: flex;
+    padding: 1rem;
+    margin-top: 4.2rem;
+}
+
+#user-page main label {
+    color: var(--color-text-complement);
+}
+
+#user-page main button {
+    width: 100%;
+    height: 5.6rem;
+    background: var(--color-secundary);
+    color: var(--color-button-text);
+    border: 0;
+    border-radius: 0.8rem;
+    cursor: pointer;
+    font: 700 1.6rem Archivo;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: background-color 0.2s;
+    margin-top: 0.2rem;
+}
+
+#user-page main button:hover {
+    background: var(--color-secundary-dark);
+}
+
+@media (min-width: 700px) {
+    #user-page {
+        max-width: 100vw;
+    }
+
+    #user-page .page-header .header-content {
+        margin-bottom: 0;
+    }
+
+    #user-page main fieldset {
+        padding: 0 6.4rem;
+    }
+
+    #user-page main {
+        padding: 6.4rem 0;
+        max-width: 740px;
+        margin: 0 auto;
+        position: relative;
+        top: 30px;
+    }
+
+    #user-page main .list-id {
+        display: flex;
+        grid-template-columns: 1fr 2fr;
+        column-gap: 8px;
+        align-items: center;
+        justify-content: center;
+    }
+
+    #user-page main .list-id .list-by-id {
+        display: flex;
+        padding: 1rem;
+        margin-top: 4.2rem;
+    }
+
+    #user-page main .user-create .user-create-action {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        column-gap: 8px;
+    }
+}
