@@ -9,7 +9,7 @@
 
 #login-page main {
     background: var(--color-box-base);
-    width: 100%;
+    width: 90%;
     max-width: 74rem;
     border-radius: 0.8rem;
     margin: -3.2rem auto 3.2rem;

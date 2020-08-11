@@ -1,4 +1,5 @@
 import React, {FormEvent, useState} from "react";
+import {useCookies} from 'react-cookie';
 
 import PageHeader from "../../components/PageHeader";
 import Input from "../../components/Input";
@@ -9,17 +10,28 @@ import warningIcon from '../../assets/images/icons/alert-triangle.svg';
 import './styles.css';
 
 function Login() {
+    const [cookies, setCookies] = useCookies();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
 
-    function handleLoginUser(e: FormEvent) {
+    async function handleLoginUser(e: FormEvent) {
         e.preventDefault();
 
-        api.post('/user/login', {
+
+        const response = await api.post('/user/login', {
             email,
             password
         });
+        setCookies('token', response.data);
+        const token = `Bearer ${cookies['token'].access_token}`;
+
+        if (token) {
+            api.interceptors.request.use(req => {
+                req.headers.authorization = token;
+                return req;
+            });
+        }
     }
 
     return (

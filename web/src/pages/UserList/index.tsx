@@ -1,4 +1,5 @@
 import React, {FormEvent, useState} from "react";
+import {useCookies} from 'react-cookie';
 
 import './styles.css'
 import PageHeader from "../../components/PageHeader";
@@ -7,6 +8,8 @@ import UserItem, {User} from "../../components/UserItem";
 import api from "../../services/api";
 
 function UserList() {
+    const [cookies] = useCookies();
+
     const [users, setUsers] = useState([]);
     const [id, setId] = useState('');
     const [fullName, setFullName] = useState('');
@@ -16,9 +19,17 @@ function UserList() {
 
     async function listUsers(e: FormEvent) {
         e.preventDefault();
+        console.log(cookies);
 
-        const response = await api.get('user');
+        const tok = `Bearer ${cookies['token'].access_token}`;
+        const response = await api.get('user', {
+            headers: {
+                authorization: tok
+            }
+        });
+        console.log(response.data);
         setUsers(response.data);
+
     }
 
     async function createUser(e: FormEvent) {
@@ -35,69 +46,68 @@ function UserList() {
         setUsers(response.data);
     }
 
-
     return (
-        <div id="user-page">
+        <div id="user-page" className="container">
             <PageHeader
                 title="Usuários"
                 description="Aqui é possível listar, cadastrar, alterar e remover usuários."
-            >
-                <main>
-                    <form onSubmit={listUsers} className="user-list">
-                        <fieldset>
-                            <legend>
-                                Listagem
-                            </legend>
-                            <div className="list-all">
-                                <button type="submit">
-                                    Listar todos
-                                </button>
-                            </div>
-                            <div className="list-id">
-                                <Input
-                                    name="userId"
-                                    label="Informe o id do usuário"
-                                    value={id}
-                                    onChange={(e) => {setId(e.target.value)}}
-                                />
-                                <button type="submit" className="list-by-id">
-                                    Listar por id
-                                </button>
-                            </div>
-                        </fieldset>
-                    </form>
-                    <form onSubmit={createUser} className="user-create">
-                        <fieldset>
-                            <legend>
-                                Criação
-                            </legend>
-                            <Input name="fullName" label="Nome completo"
-                                   value={fullName}
-                                   onChange={(e) => {setFullName(e.target.value)}}
+            />
+            <div id="nav-bar" className="nav-bar-container">
+                <form onSubmit={listUsers} className="user-list">
+                    <fieldset>
+                        <legend>
+                            Listagem
+                        </legend>
+                        <div className="list-all">
+                            <button type="submit">
+                                Listar todos
+                            </button>
+                        </div>
+                        <div className="list-id">
+                            <Input
+                                name="userId"
+                                label="Informe o id do usuário"
+                                value={id}
+                                onChange={(e) => {setId(e.target.value)}}
                             />
-                            <Input name="email" label="E-mail"
-                                   value={email}
-                                   onChange={(e) => {setEmail(e.target.value)}}
+                            <button type="submit" className="list-by-id">
+                                Listar por id
+                            </button>
+                        </div>
+                    </fieldset>
+                </form>
+                <form onSubmit={createUser} className="user-create">
+                    <fieldset>
+                        <legend>
+                            Criação
+                        </legend>
+                        <Input name="fullName" label="Nome completo"
+                               value={fullName}
+                               onChange={(e) => {setFullName(e.target.value)}}
+                        />
+                        <Input name="email" label="E-mail"
+                               value={email}
+                               onChange={(e) => {setEmail(e.target.value)}}
+                        />
+                        <div className="user-create-action">
+                            <Input name="password" label="Senha"
+                                   value={password}
+                                   onChange={(e) => {setPassword(e.target.value)}}
                             />
-                            <div className="user-create-action">
-                                <Input name="password" label="Senha"
-                                       value={password}
-                                       onChange={(e) => {setPassword(e.target.value)}}
-                                />
-                                <button type="submit" className="create">
-                                    Gravar
-                                </button>
-                            </div>
-                        </fieldset>
-                    </form>
-
-                    <div id="list-users-response">
-                        {users.map((user: User) => {
-                            return <UserItem key={user.id} user={user}/>;
-                        })}
-                    </div>
-                </main>
-            </PageHeader>
+                            <button type="submit" className="create">
+                                Gravar
+                            </button>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+            <main>
+                <div id="list-users-response">
+                    {users.map((user: User) => {
+                        return <UserItem key={user.id} user={user}/>;
+                    })}
+                </div>
+            </main>
         </div>
     )
 }
