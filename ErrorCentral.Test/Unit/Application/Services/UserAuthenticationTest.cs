@@ -9,6 +9,7 @@ using ErrorCentral.Application.Validators;
 using ErrorCentral.Domain.Models;
 using ErrorCentral.Infra.Context;
 using ErrorCentral.Infra.Repositories;
+using ErrorCentral.Test.Unit.Domain.Models;
 using ErrorCentral.Test.Unit.Infra.Context;
 using ErrorCentral.Web;
 using ErrorCentral.Web.Controllers;
@@ -18,7 +19,6 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit;
-using ErrorCentral.Tests.Unit.Domain.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -156,7 +156,7 @@ namespace ErrorCentral.Test.Unit.Application.Services
                 var service = new UserService(repository, validator);
                 var mockMapper = new MapperConfiguration(cfg =>
                 {
-                    cfg.AddProfile<AutoMapperProfile>();; 
+                    cfg.AddProfile<AutoMapperProfile>();
                 });
                 var config = InitConfiguration();
                 var mapper = mockMapper.CreateMapper();

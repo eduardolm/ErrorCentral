@@ -8,9 +8,7 @@ using ErrorCentral.Infra.Context;
 using ErrorCentral.Infra.Repositories;
 using ErrorCentral.Test.Unit.Application.Services;
 using ErrorCentral.Test.Unit.Infra.Context;
-using ErrorCentral.Tests.Unit.Infra;
 using ErrorCentral.Web;
-using ErrorCentral.Web.Controllers;
 using IdentityModel.Client;
 using Newtonsoft.Json;
 using Xunit;
@@ -40,7 +38,7 @@ namespace ErrorCentral.Test.Unit.Web.Controllers
                 var service = new UserService(repository, validator);
                 var mockMapper = new MapperConfiguration(cfg =>
                 {
-                    cfg.AddProfile<AutoMapperProfile>();; 
+                    cfg.AddProfile<AutoMapperProfile>(); 
                 });
                 var mapper = mockMapper.CreateMapper();
                 // var controller = new UserController(service, mapper);
@@ -75,7 +73,7 @@ namespace ErrorCentral.Test.Unit.Web.Controllers
                 var service = new UserService(repository, validator);
                 var mockMapper = new MapperConfiguration(cfg =>
                 {
-                    cfg.AddProfile<AutoMapperProfile>();; 
+                    cfg.AddProfile<AutoMapperProfile>(); 
                 });
                 var mapper = mockMapper.CreateMapper();
                 // var controller = new UserController(service, mapper);

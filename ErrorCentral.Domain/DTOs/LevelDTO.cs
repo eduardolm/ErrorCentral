@@ -1,6 +1,6 @@
 ﻿namespace ErrorCentral.Domain.DTOs
 {
-    public class LevelDTO
+    public class LevelDto
     {
         public string Name { get; set; }
     }

@@ -27,7 +27,7 @@ namespace ErrorCentral.Domain.Mappings
                 .IsRequired();
 
             builder.Property(x => x.CreatedAt)
-                .HasColumnType("datetime")
+                .HasColumnType("datetime2")
                 .HasColumnName("created_at")
                 .IsRequired();
         }

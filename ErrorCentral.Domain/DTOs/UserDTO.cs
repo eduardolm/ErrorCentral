@@ -2,7 +2,7 @@
 
 namespace ErrorCentral.Domain.DTOs
 {
-    public class UserDTO 
+    public class UserDto 
     {
         public int Id { get; set; }
         public string FullName { get; set; }

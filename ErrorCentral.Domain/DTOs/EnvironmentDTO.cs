@@ -1,6 +1,6 @@
 ﻿namespace ErrorCentral.Domain.DTOs
 {
-    public class EnvironmentDTO
+    public class EnvironmentDto
     {
         public string Name { get; set; }
     }

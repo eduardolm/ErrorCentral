@@ -6,13 +6,12 @@ using ErrorCentral.Domain.Models;
 using ErrorCentral.Infra.Context;
 using ErrorCentral.Infra.Repositories;
 using ErrorCentral.Test.Unit.Infra.Context;
-using ErrorCentral.Tests.Unit.Infra;
 using ErrorCentral.Web;
 using Xunit;
 
-namespace ErrorCentral.Tests.Unit.Domain.DTOs
+namespace ErrorCentral.Test.Unit.Domain.DTOs
 {
-    public class LogDTOTest
+    public class LogDtoTest
     {
         [Theory]
         [InlineData(1)]
@@ -39,23 +38,23 @@ namespace ErrorCentral.Tests.Unit.Domain.DTOs
                 var service = new LogService(repository, validator, context);
                 var mockMapper = new MapperConfiguration(cfg =>
                 {
-                    cfg.AddProfile<AutoMapperProfile>();; 
+                    cfg.AddProfile<AutoMapperProfile>(); 
                 });
                 var mapper = mockMapper.CreateMapper();
                 
                 var testLog = service.GetFullLog(id);
-                var logDTO = mapper.Map<Log, LogDTO>(testLog);
+                var logDto = mapper.Map<Log, LogDto>(testLog);
 
-                Assert.IsType<LogDTO>(logDTO);
-                Assert.Equal(testLog.Id, logDTO.Id);
-                Assert.Equal(testLog.Name, logDTO.Name);
-                Assert.Equal(testLog.Description, logDTO.Description);
-                Assert.Equal(testLog.Layer.Name, logDTO.Layer.Name);
-                Assert.Equal(testLog.Level.Name, logDTO.Level.Name);
-                Assert.Equal(testLog.Status.Name, logDTO.Status.Name);
-                Assert.Equal(testLog.Environment.Name, logDTO.Environment.Name);
-                Assert.Equal(testLog.CreatedAt, logDTO.CreatedAt);
-                Assert.Equal(testLog.User.FullName, logDTO.User.FullName);
+                Assert.IsType<LogDto>(logDto);
+                Assert.Equal(testLog.Id, logDto.Id);
+                Assert.Equal(testLog.Name, logDto.Name);
+                Assert.Equal(testLog.Description, logDto.Description);
+                Assert.Equal(testLog.Layer.Name, logDto.Layer.Name);
+                Assert.Equal(testLog.Level.Name, logDto.Level.Name);
+                Assert.Equal(testLog.Status.Name, logDto.Status.Name);
+                Assert.Equal(testLog.Environment.Name, logDto.Environment.Name);
+                Assert.Equal(testLog.CreatedAt, logDto.CreatedAt);
+                Assert.Equal(testLog.User.FullName, logDto.User.FullName);
             }
         }
     }

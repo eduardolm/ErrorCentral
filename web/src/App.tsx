@@ -2,12 +2,14 @@ import React from 'react';
 import './assets/styles/global.css';
 import Routes from "./routes";
 
-// JSX - JavaScript + XML
-
-function App() {
+const App = () => {
     return (
         <Routes />
     );
 }
 
 export default App;
+
+
+
+

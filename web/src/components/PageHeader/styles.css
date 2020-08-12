@@ -7,6 +7,7 @@
     top: 0;
     flex-direction: column;
     background-color: var(--color-primary);
+    height: 300px;
 }
 
 .page-header .top-bar-container {
@@ -54,7 +55,7 @@
 
 @media (min-width: 700px) {
     .page-header {
-        height: 340px;
+        height: 300px;
     }
 
     .page-header .top-bar-container {
