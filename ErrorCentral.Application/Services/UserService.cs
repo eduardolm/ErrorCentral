@@ -37,5 +37,6 @@ namespace ErrorCentral.Application.Services
             }).Result;
             return response;
         }
+        
     }
 }

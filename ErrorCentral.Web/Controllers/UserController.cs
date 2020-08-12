@@ -62,7 +62,7 @@ namespace ErrorCentral.Web.Controllers
             return Ok(_mapper.Map<IEnumerable<User>, IEnumerable<UserDto>>(_service.GetAll()));
         }
         
-        // POST: user
+        // POST: user/create
         [HttpPost("create")]
         public new IActionResult Create([FromBody] User user)
         {

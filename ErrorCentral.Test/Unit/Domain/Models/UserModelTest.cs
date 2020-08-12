@@ -39,7 +39,7 @@ namespace ErrorCentral.Test.Unit.Domain.Models
                 Assert.NotNull(testUser.Password);
                 Assert.NotEqual(0,testUser.Id);
                 Assert.NotNull(testUser.CreatedAt);
-                Assert.IsType<DateTime>(testUser.CreatedAt);
+                Assert.IsType<DateTime?>(testUser.CreatedAt);
                 repository.Dispose();
             }
         }

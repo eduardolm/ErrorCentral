@@ -69,18 +69,22 @@
     color: var(--color-primary-dark);
 }
 
-#user-page .nav-bar-container .user-create {
+#user-page .nav-bar-container .user-create, .user-update, .user-delete {
     margin-top: 3.6rem;
     border-top: 2px solid var(--color-line-in-white);
     padding-top: 2.4rem;
     padding-bottom: 1rem;
 }
 
-#user-page .nav-bar-container .user-create .input-block {
+#user-page .nav-bar-container .user-create .input-block,
+#user-page .nav-bar-container .user-update .input-block,
+#user-page .nav-bar-container .user-delete .input-block {
     margin-top: 1.4rem;
 }
 
-#user-page .nav-bar-container .user-create .user-create-action {
+#user-page .nav-bar-container .user-create .user-create-action,
+#user-page .nav-bar-container .user-update .user-update-action,
+#user-page .nav-bar-container .user-delete .user-delete-action{
     display: flex;
     grid-template-columns: 2fr 1fr;
     column-gap: 8px;
@@ -89,10 +93,21 @@
     margin-top: -1.4rem;
 }
 
-#user-page .nav-bar-container .user-create .user-create-action .create {
+#user-page .nav-bar-container .user-create .user-create-action .create,
+#user-page .nav-bar-container .user-update .user-update-action .update,
+#user-page .nav-bar-container .user-delete .user-delete-action .delete {
     display: flex;
     padding: 1rem;
-    margin-top: 3.4rem;
+    margin-top: 3.3rem;
+}
+
+#user-page .nav-bar-container .user-delete .user-delete-action .delete {
+    margin-top: 5.6rem;
+    background: var(--color-danger-light);
+}
+
+#user-page .nav-bar-container .user-delete .user-delete-action .delete:hover {
+    background: var(--color-danger-dark);
 }
 
 #user-page .nav-bar-container label {
@@ -172,11 +187,22 @@
         margin-top: 4.2rem;
     }
 
-    #user-page .nav-bar-container .user-create .user-create-action {
+    #user-page .nav-bar-container .user-create .user-create-action,
+    #user-page .nav-bar-container .user-update .user-update-action,
+    #user-page .nav-bar-container .user-delete .user-delete-action {
         display: grid;
         grid-template-columns: 2fr 1fr;
         column-gap: 8px;
+        margin-bottom: -3rem;
+    }
 
+    #user-page .nav-bar-container .user-delete .user-delete-action .delete {
+        margin-top: 3.2rem;
+        background: var(--color-danger-light);
+    }
+
+    #user-page .nav-bar-container .user-delete .user-delete-action .delete:hover {
+        background: var(--color-danger-dark);
     }
 
     #user-page .main {

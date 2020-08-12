@@ -11,9 +11,12 @@ const Routes = () => {
                 <Route path="/" exact component={Landing} />
                 <Route path='/login' component={Login} />
                 <Route path='/user' component={User} />
+                <Route path='/user/:id' component={User} />
+                <Route exact path='/user/create' component={User} />
             </Switch>
         </BrowserRouter>
     )
 }
+
 
 export default Routes;
