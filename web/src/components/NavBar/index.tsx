@@ -14,7 +14,6 @@ import UpdateOutlinedIcon from '@material-ui/icons/UpdateOutlined';
 import DeleteOutlineOutlinedIcon from '@material-ui/icons/DeleteOutlineOutlined';
 import IconButton from '@material-ui/core/IconButton';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import Collapse from '@material-ui/core/Collapse';
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -31,7 +30,7 @@ const useStyles = makeStyles((theme: Theme) =>
     }
 }));
 
-type Anchor = 'top' | 'left' | 'bottom' | 'right';
+type Anchor =  'top' //| 'left' | 'bottom' | 'right';
 
 export default function TemporaryDrawer() {
     const history = useHistory();
@@ -59,13 +58,17 @@ export default function TemporaryDrawer() {
 
     const list = (anchor: Anchor) => (
         <div
-            className={clsx(classes.list, {
+            className={clsx(classes.fullList, {
                 [classes.fullList]: anchor === 'top' || anchor === 'bottom',
             })}
             role="presentation"
             onClick={toggleDrawer(anchor, false)}
             onKeyDown={toggleDrawer(anchor, false)}
         >
+
+            <ExpandMoreIcon />
+
+
             <List component="nav">
                     <ListItem>
                         <Button onClick={() => {history.push('/user/list')}}>
@@ -96,11 +99,16 @@ export default function TemporaryDrawer() {
     );
 
     return (
-        <div className={classes.root}>
-
-            {(['left', 'right', 'top', 'bottom'] as Anchor[]).map((anchor) => (
+        <div>
+            {(['top'] as Anchor[]).map((anchor) => (
                 <React.Fragment key={anchor}>
-                    <Button variant="contained" color="primary" onClick={toggleDrawer(anchor, true)}>{anchor}</Button>
+                    <IconButton
+                        onClick={toggleDrawer(anchor, true)}
+                    >
+                        <ExpandMoreIcon
+                            style={{fontSize: 40, color: '#9C98A6'}}
+                        />
+                    </IconButton>
                     <Drawer anchor={anchor} open={state[anchor]} onClose={toggleDrawer(anchor, false)}>
                         {list(anchor)}
                     </Drawer>

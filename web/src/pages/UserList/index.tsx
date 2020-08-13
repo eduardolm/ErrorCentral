@@ -6,6 +6,8 @@ import PageHeader from "../../components/PageHeader";
 import Input from "../../components/Input";
 import UserItem, {User} from "../../components/UserItem";
 import api from "../../services/api";
+import Button from '@material-ui/core/Button';
+import ListOutlinedIcon from '@material-ui/icons/ListOutlined';
 
 
 function UserList(this: any) {
@@ -50,9 +52,16 @@ function UserList(this: any) {
                             Listagem
                         </legend>
                         <div className="list-all">
-                            <button type="submit">
-                                Listar todos
-                            </button>
+                            <Button
+                                type="submit"
+                                className="list-all"
+                                variant="contained"
+                                color="primary"
+                                onClick={handleListAllUsers}
+                                startIcon={<ListOutlinedIcon />}
+                            >
+                                Listar Todos
+                            </Button>
                         </div>
                     </fieldset>
                 </form>
@@ -65,9 +74,16 @@ function UserList(this: any) {
                                 value={id}
                                 onChange={(e) => {setId(e.target.value)}}
                             />
-                            <button type="submit" className="list-by-id">
-                                Listar por id
-                            </button>
+                            <Button
+                                type="submit"
+                                className="list-by-id"
+                                variant="contained"
+                                color="primary"
+                                onClick={handleListUserById}
+                                startIcon={<ListOutlinedIcon />}
+                            >
+                                Listar por Id
+                            </Button>
                         </div>
                     </fieldset>
                 </form>

@@ -5,8 +5,10 @@ import CreateOutlinedIcon from '@material-ui/icons/CreateOutlined';
 import Button from '@material-ui/core/Button';
 import {useHistory} from 'react-router-dom';
 
+
 import './styles.css';
 import TemporaryDrawer from "../../components/NavBar";
+import {IconButton} from "@material-ui/core";
 
 function Landing() {
     const history = useHistory();
@@ -30,16 +32,15 @@ function Landing() {
                     <Button
                         size="large"
                         variant="contained"
-                        // color="primary"
                         onClick={() => {history.push('/user/registry')}}
                         startIcon={<CreateOutlinedIcon />}
                     >
                         Cadastrar
                     </Button>
                 </div>
-                <div>
+                <IconButton>
                     <TemporaryDrawer />
-                </div>
+                </IconButton>
             </div>
         </div>
     )
