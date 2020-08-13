@@ -1,5 +1,6 @@
 import React, {FormEvent, useState} from "react";
 import {useCookies} from 'react-cookie';
+import Button from '@material-ui/core/Button';
 
 import PageHeader from "../../components/PageHeader";
 import Input from "../../components/Input";
@@ -14,10 +15,8 @@ function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-
     async function handleLoginUser(e: FormEvent) {
         e.preventDefault();
-
 
         const response = await api.post('/user/login', {
             email,
@@ -41,7 +40,7 @@ function Login() {
                 description="Faça seu login utilizando o formulário abaixo."
             />
             <main>
-                <form onSubmit={handleLoginUser}>
+                <form >
                     <fieldset>
                         <legend>
                             Seus dados
@@ -67,9 +66,14 @@ function Login() {
                             Importante! <br />
                             Preencha todos os dados
                         </p>
-                        <button type="submit">
+                        <Button
+                            type="submit"
+                            variant="contained"
+                            color="primary"
+                            onClick={handleLoginUser}
+                        >
                             Login
-                        </button>
+                        </Button>
                     </footer>
                 </form>
             </main>

@@ -1,0 +1,119 @@
+#user-page {
+    width: 100vw;
+    height: 100vh;
+}
+
+#user-page .page-header .header-content {
+    margin-bottom: 6.4rem;
+}
+
+#user-page .nav-bar-container {
+    margin: -3.2rem auto 3.2rem;
+    width: 90%;
+    padding-top: 3rem;
+    max-width: 74rem;
+    border-radius: 0.8rem;
+    overflow: hidden;
+    position: relative;
+    bottom: -280px;
+    background: var(--color-box-base);
+}
+
+#user-page .nav-bar-container .input-block {
+    margin-top: 2.4rem;
+    margin-bottom: 1.4rem;
+}
+
+#user-page .header-content {
+    width: 90%;
+    margin: 0 auto;
+    position: relative;
+}
+
+#user-page .nav-bar-container fieldset {
+    border: 0;
+    padding: 0 2.4rem;
+}
+
+#user-page .nav-bar-container fieldset + fieldset {
+    margin-top: 4.4rem;
+}
+
+#user-page .nav-bar-container fieldset legend {
+    font: 700 2.4rem Archivo;
+    color: var(--color-text-title);
+    margin-bottom: 2.4rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding-bottom: 1.6rem;
+    border-bottom: 2px solid var(--color-line-in-white);
+}
+
+#user-page .nav-bar-container .user-create .input-block {
+    margin-top: 1.4rem;
+}
+
+#user-page .nav-bar-container .user-create .user-create-action {
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    column-gap: 8px;
+    align-items: center;
+    justify-content: center;
+    margin-top: -1.4rem;
+}
+
+#user-page .nav-bar-container .user-create .user-create-action .create {
+    display: flex;
+    padding: 1rem;
+    margin-top: 3.3rem;
+}
+
+#user-page .nav-bar-container label {
+    color: var(--color-text-complement);
+}
+
+#user-page main {
+    margin: -3.2rem auto 3.2rem;
+    width: 90%;
+    padding-top: 3rem;
+    max-width: 74rem;
+    border-radius: 0.8rem;
+    overflow: hidden;
+    position: relative;
+    bottom: -280px;
+}
+
+@media (min-width: 700px) {
+    #user-page {
+        max-width: 100vw;
+    }
+
+    #user-page .page-header .header-content {
+        margin-bottom: 0;
+    }
+
+    #user-page .nav-bar-container fieldset {
+        padding: 0 6.4rem;
+    }
+
+    #user-page .nav-bar-container {
+        padding: 6.4rem 0;
+        max-width: 740px;
+        margin: 0 auto;
+        position: relative;
+        top: 266px;
+    }
+
+    #user-page .nav-bar-container .user-create .user-create-action {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        column-gap: 8px;
+        margin-bottom: -5rem;
+    }
+
+    #user-page .main {
+        max-width: 100vw;
+    }
+}

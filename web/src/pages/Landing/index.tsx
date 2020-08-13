@@ -1,12 +1,16 @@
 import React from "react";
-import {Link} from 'react-router-dom';
 import logoImg from '../../assets/images/logo.png';
-import loginIcon from '../../assets/images/icons/login.svg';
-import registrationIcon from '../../assets/images/icons/registration.png';
+import ExitToAppOutlinedIcon from '@material-ui/icons/ExitToAppOutlined';
+import CreateOutlinedIcon from '@material-ui/icons/CreateOutlined';
+import Button from '@material-ui/core/Button';
+import {useHistory} from 'react-router-dom';
 
 import './styles.css';
+import TemporaryDrawer from "../../components/NavBar";
 
-function Landing(){
+function Landing() {
+    const history = useHistory();
+
     return (
         <div id="landing-page">
             <div id="landing-page-content" className="container">
@@ -14,15 +18,27 @@ function Landing(){
                     <img src={logoImg} alt="Central de Erros" />
                 </div>
                 <div className="buttons-container">
-                    <Link to="/login" className="login">
-                        <img src={loginIcon} alt="Estudar" />
+                    <Button
+                        size="large"
+                        variant="contained"
+                        color="primary"
+                        onClick={() => {history.push('/user/login')}}
+                        startIcon={<ExitToAppOutlinedIcon />}
+                    >
                         Login
-                    </Link>
-
-                    <Link to="/register" className="register">
-                        <img src={registrationIcon} alt="Dar aulas" />
-                        Cadastro
-                    </Link>
+                    </Button>
+                    <Button
+                        size="large"
+                        variant="contained"
+                        // color="primary"
+                        onClick={() => {history.push('/user/registry')}}
+                        startIcon={<CreateOutlinedIcon />}
+                    >
+                        Cadastrar
+                    </Button>
+                </div>
+                <div>
+                    <TemporaryDrawer />
                 </div>
             </div>
         </div>

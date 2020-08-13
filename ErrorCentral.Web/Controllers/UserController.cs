@@ -25,8 +25,8 @@ namespace ErrorCentral.Web.Controllers
             Configuration = configuration;
         }
         
-        // POST: user/cadastro
-        [HttpPost("cadastro")]
+        // POST: user/registry
+        [HttpPost("registry")]
         [AllowAnonymous]
         public IActionResult CreateNewUser([FromBody] User user)
         {
