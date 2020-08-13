@@ -53,6 +53,12 @@
     margin-top: 2.4rem;
 }
 
+.page-header .header-menu-container {
+    position: absolute;
+    right: 0;
+    top: 90px;
+}
+
 @media (min-width: 700px) {
     .page-header {
         height: 300px;
@@ -75,5 +81,15 @@
 
     .page-header .header-content strong {
         max-width: 350px;
+    }
+
+    .page-header .header-menu-container {
+        max-width: 1100px;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        margin-right: 20rem;
+        top: -190px;
     }
 }
