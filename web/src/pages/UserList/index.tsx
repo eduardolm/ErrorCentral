@@ -10,6 +10,7 @@ import api from "../../services/api";
 import Button from '@material-ui/core/Button';
 import ListOutlinedIcon from '@material-ui/icons/ListOutlined';
 import BrandingWatermarkOutlinedIcon from '@material-ui/icons/BrandingWatermarkOutlined';
+import PageFooter from "../../components/PageFooter";
 
 function UserList(this: any) {
     const history = useHistory();
@@ -76,6 +77,7 @@ function UserList(this: any) {
             <PageHeader
                 title="Listar usuários"
                 description="Aqui é possível listar os usuários cadastrados."
+                menu={'user'}
             />
             <div id="nav-bar" className="nav-bar-container">
                 <form onSubmit={handleListAllUsers} className="user-list">
@@ -128,7 +130,8 @@ function UserList(this: any) {
                     })}
                 </div>
             </main>
-            </div>
+            <PageFooter />
+        </div>
     )
 }
 

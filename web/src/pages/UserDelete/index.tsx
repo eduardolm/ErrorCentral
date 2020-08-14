@@ -8,6 +8,7 @@ import {useHistory} from 'react-router-dom';
 
 import './styles.css';
 import Button from "@material-ui/core/Button";
+import PageFooter from "../../components/PageFooter";
 
 function UserDelete() {
     const history = useHistory();
@@ -38,6 +39,7 @@ function UserDelete() {
             <PageHeader
                 title="Excluir usuário"
                 description="Aqui é possível excluir usuários."
+                menu={'user'}
             />
             <div id="nav-bar" className="nav-bar-container">
                 <form onSubmit={handleDeleteUser} className="user-delete">
@@ -65,6 +67,7 @@ function UserDelete() {
                     </fieldset>
                 </form>
             </div>
+            <PageFooter />
         </div>
 
     )

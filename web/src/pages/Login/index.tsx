@@ -7,9 +7,8 @@ import Input from "../../components/Input";
 import api from "../../services/api";
 import ReportProblemOutlinedIcon from '@material-ui/icons/ReportProblemOutlined';
 
-import warningIcon from '../../assets/images/icons/alert-triangle.svg';
-
 import './styles.css';
+import PageFooter from "../../components/PageFooter";
 
 function Login() {
     const history = useHistory();
@@ -40,6 +39,7 @@ function Login() {
             <PageHeader
                 title="Login"
                 description="Faça seu login utilizando o formulário abaixo."
+                menu={'user'}
             />
             <main>
                 <form >
@@ -78,6 +78,7 @@ function Login() {
                     </footer>
                 </form>
             </main>
+            <PageFooter />
         </div>
     )
 }

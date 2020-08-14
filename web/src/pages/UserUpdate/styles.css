@@ -3,6 +3,10 @@
     height: 100vh;
 }
 
+#user-page .page-footer {
+    z-index: -99999;
+}
+
 #user-page .page-header .header-content {
     margin-bottom: 6.4rem;
 }

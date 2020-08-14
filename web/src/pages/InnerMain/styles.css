@@ -1,0 +1,49 @@
+#main-page .page-header .header-menu-container {
+    visibility: hidden;
+}
+
+#main-page .main-work-area-container {
+    max-height: 100vh;
+    max-width: 100vw;
+    height: 100rem;
+    scroll-padding-top: auto;
+    padding-top: 31rem;
+    padding-bottom: 100px;
+    display: block;
+}
+
+.text-container {
+    margin-top: 30px;
+    margin-bottom: 50px;
+}
+
+.main-page-buttons-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    column-gap: 8px;
+    max-width: 100vw;
+    padding-top: 20px;
+}
+
+.main-footer {
+    display: flex;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    flex-direction: column;
+    background-color: var(--color-primary);
+    height: 100px;
+}
+
+@media (min-width: 700px) {
+    #login-page {
+        max-width: 100vw;
+    }
+
+    .user-button, .log-button {
+        height: 5.6rem;
+    }
+}
+

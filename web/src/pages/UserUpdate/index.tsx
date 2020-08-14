@@ -8,6 +8,7 @@ import PageHeader from "../../components/PageHeader";
 import Input from "../../components/Input";
 import SaveAltOutlinedIcon from "@material-ui/icons/SaveAltOutlined";
 import Button from "@material-ui/core/Button";
+import PageFooter from "../../components/PageFooter";
 
 function UserUpdate() {
     const history = useHistory();
@@ -59,6 +60,7 @@ function UserUpdate() {
             <PageHeader
                 title="Alterar usuário"
                 description="Aqui é possível alterar os cadastros dos usuários."
+                menu={'user'}
             />
             <div id="nav-bar" className="nav-bar-container">
                 <form onSubmit={handleUpdateUser} className="user-update">
@@ -97,6 +99,7 @@ function UserUpdate() {
                     </fieldset>
                 </form>
             </div>
+            <PageFooter />
         </div>
     )
 }

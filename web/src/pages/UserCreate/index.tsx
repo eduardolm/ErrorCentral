@@ -9,6 +9,7 @@ import api from "../../services/api";
 import './styles.css';
 import SaveAltOutlinedIcon from "@material-ui/icons/SaveAltOutlined";
 import {useHistory} from "react-router-dom";
+import PageFooter from "../../components/PageFooter";
 
 function UserCreate() {
     const history = useHistory();
@@ -41,6 +42,7 @@ function UserCreate() {
             <PageHeader
                 title="Cadastrar usuáro"
                 description="Aqui é possível cadastrar novos usuários."
+                menu={'user'}
             />
             <div id="nav-bar" className="nav-bar-container">
                 <form onSubmit={handleCreateUser} className="user-create">
@@ -75,6 +77,7 @@ function UserCreate() {
                     </fieldset>
                 </form>
             </div>
+            <PageFooter />
         </div>
 
     )

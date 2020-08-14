@@ -1,0 +1,10 @@
+.page-footer {
+    display: flex;
+    width: 100%;
+    left: 0;
+    bottom: 0;
+    flex-direction: column;
+    background-color: var(--color-primary);
+    height: 100px;
+    position: fixed;
+}
