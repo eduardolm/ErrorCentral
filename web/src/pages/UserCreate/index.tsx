@@ -8,10 +8,12 @@ import api from "../../services/api";
 
 import './styles.css';
 import SaveAltOutlinedIcon from "@material-ui/icons/SaveAltOutlined";
+import {useHistory} from "react-router-dom";
 
 function UserCreate() {
+    const history = useHistory();
     const [cookies] = useCookies();
-    const token = `Bearer ${cookies['token'].access_token}`;
+    const token = (cookies['token']) ? `Bearer ${cookies['token'].access_token}` : '';
     const [fullName, setFullName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -19,6 +21,10 @@ function UserCreate() {
     async function handleCreateUser(e: FormEvent) {
         e.preventDefault();
 
+        if (!cookies['token']) {
+            history.push('/user/login');
+            alert('Sessão expirada! Favor fazer o login para prosseguir.')
+        }
         await api.post('user/create', {fullName, email, password}, {
             headers: {
                 authorization: token

@@ -55,8 +55,12 @@
 
 .page-header .header-menu-container {
     position: absolute;
-    right: 0;
-    top: 90px;
+    right: 20px;
+    top: 100px;
+}
+
+.page-header .top-bar-container .logout-button {
+    border: 1px solid;
 }
 
 @media (min-width: 700px) {
@@ -92,4 +96,5 @@
         margin-right: 20rem;
         top: -190px;
     }
+
 }
