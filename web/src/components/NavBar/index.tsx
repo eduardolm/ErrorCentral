@@ -1,5 +1,7 @@
 import React from 'react';
 import {useHistory} from 'react-router-dom';
+import {useCookies} from 'react-cookie';
+
 import clsx from 'clsx';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
@@ -12,8 +14,9 @@ import ListOutlinedIcon from '@material-ui/icons/ListOutlined';
 import PersonAddOutlinedIcon from '@material-ui/icons/PersonAddOutlined';
 import UpdateOutlinedIcon from '@material-ui/icons/UpdateOutlined';
 import DeleteOutlineOutlinedIcon from '@material-ui/icons/DeleteOutlineOutlined';
-import IconButton from '@material-ui/core/IconButton';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import MeetingRoomOutlinedIcon from '@material-ui/icons/MeetingRoomOutlined';
+import {Divider} from "@material-ui/core";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -33,6 +36,7 @@ const useStyles = makeStyles((theme: Theme) =>
 type Anchor =  'top' //| 'left' | 'bottom' | 'right';
 
 export default function TemporaryDrawer() {
+    const [cookies, setCookie, removeCookie] = useCookies(['token']);
     const history = useHistory();
     const classes = useStyles();
     const [state, setState] = React.useState({
@@ -56,6 +60,11 @@ export default function TemporaryDrawer() {
         setState({ ...state, [anchor]: open });
     };
 
+    const handleLogout = () => {
+        removeCookie('token');
+        history.push('/user/login');
+    }
+
     const list = (anchor: Anchor) => (
         <div
             className={clsx(classes.fullList, {
@@ -65,9 +74,6 @@ export default function TemporaryDrawer() {
             onClick={toggleDrawer(anchor, false)}
             onKeyDown={toggleDrawer(anchor, false)}
         >
-
-            <ExpandMoreIcon />
-
 
             <List component="nav">
                     <ListItem>
@@ -79,7 +85,7 @@ export default function TemporaryDrawer() {
                     <ListItem>
                         <Button onClick={() => {history.push('/user/create')}}>
                             <ListItemIcon> <PersonAddOutlinedIcon fontSize="large"/> </ListItemIcon>
-                            <ListItemText primary="Cadstrar" />
+                            <ListItemText primary="Cadastrar" />
                         </Button>
                     </ListItem>
                     <ListItem>
@@ -94,6 +100,13 @@ export default function TemporaryDrawer() {
                             <ListItemText primary="Excluir" />
                         </Button>
                     </ListItem>
+                <Divider />
+                <ListItem>
+                    <Button onClick={() => {handleLogout()}}>
+                        <ListItemIcon> <MeetingRoomOutlinedIcon fontSize="large"/> </ListItemIcon>
+                        <ListItemText primary="Logout" />
+                    </Button>
+                </ListItem>
             </List>
         </div>
     );
@@ -102,13 +115,13 @@ export default function TemporaryDrawer() {
         <div>
             {(['top'] as Anchor[]).map((anchor) => (
                 <React.Fragment key={anchor}>
-                    <IconButton
+                    <div
                         onClick={toggleDrawer(anchor, true)}
                     >
                         <ExpandMoreIcon
                             style={{fontSize: 40, color: '#9C98A6'}}
                         />
-                    </IconButton>
+                    </div>
                     <Drawer anchor={anchor} open={state[anchor]} onClose={toggleDrawer(anchor, false)}>
                         {list(anchor)}
                     </Drawer>

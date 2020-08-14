@@ -7,12 +7,14 @@ import UserCreate from "./pages/UserCreate";
 import UserUpdate from "./pages/UserUpdate";
 import UserList from "./pages/UserList";
 import UserRegistry from "./pages/UserRegistry";
+import InternalLanding from "./pages/Internal";
 
 const Routes = () => {
     return (
         <BrowserRouter>
             <Switch>
                 <Route path="/" exact component={Landing} />
+                <Route path='/main' component={InternalLanding} />
                 <Route path='/user/login' component={Login} />
                 <Route path='/user/registry' component={UserRegistry} />
                 <Route path='/user/list' component={UserList} />

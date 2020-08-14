@@ -5,38 +5,70 @@ import './styles.css'
 import PageHeader from "../../components/PageHeader";
 import Input from "../../components/Input";
 import UserItem, {User} from "../../components/UserItem";
+import {useHistory} from 'react-router-dom';
 import api from "../../services/api";
 import Button from '@material-ui/core/Button';
 import ListOutlinedIcon from '@material-ui/icons/ListOutlined';
-
+import BrandingWatermarkOutlinedIcon from '@material-ui/icons/BrandingWatermarkOutlined';
 
 function UserList(this: any) {
+    const history = useHistory();
     const [cookies] = useCookies();
-    const token = `Bearer ${cookies['token'].access_token}`;
+    const token = (cookies['token']) ? `Bearer ${cookies['token'].access_token}` : '';
     const [users, setUsers] = useState([]);
     const [id, setId] = useState('');
 
     async function handleListAllUsers(e: FormEvent) {
         e.preventDefault();
 
-        const response = await api.get('user', {
-            headers: {
-                authorization: token
+        try {
+            if (!cookies['token']) {
+                history.push('/user/login');
+                alert('Sessão expirada! Favor fazer o login para prosseguir.')
             }
-        });
-        setUsers(response.data);
+            const response = await api.get('user', {
+                headers: {
+                    authorization: token
+                }
+            });
+            setUsers(response.data);
+        } catch (e) {
+            if (e.statusCode === 401) {
+                history.push('/user/login');
+                alert('Sessão expirada. Favor fazer o login para prosseguir.');
+            } else if (e) {
+                history.push('/user/login');
+                alert('Sessão expirada. Favor fazer o login para prosseguir.');
+            }
+        }
     }
 
     async function handleListUserById(e: FormEvent) {
         e.preventDefault();
 
-        const response = await api.get('user/' + id, {
-            headers: {
-                authorization: token
+        try {
+            if (!cookies['token']) {
+                history.push('/user/login');
+                alert('Sessão expirada! Favor fazer o login para prosseguir.')
             }
-        });
-        console.log(response.data);
+            const response = await api.get(`/user/${id}`, {
+                headers: {
+                    authorization: token
+                }
+            });
+            console.log(response.data);
 
+            if (Object.prototype.toString.call( response.data ) !== '[object Array]') {
+                let currUser = [].concat(response.data);
+                setUsers(currUser);
+            }
+
+        } catch (e) {
+            if (e.statusCode === 401) {
+                history.push('/user/login');
+                alert('Sessão expirada. Favor fazer o login para prosseguir.');
+            }
+        }
     }
 
     return (
@@ -80,19 +112,18 @@ function UserList(this: any) {
                                 variant="contained"
                                 color="primary"
                                 onClick={handleListUserById}
-                                startIcon={<ListOutlinedIcon />}
+                                startIcon={<BrandingWatermarkOutlinedIcon />}
                             >
                                 Listar por Id
                             </Button>
                         </div>
                     </fieldset>
                 </form>
-
-
             </div>
             <main>
                 <div id="list-users-response">
-                    {users.map((user: User) => {
+                    {
+                        users.map((user: User) => {
                         return <UserItem key={user.id} user={user}/>;
                     })}
                 </div>

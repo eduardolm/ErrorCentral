@@ -1,5 +1,6 @@
 import React, {FormEvent, useState} from "react";
 import {useCookies} from 'react-cookie';
+import {useHistory} from 'react-router-dom';
 
 import './styles.css';
 import api from "../../services/api";
@@ -9,8 +10,9 @@ import SaveAltOutlinedIcon from "@material-ui/icons/SaveAltOutlined";
 import Button from "@material-ui/core/Button";
 
 function UserUpdate() {
+    const history = useHistory();
     const [cookies] = useCookies();
-    const token = `Bearer ${cookies['token'].access_token}`;
+    const token = (cookies['token']) ? `Bearer ${cookies['token'].access_token}` : '';
     const [id, setId] = useState('');
     const [fullName, setFullName] = useState('');
     const [email, setEmail] = useState('');
@@ -20,22 +22,36 @@ function UserUpdate() {
     async function handleUpdateUser(e: FormEvent) {
         e.preventDefault();
 
-        const response = await api.get('user/' + id, {
-            headers: {
-                authorization: token
+        try {
+            if (!cookies['token']) {
+                history.push('/user/login');
+                alert('Sessão expirada! Favor fazer o login para prosseguir.')
             }
-        });
-        setCreatedAt(response.data.createdAt);
+            const response = await api.get('user/' + id, {
+                headers: {
+                    authorization: token
+                }
+            });
+            setCreatedAt(response.data.createdAt);
 
-        await api.put('user', {id, fullName, email, password, createdAt}, {
-            headers: {
-                authorization: token
+            await api.put('user', {id, fullName, email, password, createdAt}, {
+                headers: {
+                    authorization: token
+                }
+            })
+        } catch (e) {
+            if (e.statusCode === 401) {
+                history.push('/user/login');
+                alert('Sessão expirada. Favor fazer o login para prosseguir.');
+            } else if (e.statusCode === 400) {
+                alert('Erro ao atualizar o usuário. Confira os dados informados.');
+            } else if (e.statusCode === 500) {
+                alert('Erro do servidor. Tente novamente em alguns minutos. Se o erro se repetir, entre em contato com o administrador do sistema');
+            } else {
+                history.push('/main');
+                alert('Erro ao realizar sua solicitação.')
             }
-        }).then(() => {
-            alert('Usuário alterado com sucesso!');
-        }).catch(() => {
-            alert('Erro ao alterar o cadastro.');
-        })
+        }
     }
 
     return (

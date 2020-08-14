@@ -92,6 +92,10 @@
     /*background: var(--color-secundary-dark);*/
 }
 
+#login-page .page-header .header-menu-container {
+    visibility: hidden;
+}
+
 @media (min-width: 700px) {
     #login-page {
         max-width: 100vw;
@@ -128,5 +132,9 @@
         margin: 0 auto;
         position: relative;
         top: 100px;
+    }
+
+    #login-page .page-header .header-menu-container {
+        visibility: hidden;
     }
 }

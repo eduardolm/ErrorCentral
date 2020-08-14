@@ -19,7 +19,9 @@ const UserItem: React.FC<UserItemProps> = ({user}) => {
             <div>
                 <ul className="user-item-list">
                     <li>
-                        Id: {'  '}{user.id}
+                        <strong>
+                            Id: {'  '}{user.id}
+                        </strong>
                     </li>
                     <li>
                         Nome: {'  '}{user.fullName}

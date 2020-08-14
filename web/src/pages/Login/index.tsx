@@ -1,16 +1,18 @@
 import React, {FormEvent, useState} from "react";
 import {useCookies} from 'react-cookie';
 import Button from '@material-ui/core/Button';
-
+import {useHistory} from 'react-router-dom';
 import PageHeader from "../../components/PageHeader";
 import Input from "../../components/Input";
 import api from "../../services/api";
+import ReportProblemOutlinedIcon from '@material-ui/icons/ReportProblemOutlined';
 
 import warningIcon from '../../assets/images/icons/alert-triangle.svg';
 
 import './styles.css';
 
 function Login() {
+    const history = useHistory();
     const [cookies, setCookies] = useCookies();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -22,14 +24,14 @@ function Login() {
             email,
             password
         });
-        setCookies('token', response.data);
-        const token = `Bearer ${cookies['token'].access_token}`;
 
-        if (token) {
-            api.interceptors.request.use(req => {
-                req.headers.authorization = token;
-                return req;
+        if (response.data.access_token) {
+            setCookies('token', response.data, {
+                path: '/',
+                maxAge: 3600
             });
+
+            history.push('/main');
         }
     }
 
@@ -59,10 +61,9 @@ function Login() {
                             onChange={(e) => {setPassword(e.target.value)}}
                         />
                     </fieldset>
-
                     <footer>
                         <p>
-                            <img src={warningIcon} alt="Aviso importante" />
+                            <ReportProblemOutlinedIcon style={{fontSize: 30, color: '#D71414', margin: 10}}/>
                             Importante! <br />
                             Preencha todos os dados
                         </p>

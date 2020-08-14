@@ -1,12 +1,15 @@
 import React from "react";
-import {Link} from 'react-router-dom';
 
 import logoImg from '../../assets/images/logo-small.png';
-import backIcon from '../../assets/images/icons/back.svg';
 
 import './styles.css';
 import {IconButton} from "@material-ui/core";
 import TemporaryDrawer from "../NavBar";
+import ArrowBackIosOutlinedIcon from '@material-ui/icons/ArrowBackIosOutlined';
+import MeetingRoomOutlinedIcon from '@material-ui/icons/MeetingRoomOutlined';
+import Button from '@material-ui/core/Button';
+import {useHistory} from 'react-router-dom';
+
 
 interface PageHeaderProps {
     title: string;
@@ -14,13 +17,19 @@ interface PageHeaderProps {
 }
 
 const PageHeader: React.FC<PageHeaderProps> = (props) => {
+    const history = useHistory();
     return (
         <header className="page-header">
             <div className="top-bar-container">
-                <Link to="/">
-                    <img src={backIcon} alt="Voltar" />
-                </Link>
-                <img src={logoImg} alt="Central de Erros" />
+                <IconButton
+                    aria-label="Back"
+                    size="medium"
+                    style={{color: '#9C98A6'}}
+                    onClick={() => history.push('/main')}
+                >
+                    <ArrowBackIosOutlinedIcon />
+                </IconButton>
+                <img src={logoImg} alt="Central de Erros" className="logout-icon"/>
             </div>
             <div className="header-content">
                 <strong>
@@ -30,12 +39,11 @@ const PageHeader: React.FC<PageHeaderProps> = (props) => {
                 {props.children}
             </div>
             <div className="header-menu-container">
-                <IconButton
+                <div
                     className="header-button-nav"
-                    // color="action"
                 >
-                    <TemporaryDrawer />
-                </IconButton>
+                    <TemporaryDrawer/>
+                </div>
             </div>
         </header>
     )
