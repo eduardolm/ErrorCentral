@@ -10,45 +10,45 @@ import './styles.css';
 import Button from "@material-ui/core/Button";
 import PageFooter from "../../components/PageFooter";
 
-function UserDelete() {
+function LogDelete() {
     const history = useHistory();
     const [cookies] = useCookies();
     const token = (cookies['token']) ? `Bearer ${cookies['token'].access_token}` : '';
     const [id, setId] = useState('');
 
-    async function handleDeleteUser(e: FormEvent) {
+    async function handleDeleteLog(e: FormEvent) {
         e.preventDefault();
 
         if (!cookies['token']) {
             history.push('/user/login');
             alert('Sessão expirada! Favor fazer o login para prosseguir.')
         }
-        await api.delete('user/' + id, {
+        await api.delete('log/' + id, {
             headers: {
                 authorization: token
             }
         }).then(() => {
-            alert('Usuário excluído com sucesso!');
+            alert('Log excluído com sucesso!');
         }).catch((e) => {
-            alert('Erro ao excluir o usuário.');
+            alert('Erro ao excluir o log.');
             console.log(e);
         })
     }
     return (
-        <div id="user-page" className="container">
+        <div id="log-page" className="container">
             <PageHeader
-                title="Excluir usuário"
-                description="Aqui é possível excluir usuários."
-                menu={'user'}
+                title="Excluir log"
+                description="Aqui é possível excluir logs."
+                menu={'log'}
             />
             <div id="nav-bar" className="nav-bar-container">
-                <form onSubmit={handleDeleteUser} className="user-delete">
+                <form onSubmit={handleDeleteLog} className="log-delete">
                     <fieldset>
                         <legend>
                             Exclusão
                         </legend>
-                        <div className="user-delete-action">
-                            <Input className="user-delete-input" name="id" label="Id do usuário a ser excluído"
+                        <div className="log-delete-action">
+                            <Input className="log-delete-input" name="id" label="Id do log a ser excluído"
                                    value={id}
                                    onChange={(e) => {setId(e.target.value)}}
                             />
@@ -57,7 +57,7 @@ function UserDelete() {
                                 className="delete"
                                 variant="contained"
                                 color="primary"
-                                onClick={handleDeleteUser}
+                                onClick={handleDeleteLog}
                                 startIcon={<DeleteOutlineOutlinedIcon />}
                             >
                                 Excluir
@@ -72,4 +72,4 @@ function UserDelete() {
     )
 }
 
-export default UserDelete;
+export default LogDelete;

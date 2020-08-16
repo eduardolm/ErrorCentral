@@ -32,8 +32,7 @@ function InnerMain() {
                 description="Esta é a página principal da aplicação. Nela é possível escolher qual o tipo de informação desejado."
                 menu={'user'}
             />
-            <main>
-                <div className="main-work-area-container"> {/*Formatado css */}
+            <main className="main-work-area-container">
                     <div className="text-container">
                         <p>
                             Clique em "usuários" para acessar o conteúdo relacionado aos usuários, ou "logs" para ter acesso aos logs de erros.
@@ -62,7 +61,6 @@ function InnerMain() {
                             Logs
                         </Button>
                     </div>
-                </div>
             </main>
             <footer className="main-footer">
             </footer>

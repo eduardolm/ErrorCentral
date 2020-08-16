@@ -6,11 +6,28 @@ export interface Log {
     id: number,
     name: string,
     description: string,
-    user: string,
-    environment: string,
-    layer: string,
-    level: string,
-    status: string
+    user: {
+        id: number
+        fullName: string,
+        email: string,
+        createdAt: string,
+    },
+    environment: {
+        id: number,
+        name: string
+    },
+    layer: {
+        id: number,
+        name: string
+    },
+    level: {
+        id: number,
+        name: string
+    },
+    status: {
+        id: number,
+        name: string
+    }
     createdAt: Date
 }
 
@@ -18,39 +35,44 @@ interface LogItemProps {
     log: Log;
 }
 
-const LogItem: React.FC<LogItemProps> = ({log}) => {
+const LogItem: React.FC<LogItemProps> = (props) => {
     return (
         <article className="log-item">
+            <header className="log-item-header">
+                <h2>
+                    Título:
+                </h2>
+                <h3>
+                    {props.log.name}
+                </h3>
+            </header>
             <div>
                 <ul className="log-item-list">
                     <li>
                         <strong>
-                            Id: {'  '}{log.id}
+                            Id: {'  '}{props.log.id}
                         </strong>
                     </li>
                     <li>
-                        Título: {'  '}{log.name}
+                        Descrição: {'  '}{props.log.description}
                     </li>
                     <li>
-                        Descrição: {'  '}{log.description}
+                        Usuário: {'  '}{props.log.user.fullName}
                     </li>
                     <li>
-                        Usuário: {'  '}{log.user}
+                        Ambiente: {'  '}{props.log.environment.name}
                     </li>
                     <li>
-                        Ambiente: {'  '}{log.environment}
+                        Camada: {'  '}{props.log.layer.name}
                     </li>
                     <li>
-                        Camada: {'  '}{log.layer}
+                        Criticidade: {'  '}{props.log.level.name}
                     </li>
                     <li>
-                        Criticidade: {'  '}{log.level}
+                        Status: {'  '}{props.log.status.name }
                     </li>
                     <li>
-                        Status: {'  '}{log.status}
-                    </li>
-                    <li>
-                        Cadastro: {'  '}{log.createdAt}
+                        Cadastro: {'  '}{props.log.createdAt}
                     </li>
                 </ul>
             </div>

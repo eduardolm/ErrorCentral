@@ -1,0 +1,32 @@
+#log-page .nav-bar-container .log-delete .log-delete-action {
+    display: flex;
+    grid-template-columns: 2fr 1fr;
+    column-gap: 8px;
+    align-items: center;
+    justify-content: center;
+    margin-top: -1.4rem;
+}
+
+#log-page .nav-bar-container .log-delete .log-delete-action .delete {
+    display: flex;
+    padding: 1rem;
+    margin-top: 3.9rem;
+}
+
+#log-page .nav-bar-container .log-delete .log-delete-action .delete {
+    background: var(--color-danger-light);
+}
+
+#log-page .nav-bar-container .log-delete .log-delete-action .delete:hover {
+    background: var(--color-danger-dark);
+}
+
+@media (min-width: 700px) {
+
+    #log-page .nav-bar-container .log-delete .log-delete-action {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    column-gap: 8px;
+    margin-bottom: -6rem;
+}
+}

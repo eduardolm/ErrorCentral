@@ -3,13 +3,12 @@
 }
 
 #main-page .main-work-area-container {
-    max-height: 100vh;
-    max-width: 100vw;
-    height: 100rem;
-    scroll-padding-top: auto;
-    padding-top: 31rem;
-    padding-bottom: 100px;
+    height: 300px;
     display: block;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    top: 120px;
 }
 
 .text-container {
@@ -29,7 +28,7 @@
 .main-footer {
     display: flex;
     width: 100%;
-    position: absolute;
+    position: fixed;
     left: 0;
     bottom: 0;
     flex-direction: column;

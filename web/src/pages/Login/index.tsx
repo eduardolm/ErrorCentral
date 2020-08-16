@@ -35,19 +35,18 @@ function Login() {
     }
 
     return (
-        <div id="login-page">
+        <div id="login-page" className="container">
             <PageHeader
                 title="Login"
                 description="Faça seu login utilizando o formulário abaixo."
                 menu={'user'}
             />
             <main>
-                <form >
+                <form>
                     <fieldset>
                         <legend>
                             Seus dados
                         </legend>
-
                         <Input
                             name="email"
                             label="E-mail"

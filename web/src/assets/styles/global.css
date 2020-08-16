@@ -59,8 +59,61 @@ textarea {
     max-width: 700px;
 }
 
+#user-page, #log-page, #login-page {
+    width: 100vw;
+    height: 100vh;
+}
+
+.nav-bar-container {
+    margin: -3.2rem auto 3.2rem;
+    width: 90%;
+    padding-top: 3rem;
+    max-width: 74rem;
+    border-radius: 0.8rem;
+    overflow: hidden;
+    position: relative;
+    bottom: -280px;
+    background: var(--color-box-base);
+}
+
+.nav-bar-container button {
+    width: 100%;
+    height: 5.6rem;
+    color: var(--color-button-text);
+    border: 0;
+    border-radius: 0.8rem;
+    cursor: pointer;
+    font: 700 1.6rem Archivo;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: background-color 0.2s;
+    margin-top: 0.2rem;
+}
+
+main {
+    margin: -3.2rem auto 3.2rem;
+    width: 90%;
+    padding-top: 3rem;
+    max-width: 74rem;
+    border-radius: 0.8rem;
+    overflow: hidden;
+    position: relative;
+    bottom: -280px;
+}
+
 @media (min-width: 700px) {
     :root {
         font-size: 62.5%;
+    }
+
+    .nav-bar-container {
+        width: 100%;
+        padding: 6.4rem 0;
+        max-width: 740px;
+        margin: 0 auto;
+        position: relative;
+        top: 266px;
     }
 }

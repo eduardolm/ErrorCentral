@@ -10,6 +10,8 @@ import UserRegistry from "./pages/UserRegistry";
 import InnerMain from "./pages/InnerMain";
 import LogCreate from "./pages/LogCreate";
 import LogList from "./pages/LogList";
+import LogDelete from "./pages/LogDelete";
+import LogUpdate from "./pages/LogUpdate";
 
 const Routes = () => {
     return (
@@ -25,6 +27,8 @@ const Routes = () => {
                 <Route path='/user/delete' component={UserDelete} />
                 <Route path='/log/list' component={LogList} />
                 <Route path='/log/create' component={LogCreate} />
+                <Route path='/log/update' component={LogUpdate} />
+                <Route path='/log/delete' component={LogDelete} />
             </Switch>
         </BrowserRouter>
     )

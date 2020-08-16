@@ -1,8 +1,3 @@
-#user-page {
-    width: 100vw;
-    height: 100vh;
-}
-
 #user-page .page-header .header-content {
     margin-bottom: 6.4rem;
 }
@@ -37,7 +32,6 @@
 }
 
 #user-page .nav-bar-container .user-delete .user-delete-action .delete {
-    margin-top: 5.6rem;
     background: var(--color-danger-light);
 }
 
@@ -50,34 +44,23 @@
 }
 
 @media (min-width: 700px) {
-    #user-page {
-        max-width: 100vw;
-    }
 
     #user-page .page-header .header-content {
         margin-bottom: 0;
     }
 
     #user-page .nav-bar-container fieldset {
-        padding: 0 6.4rem;
-    }
-
-    #user-page .nav-bar-container {
-        padding: 6.4rem 0;
-        max-width: 740px;
-        margin: 0 auto;
-        position: relative;
-        top: 266px;
+        padding: 0 2.4rem;
     }
 
     #user-page .nav-bar-container .user-delete .user-delete-action {
         display: grid;
         grid-template-columns: 2fr 1fr;
         column-gap: 8px;
-        margin-bottom: -3rem;
+        margin-bottom: -6rem;
     }
 
     #user-page .nav-bar-container .user-delete .user-delete-action .delete {
-        margin-top: 3.2rem;
+        /*margin-top: 3.2rem;*/
     }
 }

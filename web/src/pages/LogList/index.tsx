@@ -4,7 +4,7 @@ import {useCookies} from 'react-cookie';
 import './styles.css'
 import PageHeader from "../../components/PageHeader";
 import Input from "../../components/Input";
-import UserItem, {User} from "../../components/UserItem";
+import LogItem, {Log} from "../../components/LogItem";
 import {useHistory} from 'react-router-dom';
 import api from "../../services/api";
 import Button from '@material-ui/core/Button';
@@ -16,10 +16,10 @@ function LogList(this: any) {
     const history = useHistory();
     const [cookies] = useCookies();
     const token = (cookies['token']) ? `Bearer ${cookies['token'].access_token}` : '';
-    const [users, setUsers] = useState([]);
+    const [logs, setLogs] = useState([]);
     const [id, setId] = useState('');
 
-    async function handleListAllUsers(e: FormEvent) {
+    async function handleListAllLogs(e: FormEvent) {
         e.preventDefault();
 
         try {
@@ -27,24 +27,24 @@ function LogList(this: any) {
                 history.push('/user/login');
                 alert('Sessão expirada! Favor fazer o login para prosseguir.')
             }
-            const response = await api.get('user', {
+            const response = await api.get('log', {
                 headers: {
                     authorization: token
                 }
             });
-            setUsers(response.data);
+            setLogs(response.data);
         } catch (e) {
             if (e.statusCode === 401) {
                 history.push('/user/login');
                 alert('Sessão expirada. Favor fazer o login para prosseguir.');
             } else if (e) {
                 history.push('/user/login');
-                alert('Sessão expirada. Favor fazer o login para prosseguir.');
+                alert('Ocorre um erro ao processar sua solicitação. Favor tentar novamente dentro de alguns minutos.');
             }
         }
     }
 
-    async function handleListUserById(e: FormEvent) {
+    async function handleListLogById(e: FormEvent) {
         e.preventDefault();
 
         try {
@@ -52,35 +52,36 @@ function LogList(this: any) {
                 history.push('/user/login');
                 alert('Sessão expirada! Favor fazer o login para prosseguir.')
             }
-            const response = await api.get(`/user/${id}`, {
+            const response = await api.get(`/log/${id}`, {
                 headers: {
                     authorization: token
                 }
+
             });
-            console.log(response.data);
 
             if (Object.prototype.toString.call( response.data ) !== '[object Array]') {
-                let currUser = [].concat(response.data);
-                setUsers(currUser);
+                let currLog = [].concat(response.data);
+                setLogs(currLog);
             }
-
         } catch (e) {
             if (e.statusCode === 401) {
                 history.push('/user/login');
                 alert('Sessão expirada. Favor fazer o login para prosseguir.');
+            } else {
+                alert('Ocorreu um erro ao processar sua solicitação. Favor tentar novamente dentro de alguns minutos.');
             }
         }
     }
 
     return (
-        <div id="user-page" className="container">
+        <div id="log-page" className="container">
             <PageHeader
-                title="Listar usuários"
-                description="Aqui é possível listar os usuários cadastrados."
-                menu={'user'}
+                title="Listar Logs"
+                description="Aqui é possível listar os logs cadastrados."
+                menu={'log'}
             />
             <div id="nav-bar" className="nav-bar-container">
-                <form onSubmit={handleListAllUsers} className="user-list">
+                <form className="log-list">
                     <fieldset>
                         <legend>
                             Listagem
@@ -91,7 +92,7 @@ function LogList(this: any) {
                                 className="list-all"
                                 variant="contained"
                                 color="primary"
-                                onClick={handleListAllUsers}
+                                onClick={handleListAllLogs}
                                 startIcon={<ListOutlinedIcon />}
                             >
                                 Listar Todos
@@ -99,21 +100,21 @@ function LogList(this: any) {
                         </div>
                     </fieldset>
                 </form>
-                <form onSubmit={handleListUserById} className="user-list-id">
+                <form className="log-list-id">
                     <fieldset>
-                        <div className="list-id">
+                        <div className="grid-container-3">
                             <Input
                                 name="id"
-                                label="Informe o id do usuário"
+                                label="Informe o id do log"
                                 value={id}
                                 onChange={(e) => {setId(e.target.value)}}
                             />
                             <Button
                                 type="submit"
-                                className="list-by-id"
+                                className="list-by-id-button"
                                 variant="contained"
                                 color="primary"
-                                onClick={handleListUserById}
+                                onClick={handleListLogById}
                                 startIcon={<BrandingWatermarkOutlinedIcon />}
                             >
                                 Listar por Id
@@ -123,10 +124,10 @@ function LogList(this: any) {
                 </form>
             </div>
             <main>
-                <div id="list-users-response">
+                <div id="list-logs-response">
                     {
-                        users.map((user: User) => {
-                            return <UserItem key={user.id} user={user}/>;
+                        logs.map((log: Log) => {
+                            return <LogItem key={log.id} log={log}/>;
                         })}
                 </div>
             </main>

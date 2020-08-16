@@ -14,10 +14,11 @@ import Textarea from "../../components/TextArea";
 import Select from '../../components/Select';
 
 
-function LogCreate() {
+function LogUpdate() {
     const history = useHistory();
     const [cookies] = useCookies();
     const token = (cookies['token']) ? `Bearer ${cookies['token'].access_token}` : '';
+    const [id, setId] = useState('');
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
     const [userId, setUserId] = useState('');
@@ -27,38 +28,42 @@ function LogCreate() {
     const [statusId, setStatusId] = useState('');
 
 
-    async function handleCreateLog(e: FormEvent) {
+    async function handleUpdateLog(e: FormEvent) {
         e.preventDefault();
 
         if (!cookies['token']) {
             history.push('/user/login');
             alert('Sessão expirada! Favor fazer o login para prosseguir.')
         }
-        await api.post('log/create', {name, description, userId, environmentId, layerId, levelId, statusId}, {
+        await api.put('log/update', {id, name, description, userId, environmentId, layerId, levelId, statusId}, {
             headers: {
                 authorization: token
             }
         }).then(() => {
-            alert('Cadastro realizado com sucesso!');
+            alert('Cadastro alterado com sucesso!');
         }).catch(() => {
-            alert('Erro no cadastro.');
+            alert('Erro ao alterar o cadastro.');
         });
     }
 
     return (
         <div id="log-page" className="container">
             <PageHeader
-                title="Cadastrar log"
-                description="Aqui é possível cadastrar novos logs de erros."
+                title="Alterar log"
+                description="Aqui é possível alterar os logs de erros."
                 menu={'log'}
             />
             <div id="nav-bar" className="nav-bar-container">
-                <form onSubmit={handleCreateLog} className="log-create">
+                <form onSubmit={handleUpdateLog} className="log-update">
                     <fieldset>
                         <legend>
-                            Cadastro
+                            Alteração
                         </legend>
-                        <Input className="create-name" name="name" label="Título"
+                        <Input className="update-id" name="id" label="Id"
+                               value={id}
+                               onChange={(e) => {setId(e.target.value)}}
+                        />
+                        <Input className="update-name" name="name" label="Título"
                                value={name}
                                onChange={(e) => {setName(e.target.value)}}
                         />
@@ -68,8 +73,8 @@ function LogCreate() {
                             value={description}
                             onChange={(e) => {setDescription(e.target.value)}}
                         />
-                        <div className="grid-container-1-create">
-                            <Input className="create-user-id" name="userId" label="User Id"
+                        <div className="grid-container-1-update">
+                            <Input className="update-user-id" name="userId" label="User Id"
                                    value={userId}
                                    onChange={(e) => {setUserId(e.target.value)}}
                             />
@@ -97,7 +102,7 @@ function LogCreate() {
                                 ]}
                             />
                         </div>
-                        <div className="grid-container-2-create">
+                        <div className="grid-container-2-update">
                             <Select
                                 name="level"
                                 label="Criticidade"
@@ -122,10 +127,10 @@ function LogCreate() {
                             />
                             <Button
                                 type="submit"
-                                className="create-log-button"
+                                className="update-log-button"
                                 variant="contained"
                                 color="primary"
-                                onClick={handleCreateLog}
+                                onClick={handleUpdateLog}
                                 startIcon={<SaveAltOutlinedIcon />}
                             >
                                 Gravar
@@ -140,4 +145,4 @@ function LogCreate() {
     )
 }
 
-export default LogCreate;
+export default LogUpdate;
