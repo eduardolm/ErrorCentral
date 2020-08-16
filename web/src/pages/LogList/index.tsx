@@ -11,6 +11,7 @@ import Button from '@material-ui/core/Button';
 import ListOutlinedIcon from '@material-ui/icons/ListOutlined';
 import BrandingWatermarkOutlinedIcon from '@material-ui/icons/BrandingWatermarkOutlined';
 import PageFooter from "../../components/PageFooter";
+import Select from "../../components/Select";
 
 function LogList(this: any) {
     const history = useHistory();
@@ -18,6 +19,9 @@ function LogList(this: any) {
     const token = (cookies['token']) ? `Bearer ${cookies['token'].access_token}` : '';
     const [logs, setLogs] = useState([]);
     const [id, setId] = useState('');
+    const [environmentId, setEnvironmentId] = useState('');
+    const [orderId, setOrderId] = useState('');
+    const [searchId, setSearchId] = useState('');
 
     async function handleListAllLogs(e: FormEvent) {
         e.preventDefault();
@@ -102,7 +106,7 @@ function LogList(this: any) {
                 </form>
                 <form className="log-list-id">
                     <fieldset>
-                        <div className="grid-container-3">
+                        <div className="grid-container-1-list">
                             <Input
                                 name="id"
                                 label="Informe o id do log"
@@ -118,6 +122,59 @@ function LogList(this: any) {
                                 startIcon={<BrandingWatermarkOutlinedIcon />}
                             >
                                 Listar por Id
+                            </Button>
+                        </div>
+                    </fieldset>
+                </form>
+                <form className="log-list-env-id-level-id">
+                    <fieldset>
+                        <legend>
+                            Busca avançada
+                        </legend>
+                        <div className="grid-container-2-list">
+                            <Select
+                                name="environment"
+                                label="Ambiente"
+                                value={environmentId}
+                                onChange={(e) => {setEnvironmentId(e.target.value)}}
+                                options={[
+                                    {value: 1, label: 'Desenvolvimento'},
+                                    {value: 2, label: 'Homologação'},
+                                    {value: 3, label: 'Produção'}
+                                ]}
+                            />
+                            <Select
+                                name="orderby"
+                                label="Ordenar por"
+                                value={orderId}
+                                onChange={(e) => {setOrderId(e.target.value)}}
+                                options={[
+                                    {value: 1, label: 'Criticidade'},
+                                    {value: 2, label: 'Frequência'}
+                                ]}
+                            />
+                        </div>
+                        <div className="grid-container-3-list">
+                            <Select
+                                name="searchfor"
+                                label="Buscar por"
+                                value={searchId}
+                                onChange={(e) => {setSearchId(e.target.value)}}
+                                options={[
+                                    {value: 1, label: 'Criticidade'},
+                                    {value: 2, label: 'Descrição'},
+                                    {value: 3, label: 'Origem'}
+                                ]}
+                            />
+                            <Button
+                                type="submit"
+                                className="list-advanced-button"
+                                variant="contained"
+                                color="primary"
+                                onClick={handleListLogById}
+                                startIcon={<ListOutlinedIcon />}
+                            >
+                                Buscar
                             </Button>
                         </div>
                     </fieldset>

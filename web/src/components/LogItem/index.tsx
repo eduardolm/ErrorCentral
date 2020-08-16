@@ -40,11 +40,8 @@ const LogItem: React.FC<LogItemProps> = (props) => {
         <article className="log-item">
             <header className="log-item-header">
                 <h2>
-                    Título:
+                    Título: {'  '}{props.log.name}
                 </h2>
-                <h3>
-                    {props.log.name}
-                </h3>
             </header>
             <div>
                 <ul className="log-item-list">
@@ -63,7 +60,7 @@ const LogItem: React.FC<LogItemProps> = (props) => {
                         Ambiente: {'  '}{props.log.environment.name}
                     </li>
                     <li>
-                        Camada: {'  '}{props.log.layer.name}
+                        Origem: {'  '}{props.log.layer.name}
                     </li>
                     <li>
                         Criticidade: {'  '}{props.log.level.name}
