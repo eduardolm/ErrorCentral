@@ -63,7 +63,7 @@ const LogItem: React.FC<LogItemProps> = (props) => {
                         Origem: {'  '}{props.log.layer.name}
                     </li>
                     <li>
-                        Criticidade: {'  '}{props.log.level.name}
+                        Level: {'  '}{props.log.level.name}
                     </li>
                     <li>
                         Status: {'  '}{props.log.status.name }

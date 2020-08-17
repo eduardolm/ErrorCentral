@@ -33,6 +33,11 @@ function UserUpdate() {
                     authorization: token
                 }
             });
+
+            if (response.status === 204) {
+                alert('Registro não encontrado.');
+                return[];
+            }
             setCreatedAt(response.data.createdAt);
 
             await api.put('user', {id, fullName, email, password, createdAt}, {
@@ -49,7 +54,7 @@ function UserUpdate() {
             } else if (e.statusCode === 500) {
                 alert('Erro do servidor. Tente novamente em alguns minutos. Se o erro se repetir, entre em contato com o administrador do sistema');
             } else {
-                history.push('/main');
+                history.push('/user/update');
                 alert('Erro ao realizar sua solicitação.')
             }
         }

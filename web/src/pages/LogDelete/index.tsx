@@ -23,16 +23,29 @@ function LogDelete() {
             history.push('/user/login');
             alert('Sessão expirada! Favor fazer o login para prosseguir.')
         }
-        await api.delete('log/' + id, {
-            headers: {
-                authorization: token
+
+        try {
+            const response = await api.delete('log/' + id, {
+                headers: {
+                    authorization: token
+                }
+            });
+
+            if (response.status === 204) {
+                alert('Registro não encontrado.')
+                return [];
             }
-        }).then(() => {
-            alert('Log excluído com sucesso!');
-        }).catch((e) => {
-            alert('Erro ao excluir o log.');
-            console.log(e);
-        })
+        } catch(e) {
+            if (e.statusCode === 401) {
+                history.push('/user/login');
+                alert('Sessão expirada. Favor fazer o login para prosseguir.');
+            } else if( e.statusCode === 404) {
+                alert('Nenhum registro encontrado.')
+                return [];
+            }else {
+                alert('Ocorreu um erro ao processar sua solicitação. Favor tentar novamente dentro de alguns minutos.');
+            }
+        }
     }
     return (
         <div id="log-page" className="container">

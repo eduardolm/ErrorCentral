@@ -100,7 +100,7 @@ function LogCreate() {
                         <div className="grid-container-2-create">
                             <Select
                                 name="level"
-                                label="Criticidade"
+                                label="Level"
                                 value={levelId}
                                 onChange={(e) => {setLevelId(e.target.value)}}
                                 options={[

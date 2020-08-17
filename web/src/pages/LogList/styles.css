@@ -10,7 +10,7 @@
 
 #log-page .grid-container-2-list {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
     grid-gap: 8px;
     padding: 8px;
     align-items: baseline;

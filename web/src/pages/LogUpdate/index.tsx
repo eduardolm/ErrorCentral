@@ -35,15 +35,29 @@ function LogUpdate() {
             history.push('/user/login');
             alert('Sessão expirada! Favor fazer o login para prosseguir.')
         }
-        await api.put('log/update', {id, name, description, userId, environmentId, layerId, levelId, statusId}, {
-            headers: {
-                authorization: token
+        try {
+            const response = await api.put('/log/update', {id, name, description, userId, environmentId, layerId, levelId, statusId}, {
+                headers: {
+                    authorization: token
+                }
+            });
+            console.log(response.status);
+
+            if (response.status === 204) {
+                alert('Registro não encontrado.');
+                return [];
             }
-        }).then(() => {
-            alert('Cadastro alterado com sucesso!');
-        }).catch(() => {
-            alert('Erro ao alterar o cadastro.');
-        });
+        } catch(e) {
+            if (e.statusCode === 401) {
+                history.push('/user/login');
+                alert('Sessão expirada. Favor fazer o login para prosseguir.');
+            } else if( e.statusCode === 204) {
+                alert('Nenhum registro encontrado.')
+                return [];
+            }else {
+                alert('Ocorreu um erro ao processar sua solicitação. Favor tentar novamente dentro de alguns minutos.');
+            }
+        }
     }
 
     return (
@@ -105,7 +119,7 @@ function LogUpdate() {
                         <div className="grid-container-2-update">
                             <Select
                                 name="level"
-                                label="Criticidade"
+                                label="Level"
                                 value={levelId}
                                 onChange={(e) => {setLevelId(e.target.value)}}
                                 options={[

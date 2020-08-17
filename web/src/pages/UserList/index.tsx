@@ -32,6 +32,11 @@ function UserList(this: any) {
                     authorization: token
                 }
             });
+
+            if (response.status === 204) {
+                alert('Nenhum registro encontrado.')
+                return [];
+            }
             setUsers(response.data);
         } catch (e) {
             if (e.statusCode === 401) {
@@ -57,7 +62,12 @@ function UserList(this: any) {
                     authorization: token
                 }
             });
-            console.log(response.data);
+
+            if (response.status === 204) {
+                alert('Registro não encontrado.');
+                return [];
+            }
+            console.log(response.status);
 
             if (Object.prototype.toString.call( response.data ) !== '[object Array]') {
                 let currUser = [].concat(response.data);
