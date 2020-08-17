@@ -5,6 +5,7 @@ using ErrorCentral.Domain.Models;
 using ErrorCentral.Infra.Context;
 using ErrorCentral.Infra.Interfaces;
 using FluentValidation;
+using Microsoft.AspNetCore.Mvc;
 
 namespace ErrorCentral.Application.Services
 {
@@ -27,10 +28,15 @@ namespace ErrorCentral.Application.Services
 
         public Log GetFullLog(int id)
         {
-            var payloadBuilder = new LogBuilder(_context);
-            var payload = payloadBuilder.GetPayload(_repository.GetById(id));
+            if (_repository.GetById(id) != null)
+            {
+                var payloadBuilder = new LogBuilder(_context);
+                var payload = payloadBuilder.GetPayload(_repository.GetById(id));
             
-            return payload;
+                return payload;
+            }
+
+            return null;
         }
 
         public IEnumerable<Log> GetAllFull()

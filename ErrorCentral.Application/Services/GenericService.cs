@@ -45,13 +45,14 @@ namespace ErrorCentral.Application.Services
 
         public T Update(T entity)
         {
+            if (entity.Id.ToString().IsNullOrEmpty() || entity.Id <= 0 || _repository.GetById(entity.Id) == null) return null;
             _repository.Update(entity);
             return _repository.GetById(entity.Id);
         }
 
         public IEnumerable<T> Delete(int id)
         {
-            if (id.ToString().IsNullOrEmpty() || id < 0) return null;
+            if (id.ToString().IsNullOrEmpty() || id <= 0 || _repository.GetById(id) == null) return null;
             _repository.Delete(id);
             return _repository.GetAll();
         }
