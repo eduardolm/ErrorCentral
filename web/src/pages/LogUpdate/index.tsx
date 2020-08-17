@@ -36,12 +36,11 @@ function LogUpdate() {
             alert('Sessão expirada! Favor fazer o login para prosseguir.')
         }
         try {
-            const response = await api.put('/log/update', {id, name, description, userId, environmentId, layerId, levelId, statusId}, {
+            const response = await api.put('/log', {id, name, description, userId, environmentId, layerId, levelId, statusId}, {
                 headers: {
                     authorization: token
                 }
             });
-            console.log(response.status);
 
             if (response.status === 204) {
                 alert('Registro não encontrado.');
@@ -51,7 +50,7 @@ function LogUpdate() {
             if (e.statusCode === 401) {
                 history.push('/user/login');
                 alert('Sessão expirada. Favor fazer o login para prosseguir.');
-            } else if( e.statusCode === 204) {
+            } else if( e.statusCode === 244) {
                 alert('Nenhum registro encontrado.')
                 return [];
             }else {
