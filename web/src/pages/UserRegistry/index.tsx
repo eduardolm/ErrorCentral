@@ -29,7 +29,7 @@ function UserRegistry() {
         <div id="user-page" className="container">
             <PageHeader
                 title="Novo cadastro"
-                description="Bem-vindo! Faça seu cadsatro para começar a utilizar o sistema."
+                description="Bem-vindo! Faça seu cadastro para começar a utilizar o sistema."
                 menu={'user'}
             />
             <div id="nav-bar" className="nav-bar-container">
