@@ -37,11 +37,11 @@ const useStyles = makeStyles((theme: Theme) =>
 type Anchor =  'top' //| 'left' | 'bottom' | 'right';
 
 
-interface TemporaryDraweProps {
+interface TemporaryDrawerProps {
     menuType: string;
 }
 
-const TemporaryDrawer: React.FC<TemporaryDraweProps> = (props) => {
+const TemporaryDrawer: React.FC<TemporaryDrawerProps> = (props) => {
     const [cookies, setCookie, removeCookie] = useCookies(['token']);
     const history = useHistory();
     const classes = useStyles();
