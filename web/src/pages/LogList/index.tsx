@@ -12,8 +12,6 @@ import ListOutlinedIcon from '@material-ui/icons/ListOutlined';
 import BrandingWatermarkOutlinedIcon from '@material-ui/icons/BrandingWatermarkOutlined';
 import PageFooter from "../../components/PageFooter";
 import Select from "../../components/Select";
-import { orderBy } from '@progress/kendo-data-query';
-import _ from 'lodash';
 
 function LogList(this: any) {
     const history = useHistory();
@@ -28,10 +26,6 @@ function LogList(this: any) {
     const [searchId, setSearchId] = useState('');
     const [description, setDescription] = useState('');
     const [output, setOutput] = useState([]);
-    const [outputPayload, setOutputPayload] = useState([]);
-    const [countLevel, setCountLevel] = useState('');
-    const [countDescr, setCountDesc] = useState('');
-    const [countLayer, setCountLayer] = useState('');
 
 
     async function handleListAllLogs(e: FormEvent) {
@@ -79,23 +73,22 @@ function LogList(this: any) {
                 }
 
             });
-            console.log(response.data);
+
             if (response.status === 204) {
                 alert('Nenhum registro encontrado.')
                 return [];
             }
 
             if (Object.prototype.toString.call( response.data ) !== '[object Array]') {
-                let currLog = [].concat(response.data);
-                setLogs(currLog);
+                setLogs([].concat(response.data));
             }
 
         } catch (e) {
-            console.log(e.statusCode);
+
             if (e.statusCode === 401) {
                 history.push('/user/login');
                 alert('Sessão expirada. Favor fazer o login para prosseguir.');
-            } else if( e.statusCode === 404) {
+            } else if ( e.statusCode === 404) {
                 alert('Nenhum registro encontrado.')
                 return [];
             }else {
@@ -120,22 +113,17 @@ function LogList(this: any) {
                         authorization: token
                     }
                 });
+
                 if (response.status === 204) {
                     alert('Nenhum registro encontrado.')
                     return [];
                 }
 
-                console.log(response.data);
                 if (Object.prototype.toString.call(response.data) !== '[object Array]') {
-                    setOutputPayload(convertToArray(response.data));
+                    setLogs([].concat(response.data));
                 } else {
-                    setOutputPayload((response.data));
                     setLogs(response.data);
-                    console.log(outputPayload);
-                    console.log(logs);
                 }
-
-
 
             } else if (searchId === '2') {
                 const response = await api.get(`/log/environment?environmentId=${environmentId}&description=${description}`, {
@@ -149,17 +137,11 @@ function LogList(this: any) {
                     return [];
                 }
 
-                // if (orderId === '1') {
-                //     setOutputPayload(orderBy(output, [{field: "levelId", dir: "asc"}]));
-                // } else if (orderId === '2') {
-                //
-                //     _.countBy(output);
-                // }
-
-                setOutput(convertToArray(response.data));
-
-                const deixo = sortResults(output, description);
-                console.log(deixo);
+                if (orderId === '1') {
+                    setLogs(sortResults(convertToArray(response.data), 'level.id'));
+                } else if (orderId === '2') {
+                    setLogs(sortResults(convertToArray(response.data), 'frequency'));
+                }
 
             } else if (searchId === '3') {
 
@@ -172,10 +154,17 @@ function LogList(this: any) {
                     alert('Nenhum registro encontrado.')
                     return [];
                 }
-                setOutput(convertToArray(response.data));
+
+                const bobo = convertToArray(response.data);
+                console.log(sortResults(bobo, 'frequency'));
+
+                if (orderId === '1') {
+                    setLogs(sortResults(convertToArray(response.data), 'level.id'));
+                } else if (orderId === '2') {
+                    setLogs(sortResults(convertToArray(response.data), 'frequency'));
+                }
             }
 
-            setLogs(outputPayload);
 
         } catch (e) {
             if (e.statusCode === 401) {
@@ -188,18 +177,38 @@ function LogList(this: any) {
         }
     }
 
-    function sortResults(data: any, sorter: any) {
+    function sortResults(data: Log[], sorter: string) {
 
+        const sortBy = require('lodash.sortby');
         if (orderId === '1') {
-            return orderBy(data, [{field: sorter, dir:  "asc"}]);
+            return sortBy(data, sorter);
         }
 
         if (orderId === '2') {
-            let edu = orderBy(data, [{field: sorter, dir: "desc"}]);
-            let teste = _.countBy(edu);
-            console.log(teste);
+            const occurrences = countOccurrences(data);
+            // occurrences = { Debug: 2, Warning: 2, Error: 1 };
+            return sortBy(data, )
+            console.log(occurrences);
         }
     }
+
+    function countOccurrences(data: Log[]) {
+        let count = {Debug: 0, Warning: 0, Error: 0};
+
+        for (let i = 0; i < data.length; i++) {
+            if (data[i].level.id === 1) {
+                count.Debug++;
+            }
+            if (data[i].level.id === 2) {
+                count.Warning++;
+            }
+            if (data[i].level.id === 3) {
+                count.Error++;
+            }
+        }
+        return count;
+    }
+
 
     function convertToArray(data: any) {
         if (Object.prototype.toString.call(data) !== '[object Array]') {
@@ -310,6 +319,7 @@ function LogList(this: any) {
                                         <Select
                                             name="level-select"
                                             label="Level"
+                                            value={levelId}
                                             options={[
                                                 {value: 1, label: 'Debug'},
                                                 {value: 2, label: 'Warning'},
@@ -319,6 +329,7 @@ function LogList(this: any) {
                                         />  : <Select
                                                     name="layer-select"
                                                     label="Origem"
+                                                    value={layerId}
                                                     options={[
                                                         {value: 1, label: 'Backend'},
                                                         {value: 2, label: 'Frontend'},
