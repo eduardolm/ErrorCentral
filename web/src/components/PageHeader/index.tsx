@@ -6,14 +6,13 @@ import './styles.css';
 import {IconButton} from "@material-ui/core";
 import TemporaryDrawer from "../NavBar";
 import ArrowBackIosOutlinedIcon from '@material-ui/icons/ArrowBackIosOutlined';
-import MeetingRoomOutlinedIcon from '@material-ui/icons/MeetingRoomOutlined';
-import Button from '@material-ui/core/Button';
 import {useHistory} from 'react-router-dom';
 
 
 interface PageHeaderProps {
     title: string;
     description?: string;
+    menu: string;
 }
 
 const PageHeader: React.FC<PageHeaderProps> = (props) => {
@@ -42,7 +41,9 @@ const PageHeader: React.FC<PageHeaderProps> = (props) => {
                 <div
                     className="header-button-nav"
                 >
-                    <TemporaryDrawer/>
+                    <TemporaryDrawer
+                        menuType={props.menu}
+                    />
                 </div>
             </div>
         </header>

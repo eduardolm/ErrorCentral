@@ -1,0 +1,74 @@
+#log-page .page-header .header-content {
+    margin-bottom: 6.4rem;
+}
+
+#log-page .nav-bar-container .input-block {
+    margin-top: 2.4rem;
+    margin-bottom: 1.4rem;
+}
+
+#log-page .header-content {
+    width: 90%;
+    margin: 0 auto;
+    position: relative;
+}
+
+#log-page .nav-bar-container fieldset {
+    border: 0;
+    padding: 0 2.4rem;
+}
+
+#log-page .nav-bar-container label {
+    color: var(--color-text-complement);
+}
+
+#log-page .nav-bar-container fieldset legend {
+    font: 700 2.4rem Archivo;
+    color: var(--color-text-title);
+    margin-bottom: 2.4rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding-bottom: 1.6rem;
+    border-bottom: 2px solid var(--color-line-in-white);
+}
+
+#log-page .nav-bar-container .log-create .input-block {
+    margin-top: 1.4rem;
+}
+
+#log-page .grid-container-1-create {
+    display: grid;
+    grid-template-columns: 1fr 2fr 2fr;
+    grid-gap: 8px;
+    padding: 8px;
+    align-items: baseline;
+}
+
+#log-page .grid-container-2-create {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 8px;
+    padding: 8px;
+    align-items: baseline;
+    justify-content: center;
+    margin-top: -3rem;
+    margin-bottom: 1rem;
+}
+
+#log-page .create-log-button {
+    top: 5.3rem;
+    height: 5.5rem;
+}
+
+
+@media (min-width: 700px) {
+    #log-page {
+        max-width: 100vw;
+    }
+
+    #log-page .grid-container-2-create {
+        margin-bottom: -5rem;
+    }
+}

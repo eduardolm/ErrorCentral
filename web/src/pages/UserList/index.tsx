@@ -10,6 +10,7 @@ import api from "../../services/api";
 import Button from '@material-ui/core/Button';
 import ListOutlinedIcon from '@material-ui/icons/ListOutlined';
 import BrandingWatermarkOutlinedIcon from '@material-ui/icons/BrandingWatermarkOutlined';
+import PageFooter from "../../components/PageFooter";
 
 function UserList(this: any) {
     const history = useHistory();
@@ -31,6 +32,11 @@ function UserList(this: any) {
                     authorization: token
                 }
             });
+
+            if (response.status === 204) {
+                alert('Nenhum registro encontrado.')
+                return [];
+            }
             setUsers(response.data);
         } catch (e) {
             if (e.statusCode === 401) {
@@ -56,7 +62,12 @@ function UserList(this: any) {
                     authorization: token
                 }
             });
-            console.log(response.data);
+
+            if (response.status === 204) {
+                alert('Registro não encontrado.');
+                return [];
+            }
+            console.log(response.status);
 
             if (Object.prototype.toString.call( response.data ) !== '[object Array]') {
                 let currUser = [].concat(response.data);
@@ -76,6 +87,7 @@ function UserList(this: any) {
             <PageHeader
                 title="Listar usuários"
                 description="Aqui é possível listar os usuários cadastrados."
+                menu={'user'}
             />
             <div id="nav-bar" className="nav-bar-container">
                 <form onSubmit={handleListAllUsers} className="user-list">
@@ -128,7 +140,8 @@ function UserList(this: any) {
                     })}
                 </div>
             </main>
-            </div>
+            <PageFooter />
+        </div>
     )
 }
 

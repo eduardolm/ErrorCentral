@@ -1,22 +1,9 @@
-#user-page {
-    width: 100vw;
-    height: 100vh;
+#user-page .page-footer {
+    z-index: -99999;
 }
 
 #user-page .page-header .header-content {
     margin-bottom: 6.4rem;
-}
-
-#user-page .nav-bar-container {
-    margin: -3.2rem auto 3.2rem;
-    width: 90%;
-    padding-top: 3rem;
-    max-width: 74rem;
-    border-radius: 0.8rem;
-    overflow: hidden;
-    position: relative;
-    bottom: -280px;
-    background: var(--color-box-base);
 }
 
 #user-page .nav-bar-container .input-block {
@@ -78,57 +65,17 @@
     color: var(--color-text-complement);
 }
 
-#user-page .nav-bar-container button {
-    width: 100%;
-    height: 5.6rem;
-    /*background: var(--color-secundary);*/
-    /*color: var(--color-button-text);*/
-    border: 0;
-    border-radius: 0.8rem;
-    cursor: pointer;
-    font: 700 1.6rem Archivo;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-decoration: none;
-    transition: background-color 0.2s;
-    margin-top: 0.2rem;
-}
-
-/*#user-page .nav-bar-container button:hover {*/
-/*    background: var(--color-secundary-dark);*/
-/*}*/
-
-#user-page main {
-    margin: -3.2rem auto 3.2rem;
-    width: 90%;
-    padding-top: 3rem;
-    max-width: 74rem;
-    border-radius: 0.8rem;
-    overflow: hidden;
-    position: relative;
-    bottom: -280px;
-}
-
 @media (min-width: 700px) {
-    #user-page {
-        max-width: 100vw;
-    }
+    /*#user-page {*/
+    /*    max-width: 100vw;*/
+    /*}*/
 
     #user-page .page-header .header-content {
         margin-bottom: 0;
     }
 
     #user-page .nav-bar-container fieldset {
-        padding: 0 6.4rem;
-    }
-
-    #user-page .nav-bar-container {
-        padding: 6.4rem 0;
-        max-width: 740px;
-        margin: 0 auto;
-        position: relative;
-        top: 266px;
+        padding: 0 2.4rem;
     }
 
     #user-page .nav-bar-container .user-update .user-update-action {
@@ -138,7 +85,7 @@
         margin-bottom: -5rem;
     }
 
-    #user-page .main {
-        max-width: 100vw;
-    }
+    /*#user-page .main {*/
+    /*    max-width: 100vw;*/
+    /*}*/
 }

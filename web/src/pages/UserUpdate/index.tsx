@@ -8,6 +8,7 @@ import PageHeader from "../../components/PageHeader";
 import Input from "../../components/Input";
 import SaveAltOutlinedIcon from "@material-ui/icons/SaveAltOutlined";
 import Button from "@material-ui/core/Button";
+import PageFooter from "../../components/PageFooter";
 
 function UserUpdate() {
     const history = useHistory();
@@ -32,6 +33,11 @@ function UserUpdate() {
                     authorization: token
                 }
             });
+
+            if (response.status === 204) {
+                alert('Registro não encontrado.');
+                return[];
+            }
             setCreatedAt(response.data.createdAt);
 
             await api.put('user', {id, fullName, email, password, createdAt}, {
@@ -48,7 +54,7 @@ function UserUpdate() {
             } else if (e.statusCode === 500) {
                 alert('Erro do servidor. Tente novamente em alguns minutos. Se o erro se repetir, entre em contato com o administrador do sistema');
             } else {
-                history.push('/main');
+                history.push('/user/update');
                 alert('Erro ao realizar sua solicitação.')
             }
         }
@@ -59,6 +65,7 @@ function UserUpdate() {
             <PageHeader
                 title="Alterar usuário"
                 description="Aqui é possível alterar os cadastros dos usuários."
+                menu={'user'}
             />
             <div id="nav-bar" className="nav-bar-container">
                 <form onSubmit={handleUpdateUser} className="user-update">
@@ -97,6 +104,7 @@ function UserUpdate() {
                     </fieldset>
                 </form>
             </div>
+            <PageFooter />
         </div>
     )
 }

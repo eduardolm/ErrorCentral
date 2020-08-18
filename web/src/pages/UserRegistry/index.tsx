@@ -30,6 +30,7 @@ function UserRegistry() {
             <PageHeader
                 title="Novo cadastro"
                 description="Bem-vindo! Faça seu cadsatro para começar a utilizar o sistema."
+                menu={'user'}
             />
             <div id="nav-bar" className="nav-bar-container">
                 <form onSubmit={handleCreateUser} className="user-create">

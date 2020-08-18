@@ -16,6 +16,7 @@ import UpdateOutlinedIcon from '@material-ui/icons/UpdateOutlined';
 import DeleteOutlineOutlinedIcon from '@material-ui/icons/DeleteOutlineOutlined';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MeetingRoomOutlinedIcon from '@material-ui/icons/MeetingRoomOutlined';
+import PostAddOutlinedIcon from '@material-ui/icons/PostAddOutlined';
 import {Divider} from "@material-ui/core";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -35,7 +36,12 @@ const useStyles = makeStyles((theme: Theme) =>
 
 type Anchor =  'top' //| 'left' | 'bottom' | 'right';
 
-export default function TemporaryDrawer() {
+
+interface TemporaryDraweProps {
+    menuType: string;
+}
+
+const TemporaryDrawer: React.FC<TemporaryDraweProps> = (props) => {
     const [cookies, setCookie, removeCookie] = useCookies(['token']);
     const history = useHistory();
     const classes = useStyles();
@@ -65,7 +71,7 @@ export default function TemporaryDrawer() {
         history.push('/user/login');
     }
 
-    const list = (anchor: Anchor) => (
+    const userListMenu = (anchor: Anchor) => (
         <div
             className={clsx(classes.fullList, {
                 [classes.fullList]: anchor === 'top' || anchor === 'bottom',
@@ -74,7 +80,6 @@ export default function TemporaryDrawer() {
             onClick={toggleDrawer(anchor, false)}
             onKeyDown={toggleDrawer(anchor, false)}
         >
-
             <List component="nav">
                     <ListItem>
                         <Button onClick={() => {history.push('/user/list')}}>
@@ -111,6 +116,51 @@ export default function TemporaryDrawer() {
         </div>
     );
 
+    const logListMenu = (anchor: Anchor) => (
+        <div
+            className={clsx(classes.fullList, {
+                [classes.fullList]: anchor === 'top' || anchor === 'bottom',
+            })}
+            role="presentation"
+            onClick={toggleDrawer(anchor, false)}
+            onKeyDown={toggleDrawer(anchor, false)}
+        >
+            <List component="nav">
+                <ListItem>
+                    <Button onClick={() => {history.push('/log/list')}}>
+                        <ListItemIcon> <ListOutlinedIcon fontSize="large"/> </ListItemIcon>
+                        <ListItemText primary="Listar" />
+                    </Button>
+                </ListItem>
+                <ListItem>
+                    <Button onClick={() => {history.push('/log/create')}}>
+                        <ListItemIcon> <PostAddOutlinedIcon fontSize="large"/> </ListItemIcon>
+                        <ListItemText primary="Cadastrar" />
+                    </Button>
+                </ListItem>
+                <ListItem>
+                    <Button onClick={() => {history.push('/log/update')}}>
+                        <ListItemIcon> <UpdateOutlinedIcon fontSize="large"/> </ListItemIcon>
+                        <ListItemText primary="Alterar" />
+                    </Button>
+                </ListItem>
+                <ListItem>
+                    <Button onClick={() => {history.push('/log/delete')}}>
+                        <ListItemIcon> <DeleteOutlineOutlinedIcon fontSize="large"/> </ListItemIcon>
+                        <ListItemText primary="Excluir" />
+                    </Button>
+                </ListItem>
+                <Divider />
+                <ListItem>
+                    <Button onClick={() => {handleLogout()}}>
+                        <ListItemIcon> <MeetingRoomOutlinedIcon fontSize="large"/> </ListItemIcon>
+                        <ListItemText primary="Logout" />
+                    </Button>
+                </ListItem>
+            </List>
+        </div>
+    );
+
     return (
         <div>
             {(['top'] as Anchor[]).map((anchor) => (
@@ -123,10 +173,12 @@ export default function TemporaryDrawer() {
                         />
                     </div>
                     <Drawer anchor={anchor} open={state[anchor]} onClose={toggleDrawer(anchor, false)}>
-                        {list(anchor)}
+                        {(props.menuType === 'user') ? userListMenu(anchor) : logListMenu(anchor)}
                     </Drawer>
                 </React.Fragment>
             ))}
         </div>
     );
 }
+
+export default TemporaryDrawer;

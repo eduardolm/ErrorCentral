@@ -7,20 +7,28 @@ import UserCreate from "./pages/UserCreate";
 import UserUpdate from "./pages/UserUpdate";
 import UserList from "./pages/UserList";
 import UserRegistry from "./pages/UserRegistry";
-import InternalLanding from "./pages/Internal";
+import InnerMain from "./pages/InnerMain";
+import LogCreate from "./pages/LogCreate";
+import LogList from "./pages/LogList";
+import LogDelete from "./pages/LogDelete";
+import LogUpdate from "./pages/LogUpdate";
 
 const Routes = () => {
     return (
         <BrowserRouter>
             <Switch>
                 <Route path="/" exact component={Landing} />
-                <Route path='/main' component={InternalLanding} />
+                <Route path='/main' component={InnerMain} />
                 <Route path='/user/login' component={Login} />
                 <Route path='/user/registry' component={UserRegistry} />
                 <Route path='/user/list' component={UserList} />
                 <Route path='/user/create' component={UserCreate} />
                 <Route path='/user/update' component={UserUpdate} />
                 <Route path='/user/delete' component={UserDelete} />
+                <Route path='/log/list' component={LogList} />
+                <Route path='/log/create' component={LogCreate} />
+                <Route path='/log/update' component={LogUpdate} />
+                <Route path='/log/delete' component={LogDelete} />
             </Switch>
         </BrowserRouter>
     )

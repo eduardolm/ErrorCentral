@@ -48,8 +48,8 @@ namespace ErrorCentral.Web.Controllers
         public IActionResult Delete(int id)
         {
             if (id.ToString().IsNullOrEmpty() || id < 0) return BadRequest();
-            _service.Delete(id);
-            return Ok("Item removido com sucesso.");
+            if (_service.Delete(id) != null) return Ok("Item removido com sucesso.");
+            return NoContent();
         }
     }
 }

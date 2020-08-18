@@ -1,0 +1,69 @@
+#log-page .grid-container-1-list {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-gap: 8px;
+    padding: 8px;
+    align-items: baseline;
+    justify-content: center;
+    margin-top: -1rem;
+}
+
+#log-page .grid-container-2-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 8px;
+    padding: 8px;
+    align-items: baseline;
+    justify-content: center;
+    margin-top: -3rem;
+    margin-bottom: 1rem;
+}
+
+#log-page .grid-container-3-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 8px;
+    padding: 8px;
+    align-items: baseline;
+    justify-content: center;
+    margin-top: -3rem;
+    margin-bottom: 1rem;
+}
+
+#log-page .grid-container-3-list button {
+    top: 5.3rem;
+    height: 5.5rem;
+}
+
+#log-page .list-by-id-button {
+    top: 5.3rem;
+    height: 5.5rem;
+}
+
+#log-page .nav-bar-container fieldset + fieldset {
+    border: 0;
+    padding: 0 2.4rem;
+}
+
+@media (min-width: 700px) {
+    #log-page {
+        max-width: 100vw;
+    }
+
+    #log-page .grid-container-1-list {
+        margin-bottom: -3rem;
+    }
+
+    #log-page .grid-container-3-list {
+        margin-bottom: -6rem;
+    }
+
+    #log-page .list-by-id-button {
+        top: 5.3rem;
+        height: 5.5rem;
+    }
+
+    #log-page .nav-bar-container .log-list-id + .log-list-env-id-level-id {
+        margin-top: 5rem;
+    }
+}
