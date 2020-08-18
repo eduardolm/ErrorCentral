@@ -25,8 +25,6 @@ function LogList(this: any) {
     const [orderId, setOrderId] = useState('');
     const [searchId, setSearchId] = useState('');
     const [description, setDescription] = useState('');
-    const [output, setOutput] = useState([]);
-
 
     async function handleListAllLogs(e: FormEvent) {
         e.preventDefault();
@@ -180,35 +178,27 @@ function LogList(this: any) {
     function sortResults(data: Log[], sorter: string) {
 
         const sortBy = require('lodash.sortby');
+
         if (orderId === '1') {
             return sortBy(data, sorter);
         }
 
         if (orderId === '2') {
-            const occurrences = countOccurrences(data);
-            // occurrences = { Debug: 2, Warning: 2, Error: 1 };
-            return sortBy(data, )
-            console.log(occurrences);
+            return orderByFrequency(data);
         }
     }
 
-    function countOccurrences(data: Log[]) {
-        let count = {Debug: 0, Warning: 0, Error: 0};
+    function orderByFrequency(data: Log[]){
+        let counter = Object.create(null);
+        data.forEach(function(word) {
+            counter[word.level.id] = (counter[word.level.id] || 0) + 1;
+        });
 
-        for (let i = 0; i < data.length; i++) {
-            if (data[i].level.id === 1) {
-                count.Debug++;
-            }
-            if (data[i].level.id === 2) {
-                count.Warning++;
-            }
-            if (data[i].level.id === 3) {
-                count.Error++;
-            }
-        }
-        return count;
+        data.sort(function(x, y) {
+            return counter[y.level.id] - counter[x.level.id];
+        });
+        return data;
     }
-
 
     function convertToArray(data: any) {
         if (Object.prototype.toString.call(data) !== '[object Array]') {
