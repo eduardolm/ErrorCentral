@@ -22,19 +22,33 @@ function UserCreate() {
     async function handleCreateUser(e: FormEvent) {
         e.preventDefault();
 
-        if (!cookies['token']) {
-            history.push('/user/login');
-            alert('Sessão expirada! Favor fazer o login para prosseguir.')
-        }
-        await api.post('user/create', {fullName, email, password}, {
-            headers: {
-                authorization: token
+        try {
+            if (!cookies['token']) {
+                history.push('/user/login');
+                alert('Sessão expirada! Favor fazer o login para prosseguir.')
             }
-        }).then(() => {
-            alert('Cadastro realizado com sucesso!');
-        }).catch(() => {
-            alert('Erro no cadastro.');
-        });
+            const response = await api.post('user/create', {fullName, email, password}, {
+                headers: {
+                    authorization: token
+                }
+            });
+
+            if (response.status === 200) {
+                alert('Cadastro realizado com sucesso!');
+            }
+
+        } catch(e) {
+            if (e.status === 400) {
+                alert('Verifique os dados digitados. Caso estejam corretos, já existe este registro em nosso banco de dados.');
+            }
+            if (e.status === 401) {
+                history.push(('/user/login'));
+                alert('Sessão expirada! Favor fazer o login para prosseguir.');
+            }
+            if (e.status >= 500) {
+                alert('Ocorreu um erro interno. Favor tentar novamente dentro de alguns minutos.');
+            }
+        }
     }
 
     return (

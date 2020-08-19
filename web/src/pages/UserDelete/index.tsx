@@ -31,6 +31,9 @@ function UserDelete() {
             }
             );
 
+            if (response.status === 200) {
+                alert('Registro excluído com sucesso!');
+            }
             if (response.status === 204) {
                 alert('Registro não encontrado.');
                 return [];

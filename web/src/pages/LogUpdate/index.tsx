@@ -51,6 +51,10 @@ function LogUpdate() {
                 }
             });
 
+            if (response.status === 200 ){
+                alert('Registro alterado com sucesso!');
+            }
+
             if (response.status === 204) {
                 alert('Registro não encontrado.');
                 return [];
