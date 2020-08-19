@@ -18,7 +18,7 @@ const Routes = () => {
         <BrowserRouter>
             <Switch>
                 <Route path="/" exact component={Landing} />
-                <Route path='/main' component={InnerMain} />
+                <Route exact path='/main' component={InnerMain} />
                 <Route path='/user/login' component={Login} />
                 <Route path='/user/registry' component={UserRegistry} />
                 <Route path='/user/list' component={UserList} />

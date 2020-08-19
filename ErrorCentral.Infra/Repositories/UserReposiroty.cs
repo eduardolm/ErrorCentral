@@ -9,6 +9,5 @@ namespace ErrorCentral.Infra.Repositories
         public UserRepository(MainContext dbContext) : base(dbContext)
         {
         }
-
     }
 }

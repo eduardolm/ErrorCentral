@@ -1,5 +1,4 @@
-﻿using System;
-using ErrorCentral.Application.Services;
+﻿using ErrorCentral.Application.Services;
 using ErrorCentral.Application.Validators;
 using ErrorCentral.Domain.Models;
 using ErrorCentral.Infra.Context;
@@ -38,8 +37,6 @@ namespace ErrorCentral.Test.Unit.Domain.Models
                 Assert.NotNull(testUser.Email);
                 Assert.NotNull(testUser.Password);
                 Assert.NotEqual(0,testUser.Id);
-                Assert.NotNull(testUser.CreatedAt);
-                Assert.IsType<DateTime?>(testUser.CreatedAt);
                 repository.Dispose();
             }
         }

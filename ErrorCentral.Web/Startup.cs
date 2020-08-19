@@ -1,7 +1,5 @@
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IdentityModel.Tokens.Jwt;
-using System.Threading.Tasks;
 using ErrorCentral.Application.Interfaces;
 using ErrorCentral.Application.Services;
 using ErrorCentral.Infra.Context;
@@ -21,10 +19,7 @@ using AutoMapper;
 using ErrorCentral.Domain.Models;
 using FluentValidation;
 using ErrorCentral.Application.Validators;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Http;
 using Microsoft.IdentityModel.Logging;
-using ErrorCentral.Web;
 using ErrorCentral.Web.Interfaces;
 
 namespace ErrorCentral.Web
@@ -60,8 +55,8 @@ namespace ErrorCentral.Web
 
             services.AddDbContext<MainContext>(opt => opt
                 .UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            
-            services.AddScoped<IUserService, UserService>();
+
+                services.AddScoped<IUserService, UserService>();
             services.AddScoped<ILogService, LogService>();
             services.AddScoped<ILayerService, LayerService>();
             services.AddScoped<ILevelService, LevelService>();
@@ -120,11 +115,11 @@ namespace ErrorCentral.Web
                     .ServiceProvider
                     .GetRequiredService<MainContext>();
             
-                context
-                    .Database
-                    .Migrate();
+                // context
+                //     .Database
+                //     .Migrate();
             }
-            IdentityModelEventSource.ShowPII = true;
+            IdentityModelEventSource.ShowPII = false;
 
             app.UseDefaultFiles();
             app.UseStaticFiles()

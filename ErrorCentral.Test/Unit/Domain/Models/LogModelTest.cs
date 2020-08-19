@@ -54,7 +54,6 @@ namespace ErrorCentral.Test.Unit.Domain.Models
 
             using (var context = new MainContext(fakeContext.FakeOptions))
             {
-                var logbuilder = new LogBuilder(context);
                 var repository = new LogRepository(context);
                 var validator = new LogValidator();
                 var service = new LogService(repository, validator, context);

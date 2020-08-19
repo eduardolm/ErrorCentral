@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using ErrorCentral.Domain.Interfaces;
 using ErrorCentral.Infra.Context;
 using ErrorCentral.Infra.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace ErrorCentral.Infra.Repositories
 {
@@ -33,6 +35,7 @@ namespace ErrorCentral.Infra.Repositories
 
         public void Update(T entity)
         {
+            DetachLocal(_ => _.Id == entity.Id);
             _dbContext.Set<T>().Update(entity);
             _dbContext.SaveChanges();
         }
@@ -47,6 +50,15 @@ namespace ErrorCentral.Infra.Repositories
         public void Dispose()
         {
             _dbContext.Dispose();
+        }
+
+        public virtual void DetachLocal(Func<T, bool> predicate)
+        {
+            var local = _dbContext.Set<T>().Local.Where(predicate).FirstOrDefault();
+            if (local != null)
+            {
+                _dbContext.Entry(local).State = EntityState.Detached;
+            }
         }
     }
 }

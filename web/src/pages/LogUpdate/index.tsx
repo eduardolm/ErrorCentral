@@ -26,6 +26,7 @@ function LogUpdate() {
     const [layerId, setLayerId] = useState('');
     const [levelId, setLevelId] = useState('');
     const [statusId, setStatusId] = useState('');
+    const [createdAt, setCreatedAt] = useState('');
 
 
     async function handleUpdateLog(e: FormEvent) {
@@ -36,7 +37,15 @@ function LogUpdate() {
             alert('Sessão expirada! Favor fazer o login para prosseguir.')
         }
         try {
-            const response = await api.put('/log', {id, name, description, userId, environmentId, layerId, levelId, statusId}, {
+            const dateResponse = await api.get('log/' + id, {
+                headers: {
+                    authorization: token
+                }
+            });
+
+            setCreatedAt(dateResponse.data.createdAt);
+
+            const response = await api.put('/log', {id, name, description, userId, environmentId, layerId, levelId, statusId, createdAt}, {
                 headers: {
                     authorization: token
                 }

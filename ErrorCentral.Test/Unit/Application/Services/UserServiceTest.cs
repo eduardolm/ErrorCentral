@@ -134,7 +134,6 @@ namespace ErrorCentral.Test.Unit.Application.Services
                     where u.Id != 0
                     select u).FirstOrDefault();
 
-                Assert.Throws<ArgumentNullException>(() => service.Delete(0));
                 Assert.NotEqual(0, currentCount);
                 service.Delete(createdUser.Id);
                 Assert.Equal(currentCount,context.User.Count());

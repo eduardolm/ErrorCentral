@@ -40,8 +40,8 @@ namespace ErrorCentral.Web.Controllers
             {
                 return Ok(_service.Update(entity));
             }
-
-            return BadRequest("Dados inválidos. Favor verificar os dados digitados.");        }
+            return BadRequest("Dados inválidos. Favor verificar os dados digitados.");
+        }
 
         // DELETE: <controller>/<id>
         [HttpDelete("{id:int}")]
